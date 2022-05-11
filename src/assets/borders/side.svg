@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="87" height="742" viewBox="0 0 87 742">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke-linejoin: round;
+        stroke-width: 10px;
+        fill-rule: evenodd;
+        stroke: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="43.281" y1="4.938" x2="43.281" y2="737.312" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fe8900"/>
+      <stop offset="0.498" stop-color="#de2015"/>
+      <stop offset="1" stop-color="#fe8900"/>
+    </linearGradient>
+  </defs>
+  <path id="Rectangle_1_copy_9" data-name="Rectangle 1 copy 9" class="cls-1" d="M14.777,4.943h57a10,10,0,0,1,10,10V727.312a10,10,0,0,1-10,10h-57a10,10,0,0,1-10-10V14.943A10,10,0,0,1,14.777,4.943Z"/>
+</svg>

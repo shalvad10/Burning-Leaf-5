@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1370" height="125" viewBox="0 0 1370 125">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #b80011;
+        stroke-width: 10px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Rectangle_2_copy" data-name="Rectangle 2 copy" class="cls-1" d="M20.073,3.992H1350.9a10,10,0,0,1,10,10v97a10,10,0,0,1-10,10H20.073a10,10,0,0,1-10-10v-97A10,10,0,0,1,20.073,3.992Z"/>
+</svg>

@@ -1,0 +1,20 @@
+<div class="cont">
+    <div class="lines" *ngFor="let line of lines">
+        <div class="fixedLines" *ngIf="showLines(line)">
+            <span>LINES</span>
+            <span>FIXED</span>
+        </div>
+        {{ line }}
+    </div>
+    <div class="buttons" *ngIf="hasButtons">
+        <div class="block">
+            <app-nominales-selector class="nominales-selector" *ngIf="showNMSelector" [selectedNominale]="selectedNominale" [nominales]="nominales" (nominaleChanged)="nominaleChanged($event)"></app-nominales-selector>
+            <div class="autospin" (click)="onAutoSpin()"></div>
+            <div class="spin" (click)="onSpin()" #spinButton></div>
+            <div class="nominales_selector autospin" (click)="toggleNMSelector()">
+                <div class="icon"></div>
+                <div class="value"> {{ selectedNominale }} </div>
+            </div>
+        </div>
+    </div>
+</div>

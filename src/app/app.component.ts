@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'slot-game';
+
+  @ViewChild('gameContainer') gameContainer: any;
+
+  onSpin() {
+    this.gameContainer.game.onSpin();
+  }
+
+  onAutoSpin() {
+    this.gameContainer.game.onAutoSpin();
+  }
 }

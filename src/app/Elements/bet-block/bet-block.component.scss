@@ -1,0 +1,59 @@
+.cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #AAB1B0;
+    background: #2C2022;
+    border-radius: 10px;
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    &.selected {
+        border: 3px solid #A90006;
+        background: linear-gradient(#F57602, #D52F10);
+        .label {
+            &.currency {
+                color: #FFD900;
+            }
+        }
+    }
+    .label {
+        &.currency {
+            font-weight: 900;
+            font-size: 15px;
+            color: #fff;
+            text-align: left;
+        }
+        &.value {
+            font-weight: 900;
+            font-size: 25px;
+            color: #fff;
+            text-align: left;
+        }
+        &.bet {
+            font-weight: 500;
+            font-size: 15px;
+            color: #FFD900;
+            text-align: left;
+        }
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+    .cont {
+        width: 65px;
+        height: 65px;
+        .label {
+            &.currency {
+                font-size: 13px;
+            }
+            &.value {
+                font-size: 23px;
+            }
+            &.bet {
+                font-size: 13px;
+            }
+        }
+    }  
+}

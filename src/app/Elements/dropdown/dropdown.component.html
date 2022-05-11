@@ -1,0 +1,13 @@
+<div class="content">
+    <div class="selected"> 
+        <div class="value"> {{ selected }} </div>
+        <div class="btn">
+            <div class="icon" (click)="toggleBlock()" #block></div>
+        </div>
+    </div>
+    <div class="elements" *ngIf="showDropdown">
+        <div class="item" *ngFor="let item of items">
+            <div class="value"> {{ item }} </div>
+        </div>
+    </div>
+</div>
