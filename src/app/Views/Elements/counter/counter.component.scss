@@ -1,0 +1,37 @@
+.content {
+    cursor: pointer;
+    width: 150px;
+    height: 40px;
+    background-color: #3E0006;
+    border: 15px solid transparent;
+    border-image: url('../../../../assets/borders/bottom_small.svg') 30 round;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .value {
+        font-weight: 900;
+        font-size: 27px;
+        color: #fff;
+        text-align: left;
+    }
+    
+    .btn {
+        .icon {
+            cursor: pointer;
+            margin: 5px;
+            width: 35px;
+            height: 35px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            &.minus {
+                background-image: url('../../../../assets/icons/minus.svg');
+            }
+            &.add {
+                background-image: url('../../../../assets/icons/plus.svg');
+            }
+        }
+    }
+}

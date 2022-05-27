@@ -9,11 +9,11 @@
       </div>
       <div class="middle">
         <div class="game">
-          <app-game-container class="container" #gameContainer></app-game-container>
+          <app-game-container class="container" [gameData]="data.game" #gameContainer></app-game-container>
         </div>
         <div class="bottom-panel">
             <app-bonus-button></app-bonus-button>
-            <app-action-panel></app-action-panel>
+            <app-action-panel [data]="data"></app-action-panel>
         </div>
       </div>
       <div class="side right">

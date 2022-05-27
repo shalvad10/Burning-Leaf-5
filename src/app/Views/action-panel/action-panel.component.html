@@ -1,0 +1,23 @@
+<div class="content">
+    <div class="block balance">
+        <app-label-value label="balance" [value]="balance"></app-label-value>
+    </div>
+    <!-- <div class="block value">
+        <app-counter [value]="2" [minValue]="1" [maxValue]="10"></app-counter>
+    </div>
+    <div class="block bet">
+        <app-dropdown [allElements]="nominales"></app-dropdown>
+    </div> -->
+    <div class="block nominales">
+        <app-bet-block *ngFor="let item of nominales" currency="GEL" [value]="item" [isSelected]="selectedNominale == item" (click)="selectNominale(item)"></app-bet-block>
+    </div>
+    <div class="block last_win">
+        <app-label-value label="last win" value="100"></app-label-value>
+    </div>
+    <div class="block action_buttons">
+        <div class="icon info"></div>
+        <div class="icon volume" [ngClass]="[volume ? 'on' : 'off']" (click)="toggleVolume()"></div>
+        <div class="icon menu"></div>
+        <div class="icon full_screen" (click)="fullScreen()"></div>
+    </div>
+</div>
