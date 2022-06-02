@@ -39,7 +39,19 @@ export default class Symbol {
   }
 
   static random() {
-    return this.symbols[Math.floor(Math.random() * this.symbols.length)];
+    let symbols = [
+      "cherry",
+      "lemon",
+      "orange",
+      "plum",
+      "bell",
+      "wintry",
+      "grape",
+      "seven",
+      "dollar",
+      "star"
+    ];
+    return symbols[Math.floor(Math.random() * symbols.length)];
   }
 
   static getByID(id: number) {

@@ -58,7 +58,7 @@ export default class Reel {
       (resolve) => (this.animation.onfinish = resolve)
     );
     const timeoutPromise = new Promise((resolve) =>
-      setTimeout(resolve, this.factor * 1000)
+      setTimeout(resolve, this.factor * 500)
     );
 
     this.animation.play();

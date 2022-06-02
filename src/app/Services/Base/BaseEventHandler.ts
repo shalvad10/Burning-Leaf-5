@@ -1,8 +1,5 @@
-import { ObjectParser } from './../Connection/ObjectParser';
 import { ConnEnums    } from '../Enums/ConnEnums';
 import { Sender } from '../Actions/Sender';
-import SharedMethods from '../Actions/SharedMethods';
-import { AppEnums } from 'src/app/Services/Enums/AppEnums';
 
 export default abstract class BaseEventHandler {
   constructor(private data: any, private sender: Sender) { }
@@ -10,7 +7,7 @@ export default abstract class BaseEventHandler {
   public handleEvents(code: number, data: any): void {
     switch (code) {
       // case ConnEnums.events.MatchListUpdate       : { this.updateTables(data);        break; }
-      // case ConnEnums.events.RakebackLevel         : { this.setRakebackLevel(data);    break; }
+      case ConnEnums.events.RemainingFreeSpins    : { this.remainingFreespins(data);  break; }
       case ConnEnums.events.BalanceUpdated        : { this.updateBalance(data);       break; }
       // case ConnEnums.events.MatchListOnJoinLobby  : { this.setTables(data);           break; }
       // case ConnEnums.events.MatchDeleteEvent      : { this.deleteTable(data);         break; }
@@ -24,6 +21,12 @@ export default abstract class BaseEventHandler {
       // case ConnEnums.events.MatchesEnableState    : { this.changeMatchesState(data);  break; }
       // case ConnEnums.events.MyTournaments         : { this.setMyTournaments(data);    break; }
     }
+  }
+
+  public remainingFreespins(data: any) {
+    this.data.game.freeSpins.count = data.FreespinsCount;
+    this.data.game.freeSpins.bet = data.BetAmmount / this.data.ammountDivide;
+    this.data.game.freeSpins.typeID = data.FrespinTypeID;
   }
 
   public updateBalance(data: any) {

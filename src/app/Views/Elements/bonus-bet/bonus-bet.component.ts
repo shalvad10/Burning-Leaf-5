@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-bonus-bet',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BonusBetComponent implements OnInit {
 
+  @Input() bet: any;
+  @Output() selectBet:any = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+  
+  change(direction: number): void {
+    this.selectBet.emit(direction);
   }
 
 }

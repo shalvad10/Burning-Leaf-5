@@ -1,8 +1,8 @@
-<div class="cont">
+<div class="cont" *ngIf="dataLoaded">
     <div class="bonus-block">
-        <app-bonus-item *ngFor="let freeSpin of freeSpins" [freeSpin]="freeSpin" [selectedBet]="selectedBet"></app-bonus-item>
+        <app-bonus-item *ngFor="let freeSpin of freeSpins" [freeSpin]="freeSpin" [selectedBet]="selectedBet" (onAction)="bubbleAction($event)"></app-bonus-item>
     </div>
     <div class="bet-block">
-        <app-bonus-bet></app-bonus-bet>
+        <app-bonus-bet [bet]="selectedBet" (selectBet)="selectBet($event)"></app-bonus-bet>
     </div>
 </div>

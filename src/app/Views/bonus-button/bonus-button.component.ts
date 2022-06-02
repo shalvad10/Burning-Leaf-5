@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ComponentBase } from 'src/app/Base/ComponentBase';
 
 @Component({
   selector: 'app-bonus-button',
   templateUrl: './bonus-button.component.html',
   styleUrls: ['./bonus-button.component.scss']
 })
-export class BonusButtonComponent implements OnInit {
+export class BonusButtonComponent extends ComponentBase implements OnInit {
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) {
+    super(ref);
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  onClick() {
+    this.emitAction('toggleModal', {modal: 'bonus', data: undefined});
   }
 
 }

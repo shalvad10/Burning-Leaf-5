@@ -1,10 +1,10 @@
 <div class="cont">
     <div class="text-block">
         <div class="title"> Bet EUR </div>
-        <div class="bet">  5.00 </div>
+        <div class="bet">  {{ bet.toFixed(2) }} </div>
     </div>
     <div class="arrows-block">
-        <div class="arrow minus"> - </div>
-        <div class="arrow plus"> + </div>
+        <div class="arrow minus" (click)="change(-1)"> - </div>
+        <div class="arrow plus" (click)="change(1)"> + </div>
     </div>
 </div>

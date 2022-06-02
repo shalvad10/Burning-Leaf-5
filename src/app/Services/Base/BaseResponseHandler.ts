@@ -29,11 +29,11 @@ export default abstract class BaseResponseHandler {
   }
 
   public handleResponses(code: number, data: any): void {
-    switch (code)
-    {
+    switch (code) {
       // case ConnEnums.operations.CreateSession       : { this.createSession(data);        break; }
-      case ConnEnums.operations.Login               : { this.login(data);   break; }
-      case ConnEnums.operations.Spin                : { this.spin(data);    break; }
+      case ConnEnums.operations.Login               : { this.login(data);         break; }
+      case ConnEnums.operations.Spin                : { this.spin(data);          break; }
+      case ConnEnums.operations.BuyFreeSpin         : { this.buyFreeSpin(data);   break; }
       // case ConnEnums.operations.GetRakebackState    : { this.getRakebackState(data);     break; }
       // case ConnEnums.operations.EncashRakebackPoints: { this.rakebackExchange(data);     break; }
       // case ConnEnums.operations.TouranamentInfo     : { this.tournamentInfo(data);       break; }
@@ -47,9 +47,18 @@ export default abstract class BaseResponseHandler {
   }
 
   public spin(data: any): void {
-    this.data.game.initialMatrix  = SharedMethods.generateArrFromObj(data.InitialMatrix);
-    this.data.game.changedMatrix  = SharedMethods.generateArrFromObj(data.FinalMatrix);
-    this.data.game.specialSymbols = data.Scatters;
-    this.data.game.lines          = data.Lines;
+    this.data.game.initialMatrix    = SharedMethods.generateArrFromObj(data.InitialMatrix);
+    this.data.game.changedMatrix    = SharedMethods.generateArrFromObj(data.FinalMatrix);
+    this.data.game.specialSymbols   = data.Scatters;
+    this.data.game.lines            = data.Lines;
+    setTimeout(() => {
+      this.data.game.spinning = false;
+      this.data.game.wonAmmount = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : this.data.game.wonAmmount;
+      console.warn(this.data.game.spinning);
+    }, 3000);
+  }
+
+  public buyFreeSpin(data: any): void {
+    this.data.modal.currentModal = '';
   }
 }

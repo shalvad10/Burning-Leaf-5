@@ -15,11 +15,11 @@ export default class Slot {
     Symbol.preload();
 
     this.currentSymbols = [
-      ["wintry", "grape", "star"],
-      ["wintry", "wintry", "wintry"],
-      ["wintry", "leaf", "wintry"],
-      ["wintry", "star", "star"],
-      ["wintry", "star", "star"],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()]
     ];
 
     this.nextSymbols = [

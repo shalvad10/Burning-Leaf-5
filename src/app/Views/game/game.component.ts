@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ComponentBase } from 'src/app/Base/ComponentBase';
 import SharedMethods, { WinnObject } from 'src/app/Services/Actions/SharedMethods';
 
 import Slot from './Engine/Slot';
@@ -8,9 +9,11 @@ import Slot from './Engine/Slot';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
+export class GameComponent extends ComponentBase implements OnInit {
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) {
+    super(ref);
+  }
 
   @Input() gameData: any;
   @Input() lines: any;
@@ -31,11 +34,11 @@ export class GameComponent implements OnInit {
       this.spinning = false;
       this.changeSymbols();
       this.showWin(SharedMethods.checkWin(this.gameData));
-      if (this.autoSpin == true) {
-        setTimeout(() => {
-          this.onSpin();
-        }, 1);
-      }
+      // if (this.autoSpin == true) {
+      //   setTimeout(() => {
+      //     this.emitAction('autoSpin');
+      //   }, 1);
+      // }
     },
   };
 
@@ -62,6 +65,7 @@ export class GameComponent implements OnInit {
       let reels = document.getElementsByClassName('reel');
       for (let k = 0; k < data.length; k++) {
         if (data[k].winType == 'line') {
+          var symbolsCount = 0;
           let winningLines = this.lines[`line${data[k].lineId}`];
           for (let i = 0; i < reels.length; i++) {
             let allowBorder = true;
@@ -77,6 +81,7 @@ export class GameComponent implements OnInit {
                       let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
                       console.warn(symbol, data[k].symbol);
                       if ( symbol === 'leaf' || symbol === data[k].symbol) {
+                        symbolsCount++;
                         (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).style.cssText = `
                         width: calc(100% - 10px);
                         height: calc(100% - 10px);
@@ -124,28 +129,33 @@ export class GameComponent implements OnInit {
     }
   }
 
+  public get maxSymbols() {
+    return this.gameData.wonSymbolsCount;
+  }
+
 
   ngOnInit(): void {
     this.slot = new Slot(document.getElementById('reels'), this.config);
   }
 
-  onSpin(autoSpin: boolean = false): void {
+  onSpin(): void {
+    console.warn(this.spinning, this.autoSpin);
     if (this.spinning == false) {
       this.slot?.spin(this.gameData.initialMatrix);
     } else {
-      if (autoSpin == false) {
+      if (this.autoSpin == true) {
         this.autoSpin = false;
       }
     }
   }
 
   onAutoSpin() {
-    this.autoSpin = true;
-    if (this.spinning == false) {
-      this.onSpin();
-    } else {
-      this.autoSpin = false;
-    }
+    // this.autoSpin = true;
+    // if (this.spinning == false) {
+    //   this.emitAction('autoSpin');
+    // } else {
+    //   this.autoSpin = false;
+    // }
   }
 
 }

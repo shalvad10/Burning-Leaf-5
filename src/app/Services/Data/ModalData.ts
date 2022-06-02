@@ -2,10 +2,8 @@ export class ModalData {
   public data: any = {
     currentModal: '',
     modalParams: {
-      avatars: {
-        close: false,
-        icon: false,
-        size: { x: 636, y: 377, fullscreen: true},
+      bonus: {
+        close: true,
         data: {}
       },
       info:

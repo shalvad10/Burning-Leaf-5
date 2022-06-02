@@ -5,6 +5,15 @@
         </span>
     </div>
     <div class="content">
-        <app-buy-freespins [freeSpins]="data.freespinTypes" [selectedBet]="data.game.selectedBet"></app-buy-freespins>
+        <span  class="close" (click)="close()"> X </span>
+        <app-buy-freespins
+            *ngIf="data.modal.currentModal == 'bonus'"
+            [freeSpins]="data.freespinTypes"
+            [selectedBet]="data.game.selectedBet"
+            [betMultipliers]="data.game.betMultipliers"
+            [gameLine]="data.game.gameLine"
+            [selectedNominale]="data.game.selectedNominale"
+            (onAction)="bubbleAction($event)"
+        ></app-buy-freespins>
     </div>
 </div>

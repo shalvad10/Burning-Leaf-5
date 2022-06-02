@@ -9,10 +9,13 @@
       </div>
       <div class="middle">
         <div class="game">
-          <app-game-container class="container" [gameData]="data.game" [lines]="data.winByLines" #gameContainer></app-game-container>
+          <app-game-container class="container" [gameData]="data.game" [lines]="data.winByLines" (onAction)="handleAction($event)" #gameContainer></app-game-container>
         </div>
-        <div class="bottom-panel">
-            <app-bonus-button></app-bonus-button>
+        <div class="informationText" *ngIf="freeSpins > 0">
+          <span> დარჩენილია {{freeSpins}} ფრისპინი</span>
+        </div>
+        <div class="bottom-panel" [ngClass]="{'withText': freeSpins > 0}">
+            <app-bonus-button (onAction)="handleAction($event)"></app-bonus-button>
             <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
         </div>
       </div>
@@ -22,4 +25,4 @@
     </div>
   </div>
 </div>
-<!-- <app-modal class="modal" [data]="data"></app-modal> -->
+<app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)"></app-modal>

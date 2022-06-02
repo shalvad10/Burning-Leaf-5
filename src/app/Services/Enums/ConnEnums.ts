@@ -2,7 +2,8 @@ export const ConnEnums = {
   operations: {
     Login : 0,
     Spin : 10,
-    BuyFreeSpin : 11
+    FreeSpin: 11,
+    BuyFreeSpin : 14
   },
   operationParams: {
     PlayerName : 0,
@@ -43,7 +44,11 @@ export const ConnEnums = {
     GameId: 6,
     AccountId: 7,
     DeviceTypeId: 8,
-    SessionId: 9
+    SessionId: 9,
+
+    FreespinsCount: 10,
+    BetAmmount: 20,
+    FrespinTypeID: 30
   },
   errorCodes: {
     NoError: 0,

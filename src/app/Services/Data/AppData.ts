@@ -22,9 +22,7 @@ export class AppData {
   }
 
   public setProperties(data: any): void {
-    console.warn(data);
     this.base.data.connection.sessionKey = data.sessionkey;
-    // this.base.data.language.selectedLanguage = data.lang;
 
     Languages.instance.selectLanguage(data.lang);
   }

@@ -25,4 +25,21 @@ export default class BaseSender {
 
     this.conn.sendObject(ConnEnums.operations.Spin, obj);
   }
+
+  public freeSpin(bet: number): void {
+    const obj: any = {};
+    obj[ConnEnums.operationParams.BetAmount] = bet;
+    obj[ConnEnums.operationParams.NumberOfLines] = 5;
+
+    this.conn.sendObject(ConnEnums.operations.FreeSpin, obj);
+  }
+
+  public buyFreeSpin(freespinType:number, bet: number): void {
+    const obj: any = {};
+    obj[ConnEnums.operationParams.FreeSpinTypeId] = freespinType;
+    obj[ConnEnums.operationParams.BetAmount] = bet;
+    obj[ConnEnums.operationParams.NumberOfLines] = 5;
+
+    this.conn.sendObject(ConnEnums.operations.BuyFreeSpin, obj);
+  }
 }

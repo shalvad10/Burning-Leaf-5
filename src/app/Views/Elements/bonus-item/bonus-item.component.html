@@ -1,7 +1,7 @@
 <div class="cont">
     <div class="text-block">
         <div class="title">  {{ freeSpin.type }}  </div>
-        <div class="price"> {{ selectedBet * freeSpin.price }} Euro - Buy </div>
+        <div class="price" (click)="onClick()"> {{ selectedBet * freeSpin.price }} Euro - Buy </div>
     </div>
     <div class="leafs-block">
         <div class="leaf" *ngIf="freeSpin.leafs >= 2"></div>

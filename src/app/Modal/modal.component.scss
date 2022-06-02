@@ -16,4 +16,16 @@
             color: #fff;
         }
     }
+    .content {
+        position: relative;
+        .close {
+            cursor: pointer;
+            position: absolute;
+            top: -50px;
+            right: 10px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #F7E300;    
+        }
+    }
 }

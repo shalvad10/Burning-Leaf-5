@@ -1,9 +1,4 @@
 import { Sender } from './Sender';
-import { Languages } from '../Libs/Languages';
-import { ConnEnums } from '../Enums/ConnEnums';
-import { AppEnums } from '../Enums/AppEnums';
-import SharedMethods from './SharedMethods';
-import { Styles } from '../Libs/Styles';
 
 export default class Actions {
   
@@ -17,7 +12,8 @@ export default class Actions {
       case 'spin'           : { this.spin();                break; }
       case 'selectNominale' : { this.selectNominale(data);  break; }
       case 'selectBet'      : { this.selectBet(data);       break; }
-      // case 'changeState'            : { this.changeState(data);                   break; }
+      case 'buyFreeSpin'    : { this.buyFreeSpin(data);     break; }
+      case 'toggleModal'    : { this.toggleModal(data);     break; }
       // case 'toggleTabs'             : { this.toggleTab(data);                     break; }
       // case 'joinGame'               : { this.joinGame(data);                      break; }
       // case 'openModal'              : { this.toggleModal(data);                   break; }
@@ -41,21 +37,31 @@ export default class Actions {
   }
 
   public spin(): void {
-    this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
+    this.data.game.spinning = true;
+    if ( this.data.game.freeSpins.count == 0) {
+      this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
+    } else {
+      this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
+    }
   }
 
   public selectNominale(data: any): void {
     this.data.game.selectedNominale = data;
     this.data.game.selectedBet = data * this.data.game.betMultipliers[this.data.game.selectedMultiplierIndex] * this.data.game.gameLine;
-    console.error(data * this.data.game.betMultipliers[this.data.game.selectedMultiplierIndex] * this.data.game.gameLine);
-    console.warn('NOMINALE', this.data);
-
   }
+
+  public buyFreeSpin(data: any): void {
+    this.sender.buyFreeSpin(data.freeSpinType, this.data.game.selectedBet * this.data.ammountDivide);
+  }
+
   public selectBet(data: any): void {
-    console.warn('BET', data);
     this.data.game.selectedBet = data.bet;
     this.data.game.selectedMultiplierIndex = data.index
     this.spin();
+  }
+
+  public toggleModal(data: any): void {
+    this.data.modal.currentModal = data.modal;
   }
 
 }
