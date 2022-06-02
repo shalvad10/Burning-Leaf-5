@@ -61,9 +61,23 @@
     }
 }
 
+// .modal {
+//     position: absolute;
+//     width: 100vw;
+//     height: 100vh;
+// }
+
 @media only screen and (max-width: 1600px) {
     .content {    
-        .container {    
+        .container {
+            .header {
+                margin: 15px;
+                
+                .title {
+                    width: 400px;
+                    height: 45px;
+                }
+            }    
             .cont {
                 .side {
                     height: 525px;
@@ -79,7 +93,7 @@
                     }
                     .bottom-panel {
                         height: 75px;
-                        margin-top: 50px;
+                        margin-top: 65px;
                     }
                 }
             }

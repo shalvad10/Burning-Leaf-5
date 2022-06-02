@@ -8,12 +8,13 @@ export const ConnEnums = {
     PlayerName : 0,
     SessionId : 1,
     Balance : 2,
-    SlotId : 3,
+    GameId : 3,
 
     Number : 10,
     String : 11,
     Boolean : 12,
     Array : 13,
+    Dictionary: 14,
 
     BetAmount : 20,
     WonAmount : 21,
@@ -22,10 +23,11 @@ export const ConnEnums = {
     SymbolId : 24,
     Multiplier : 25,
 
-    InitialMatrix : 20,
-    FinalMatrix : 21,
-    Scatters : 22,
-    Lines : 23
+    InitialMatrix : 30,
+    FinalMatrix : 31,
+    Scatters : 32,
+    Lines : 33,
+    FreeSpinTypeId: 34
   },
   events: {
     BalanceUpdated : 0,

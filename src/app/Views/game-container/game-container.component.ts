@@ -10,6 +10,7 @@ export class GameContainerComponent implements OnInit {
   @ViewChild('gameContainer') game: any;
 
   @Input() gameData: any;
+  @Input() lines: any;
 
   constructor() { }
 

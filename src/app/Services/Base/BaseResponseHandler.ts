@@ -43,13 +43,13 @@ export default abstract class BaseResponseHandler {
 
   public login(data: any): void {
     this.data.user.userName = data.PlayerName;
-    this.data.user.balance  = data.Balance;
+    this.data.user.balance  = data.Balance / this.data.ammountDivide;
   }
 
   public spin(data: any): void {
-    this.data.game.initialMatrix = SharedMethods.generateArrFromObj(data.BetAmount);
-    this.data.game.changedMatrix = SharedMethods.generateArrFromObj(data.WonAmount);
-    console.warn('resp',this.data.game.initialMatrix);
-    console.warn('resp',this.data.game.changedMatrix);
+    this.data.game.initialMatrix  = SharedMethods.generateArrFromObj(data.InitialMatrix);
+    this.data.game.changedMatrix  = SharedMethods.generateArrFromObj(data.FinalMatrix);
+    this.data.game.specialSymbols = data.Scatters;
+    this.data.game.lines          = data.Lines;
   }
 }

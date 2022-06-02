@@ -1,5 +1,5 @@
-<div class="cont" [ngClass]="{'selected': isSelected}">
+<div class="cont" [ngClass]="{'selected': isSelected}" (click)="selectBet()">
     <span class="label currency"> {{ currency }} </span>
-    <span class="label value"> {{ value }} </span>
+    <span class="label value"> {{ transformText() }} </span>
     <span class="label bet"> BET </span>
 </div>

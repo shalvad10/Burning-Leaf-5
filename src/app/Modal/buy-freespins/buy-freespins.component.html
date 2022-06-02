@@ -1,0 +1,8 @@
+<div class="cont">
+    <div class="bonus-block">
+        <app-bonus-item *ngFor="let freeSpin of freeSpins" [freeSpin]="freeSpin" [selectedBet]="selectedBet"></app-bonus-item>
+    </div>
+    <div class="bet-block">
+        <app-bonus-bet></app-bonus-bet>
+    </div>
+</div>

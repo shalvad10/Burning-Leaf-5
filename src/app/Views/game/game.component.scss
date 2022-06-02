@@ -13,18 +13,12 @@
         justify-content: center;
         align-items: flex-end;
         overflow: hidden;
+        padding: 10px 0px;
         &:not(:first-child) {
             margin-left: 10px;
         }
         &:not(:last-child) {
             margin-right: 10px;
-        }
-        .icons {
-            width: 100%;
-            img {
-                width: 200px;
-                height: 200px;
-            }
         }
     }
 }
@@ -38,13 +32,6 @@
             }
             &:not(:last-child) {
                 margin-right: 10px;
-            }
-            .icons {
-                width: 100%;
-                img {
-                    width: 200px;
-                    height: 200px;
-                }
             }
         }
     }

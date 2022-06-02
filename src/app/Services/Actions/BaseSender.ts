@@ -13,15 +13,15 @@ export default class BaseSender {
     console.warn(this.conn)
     const obj: any = {};
     obj[ConnEnums.operationParams.SessionId] = this.conn.data.connection.sessionKey;
-    obj[ConnEnums.operationParams.SlotId] = 1;
+    obj[ConnEnums.operationParams.GameId] = 1;
 
     this.conn.sendObject(ConnEnums.operations.Login, obj);
   }
 
-  public spin(): void {
+  public spin(bet: number): void {
     const obj: any = {};
-    obj[ConnEnums.operationParams.BetAmount] = 5;
-    obj[ConnEnums.operationParams.NumberOfLines] = 20;
+    obj[ConnEnums.operationParams.BetAmount] = bet;
+    obj[ConnEnums.operationParams.NumberOfLines] = 5;
 
     this.conn.sendObject(ConnEnums.operations.Spin, obj);
   }

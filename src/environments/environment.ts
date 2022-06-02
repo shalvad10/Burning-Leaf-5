@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiURL: 'http://20.73.255.80:8088',
   connectionURL: 'ws://20.73.255.80:10010'
 };
 

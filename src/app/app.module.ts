@@ -12,6 +12,11 @@ import { CounterComponent } from './Views/Elements/counter/counter.component';
 import { DropdownComponent } from './Views/Elements/dropdown/dropdown.component';
 import { BetBlockComponent } from './Views/Elements/bet-block/bet-block.component';
 import { NominalesSelectorComponent } from './Views/Elements/nominales-selector/nominales-selector.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ModalComponent } from './Modal/modal.component';
+import { BuyFreespinsComponent } from './Modal/buy-freespins/buy-freespins.component';
+import { BonusItemComponent } from './Views/Elements/bonus-item/bonus-item.component';
+import { BonusBetComponent } from './Views/Elements/bonus-bet/bonus-bet.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +30,15 @@ import { NominalesSelectorComponent } from './Views/Elements/nominales-selector/
     CounterComponent,
     DropdownComponent,
     BetBlockComponent,
-    NominalesSelectorComponent
+    NominalesSelectorComponent,
+    ModalComponent,
+    BuyFreespinsComponent,
+    BonusItemComponent,
+    BonusBetComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

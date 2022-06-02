@@ -14,8 +14,9 @@ export default class Actions {
     console.warn(type,data);
 
     switch (type) {
-      case 'spin'         : { this.spin();                break; }
-      // case 'toggleModal'            : { this.toggleModal(data);                   break; }
+      case 'spin'           : { this.spin();                break; }
+      case 'selectNominale' : { this.selectNominale(data);  break; }
+      case 'selectBet'      : { this.selectBet(data);       break; }
       // case 'changeState'            : { this.changeState(data);                   break; }
       // case 'toggleTabs'             : { this.toggleTab(data);                     break; }
       // case 'joinGame'               : { this.joinGame(data);                      break; }
@@ -40,7 +41,21 @@ export default class Actions {
   }
 
   public spin(): void {
-    this.sender.spin();
+    this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
+  }
+
+  public selectNominale(data: any): void {
+    this.data.game.selectedNominale = data;
+    this.data.game.selectedBet = data * this.data.game.betMultipliers[this.data.game.selectedMultiplierIndex] * this.data.game.gameLine;
+    console.error(data * this.data.game.betMultipliers[this.data.game.selectedMultiplierIndex] * this.data.game.gameLine);
+    console.warn('NOMINALE', this.data);
+
+  }
+  public selectBet(data: any): void {
+    console.warn('BET', data);
+    this.data.game.selectedBet = data.bet;
+    this.data.game.selectedMultiplierIndex = data.index
+    this.spin();
   }
 
 }

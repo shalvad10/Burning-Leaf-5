@@ -1,0 +1,21 @@
+<div class="cont">
+    <div class="text-block">
+        <div class="title">  {{ freeSpin.type }}  </div>
+        <div class="price"> {{ selectedBet * freeSpin.price }} Euro - Buy </div>
+    </div>
+    <div class="leafs-block">
+        <div class="leaf" *ngIf="freeSpin.leafs >= 2"></div>
+        <div class="leaf" *ngIf="freeSpin.leafs > 2"></div>
+        <div class="plus" *ngIf="freeSpin.leafs == 2.5">
+            +
+        </div>
+        <div class="leaf">
+            <div class="free_spins">
+                <div class="content">
+                    <span class="number"> {{ freeSpin.freespinsCount }} </span>
+                    <span class="text"> Free Spins </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

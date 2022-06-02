@@ -1,5 +1,5 @@
 .content {
-    width: 950px;
+    width: 970px;
     height: 70px;
     background-color: #3E0006;
     border: 15px solid transparent;
@@ -68,7 +68,7 @@
 @media only screen and (max-width: 1600px) {
     .content {
         width: 875px;
-        height: 65px;
+        height: 60px;
         .block {
             &.action_buttons {
                 .icon {

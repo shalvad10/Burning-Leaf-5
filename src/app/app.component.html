@@ -9,16 +9,17 @@
       </div>
       <div class="middle">
         <div class="game">
-          <app-game-container class="container" [gameData]="data.game" #gameContainer></app-game-container>
+          <app-game-container class="container" [gameData]="data.game" [lines]="data.winByLines" #gameContainer></app-game-container>
         </div>
         <div class="bottom-panel">
             <app-bonus-button></app-bonus-button>
-            <app-action-panel [data]="data"></app-action-panel>
+            <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
         </div>
       </div>
       <div class="side right">
-        <app-lines [hasButtons]="true" (spin)="onSpin()" (autoSpin)="onAutoSpin()"></app-lines>
+        <app-lines [hasButtons]="true" [nominales]="data.game.nominales" [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin()" (onAction)="handleAction($event)"></app-lines>
       </div>
     </div>
   </div>
 </div>
+<!-- <app-modal class="modal" [data]="data"></app-modal> -->

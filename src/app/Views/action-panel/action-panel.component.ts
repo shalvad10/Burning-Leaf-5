@@ -1,19 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ComponentBase } from 'src/app/Base/ComponentBase';
 
 @Component({
   selector: 'app-action-panel',
   templateUrl: './action-panel.component.html',
   styleUrls: ['./action-panel.component.scss']
 })
-export class ActionPanelComponent implements OnInit {
+export class ActionPanelComponent extends ComponentBase implements OnInit {
 
   public volume: boolean = true;
-
-  public nominales = [0.03,0.5,1,2,3];
-  public selectedNominale = 0.5;
-
   @Input() data: any;
-  constructor() { }
+
+  constructor(public ref: ChangeDetectorRef) {
+    super(ref);
+  }
 
   ngOnInit(): void { }
 
@@ -21,8 +21,21 @@ export class ActionPanelComponent implements OnInit {
     this.volume = !this.volume;
   }
 
-  selectNominale(nominale: number) {
-    this.selectedNominale = nominale;
+  public get selectedBet(): number {
+    return this.data.game.selectedBet;
+  }
+  public get gameLine(): number {
+    return this.data.game.gameLine;
+  }
+  public get betMultipliers(): number[] {
+    return this.data.game.betMultipliers;
+  }
+  public get selectedNominale(): number {
+    return this.data.game.selectedNominale;
+  }
+
+  public bet(betMultiplier:number) {
+    return betMultiplier * this.gameLine * this.selectedNominale;
   }
 
   fullScreen(): void {

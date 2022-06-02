@@ -27,6 +27,6 @@ export default abstract class BaseEventHandler {
   }
 
   public updateBalance(data: any) {
-    this.data.user.balance = data.Balance;
+    this.data.user.balance = data.Balance / this.data.ammountDivide;
   }
 }

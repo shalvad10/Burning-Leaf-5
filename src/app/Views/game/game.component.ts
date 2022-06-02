@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import SharedMethods, { WinnObject } from 'src/app/Services/Actions/SharedMethods';
 
 import Slot from './Engine/Slot';
 
@@ -12,6 +13,7 @@ export class GameComponent implements OnInit {
   constructor() { }
 
   @Input() gameData: any;
+  @Input() lines: any;
 
   public slot?: Slot;
 
@@ -28,6 +30,7 @@ export class GameComponent implements OnInit {
       console.log("onSpinEnd", symbols, this.autoSpin);
       this.spinning = false;
       this.changeSymbols();
+      this.showWin(SharedMethods.checkWin(this.gameData));
       if (this.autoSpin == true) {
         setTimeout(() => {
           this.onSpin();
@@ -36,7 +39,7 @@ export class GameComponent implements OnInit {
     },
   };
 
-  changeSymbols() {
+  public changeSymbols() {
     let arr = this.gameData.changedMatrix;
     for (let i=0; i<arr.length; i++) {
       let reel = document.getElementsByClassName('reel')[i];
@@ -48,6 +51,74 @@ export class GameComponent implements OnInit {
         if(symbol !== arr[i][j]) {
           imgTag = imgTag.replace(symbol,arr[i][j]);
           img.src = imgTag;
+        }
+      }
+    }
+  }
+
+  public showWin(data: WinnObject[]) {
+    console.warn(data);
+    if (data.length > 0) {
+      let reels = document.getElementsByClassName('reel');
+      for (let k = 0; k < data.length; k++) {
+        if (data[k].winType == 'line') {
+          let winningLines = this.lines[`line${data[k].lineId}`];
+          for (let i = 0; i < reels.length; i++) {
+            let allowBorder = true;
+            for (let j = 0; j< winningLines.length; j++) {
+              if( i == winningLines[j][1] ){
+                console.warn(reels[i]);
+                console.warn(reels[i].firstChild);
+                console.warn(reels[i].firstChild?.childNodes[winningLines[j][0]]);
+                console.warn(allowBorder);
+                if (allowBorder == true) {
+                  if (reels[i].firstChild?.childNodes[winningLines[j][0]]) {
+                      let srcArr = (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).getAttribute('src')?.split('/');
+                      let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
+                      console.warn(symbol, data[k].symbol);
+                      if ( symbol === 'leaf' || symbol === data[k].symbol) {
+                        (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).style.cssText = `
+                        width: calc(100% - 10px);
+                        height: calc(100% - 10px);
+                        border: 5px solid rgb(23, 202, 23);
+                        `;
+                      } else {
+                        allowBorder = false;
+                      }
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          console.warn('DATA', data);
+          for (let k = 0; k < data.length; k++) {
+            console.warn('ALL REELS',reels);
+            for (let i = 0; i < reels.length; i++) {
+              let allowBorder = true;
+              let childNodes: any = reels[i].childNodes;
+              console.warn('SINGLE REEL',reels[i]);
+              console.warn('REEL CHILD NODES', childNodes);
+              for (let j = 0; j<childNodes.length; j++) {
+                let images = childNodes[j].childNodes;
+                console.warn('IMAGES', childNodes);
+                for (let l = 0; l<images.length; l++) {
+                  console.warn('SINGLE IMAGE', images[l]);
+                  let srcArr = images[l].getAttribute('src')?.split('/');
+                  console.warn('SINGLE IMAGE SRC ARRAY', srcArr);
+                  let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
+                  console.warn('SINGLE IMAGE SYMBOL FROM SRC', srcArr);
+                  if (  symbol === data[k].symbol) {
+                    images[l].style.cssText = `
+                    width: calc(100% - 10px);
+                    height: calc(100% - 10px);
+                    border: 5px solid rgb(23, 202, 23);
+                    `;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

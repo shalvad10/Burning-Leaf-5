@@ -11,7 +11,7 @@ export default class Symbol {
             this.img = cache[name].cloneNode();
         } else {
             this.img = new Image();
-            this.img.src = `../../../assets/symbols/${name}.svg`;
+            this.img.src = `/assets/symbols/${name}.svg`;
             this.img.style = "width: 100%; height: 100%; transition: 1.5s"
         
             cache[name] = this.img;
