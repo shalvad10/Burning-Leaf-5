@@ -36,3 +36,24 @@
         }
     }
 }
+
+@media only screen and (max-width: 1400px) {
+    #reels {
+        .reel {
+            width: 130px;
+        }
+    }
+}
+@media only screen and (max-width: 920px) {
+    #reels {
+        .reel {
+            width: 70px;
+            &:not(:first-child) {
+                margin-left: 5px;
+            }
+            &:not(:last-child) {
+                margin-right: 5px;
+            }
+        }
+    }
+}

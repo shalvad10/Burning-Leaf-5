@@ -9,6 +9,7 @@ import { ComponentBase } from 'src/app/Base/ComponentBase';
 export class BetBlockComponent extends ComponentBase implements OnInit {
 
   @Input() currency!: string;
+  @Input() spinning!: boolean;
   @Input() value: any;
   @Input() index!: number;
   @Input() isSelected!: boolean;
@@ -18,7 +19,9 @@ export class BetBlockComponent extends ComponentBase implements OnInit {
   }
 
   selectBet() {
-    this.emitAction('selectBet', { bet: this.value, index: this.index});
+    if (this.spinning == false) {
+      this.emitAction('selectBet', { bet: this.value, index: this.index});
+    }
   }
 
   transformText() {

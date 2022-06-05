@@ -23,3 +23,14 @@
         }
     }    
 }
+
+@media only screen and (max-width: 920px) {
+    .content {
+        .label {
+            font-size: 8px;
+        }
+        .value {
+            font-size: 15px;
+        }
+    }    
+}

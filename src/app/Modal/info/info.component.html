@@ -1,0 +1,8 @@
+<div class="cont">
+    <div class="text"> <span> {{ modalData.infoText }} </span> </div>
+    <div class="buttons" *ngIf="modalData.buttons.length > 0">
+        <div class="btn" *ngFor="let modal of modalData.buttons" [style.background-color]="modal.backgroundColor" (click)="onClick(modal.action)">
+            {{ modal.text }}
+        </div>
+    </div>
+</div>

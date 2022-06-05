@@ -20,6 +20,7 @@ export class LinesComponent extends ComponentBase implements OnInit {
 
   @Input() nominales?: number[];
   @Input() selectedNominale?: number;
+  @Input() data: any;
 
   @Output() spin = new EventEmitter<any>();
   @Output() autoSpin = new EventEmitter<any>();
@@ -39,21 +40,27 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   nominaleChanged(nominale: number): void {
-    this.showNMSelector = !this.showNMSelector;
-    this.selectedNominale = nominale;
-    this.emitAction('selectNominale', nominale);
+    if (this.data.game.spinning == false) {
+      this.showNMSelector = !this.showNMSelector;
+      this.selectedNominale = nominale;
+      this.emitAction('selectNominale', nominale);
+    }
   }
 
   onSpin(): void {
-    this.spinButton.nativeElement.classList.toggle('animate');
-    this.spin.emit();
-    setTimeout( () => {
+    if (this.data.game.spinning == false) {
       this.spinButton.nativeElement.classList.toggle('animate');
-    }, 100);
+      this.spin.emit();
+      setTimeout( () => {
+        this.spinButton.nativeElement.classList.toggle('animate');
+      }, 100);
+    }
   }
 
   onAutoSpin(): void {
-    this.autoSpin.emit();
+    if (this.data.game.spinning == false) {
+      this.autoSpin.emit();
+    }
   }
 
 }

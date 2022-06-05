@@ -20,9 +20,11 @@ export default abstract class BaseResponseHandler {
 
   public onError(code:any, key:any, msg:any) {
     switch (code) {
-      case ConnEnums.Errors.LobbyPeerAlreadyExists: {
+      case ConnEnums.errorCodes.PlayerExists: 
+      case ConnEnums.errorCodes.PlayerNotFound:
+      case ConnEnums.errorCodes.Exception: {
         this.data.modal.currentModal = 'info';
-        this.data.modal.modalParams[this.data.modal.currentModal].infoText = 'lobby_oppened';
+        this.data.modal.modalParams[this.data.modal.currentModal].infoText = msg;
         this.sender.enableReconnect(false);
       }
     }

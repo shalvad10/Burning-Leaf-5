@@ -16,12 +16,13 @@ export class ModalComponent extends ComponentBase implements OnInit {
 
   ngOnInit(): void {
   }
+
   
   public get modal() {
     return this.data.modal;
   }
   public get activeModal() {
-    return this.modal[this.modal.currentModal]
+    return this.modal.modalParams[this.modal.currentModal];
   }
 
   close() {

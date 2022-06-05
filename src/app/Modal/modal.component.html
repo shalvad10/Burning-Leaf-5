@@ -1,11 +1,16 @@
-<div class="modal">
+<div class="modal" *ngIf="activeModal">
     <div class="header">
-        <span class="title">
-            BUY WILD BONUS
+        <span class="title" *ngIf="activeModal.title.length > 0" >
+            {{ activeModal.title }}
         </span>
     </div>
     <div class="content">
-        <span  class="close" (click)="close()"> X </span>
+        <span *ngIf="activeModal.close" class="close" (click)="close()"> X </span>
+        <app-info
+            *ngIf="data.modal.currentModal == 'info'"
+            [modalData]="activeModal"
+            (onAction)="bubbleAction($event)"
+        ></app-info>
         <app-buy-freespins
             *ngIf="data.modal.currentModal == 'bonus'"
             [freeSpins]="data.freespinTypes"

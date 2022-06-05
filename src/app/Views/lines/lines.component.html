@@ -6,7 +6,7 @@
         </div>
         {{ line }}
     </div>
-    <div class="buttons" *ngIf="hasButtons">
+    <div class="buttons" *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true ? 0 : 1}">
         <div class="block">
             <app-nominales-selector class="nominales-selector" *ngIf="showNMSelector" [selectedNominale]="selectedNominale" [nominales]="nominales" (nominaleChanged)="nominaleChanged($event)"></app-nominales-selector>
             <div class="autospin" (click)="onAutoSpin()"></div>

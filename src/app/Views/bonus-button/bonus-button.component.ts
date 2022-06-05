@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ComponentBase } from 'src/app/Base/ComponentBase';
 
 @Component({
@@ -8,6 +8,8 @@ import { ComponentBase } from 'src/app/Base/ComponentBase';
 })
 export class BonusButtonComponent extends ComponentBase implements OnInit {
 
+  @Input() freeSpins!: number;
+
   constructor(private ref: ChangeDetectorRef) {
     super(ref);
   }
@@ -15,7 +17,9 @@ export class BonusButtonComponent extends ComponentBase implements OnInit {
   ngOnInit(): void { }
 
   onClick() {
-    this.emitAction('toggleModal', {modal: 'bonus', data: undefined});
+    if (this.freeSpins == 0) {
+      this.emitAction('toggleModal', {modal: 'bonus', data: undefined});
+    }
   }
 
 }

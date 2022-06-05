@@ -1,0 +1,30 @@
+.cont {
+    width: 500px;
+    height: 250px;
+    background-color: #3E0006;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .text {
+        text-align: center;
+        span {
+            font-size: 30px;
+            color: #FFF;
+        }
+    }
+    .buttons {
+        padding-top: 10px;
+        .btn {
+            width: 100px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            font-size: 25px;
+        }
+    }
+}

@@ -16,10 +16,10 @@ export class AppComponent extends ComponentBase {
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-    //   console.warn(data);
-    //   this.data.connection.sessionKey = data.sessionId;
-    // });
+    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+      console.warn(data);
+      this.data.connection.sessionKey = data.sessionId;
+    });
     this.app = new AppMain();
 
     // console.log(this.app.dataObject);
@@ -60,6 +60,10 @@ export class AppComponent extends ComponentBase {
     } else if (e.action == 'autoSpin') {
       this.onSpin();
     }
+  }
+
+  public get informationText() {
+    return this.freeSpins > 0 ? `remaining freespins: ${this.freeSpins}`: (this.data.game.spinning ? '' : 'please place your bet' );
   }
 
   public get data() {

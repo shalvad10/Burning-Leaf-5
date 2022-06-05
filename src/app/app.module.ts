@@ -17,6 +17,7 @@ import { ModalComponent } from './Modal/modal.component';
 import { BuyFreespinsComponent } from './Modal/buy-freespins/buy-freespins.component';
 import { BonusItemComponent } from './Views/Elements/bonus-item/bonus-item.component';
 import { BonusBetComponent } from './Views/Elements/bonus-bet/bonus-bet.component';
+import { InfoComponent } from './Modal/info/info.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BonusBetComponent } from './Views/Elements/bonus-bet/bonus-bet.componen
     ModalComponent,
     BuyFreespinsComponent,
     BonusItemComponent,
-    BonusBetComponent
+    BonusBetComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

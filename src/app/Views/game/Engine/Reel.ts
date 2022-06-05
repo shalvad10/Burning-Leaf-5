@@ -24,7 +24,7 @@ export default class Reel {
         },
       ],
       {
-        duration: this.factor * 1200,
+        duration: this.factor * 666, // ლევანასგან 
         easing: "ease-in-out",
       }
     );

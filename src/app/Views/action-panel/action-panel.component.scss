@@ -80,3 +80,27 @@
     }
     
 }
+
+
+@media only screen and (max-width: 1400px) {
+    .content {
+        width: 900px;
+    }
+    
+}
+
+@media only screen and (max-width: 920px) {
+    .content {
+        width: 555px;
+        height: 30px;
+        .block {
+            &.action_buttons {
+                .icon {
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+    }
+    
+}

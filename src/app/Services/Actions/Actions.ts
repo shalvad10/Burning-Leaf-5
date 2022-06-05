@@ -14,6 +14,7 @@ export default class Actions {
       case 'selectBet'      : { this.selectBet(data);       break; }
       case 'buyFreeSpin'    : { this.buyFreeSpin(data);     break; }
       case 'toggleModal'    : { this.toggleModal(data);     break; }
+      case 'closeGame'      : { this.closeGame();           break; }
       // case 'toggleTabs'             : { this.toggleTab(data);                     break; }
       // case 'joinGame'               : { this.joinGame(data);                      break; }
       // case 'openModal'              : { this.toggleModal(data);                   break; }
@@ -43,6 +44,10 @@ export default class Actions {
     } else {
       this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
     }
+  }
+
+  public closeGame(): void {
+    window.close();
   }
 
   public selectNominale(data: any): void {

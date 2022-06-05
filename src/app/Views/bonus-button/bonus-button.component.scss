@@ -31,7 +31,6 @@
 
 @media only screen and (max-width: 1600px) {
     .bonus {
-        cursor: pointer;
         width: 150px;
         height: 60px;
     
@@ -42,6 +41,23 @@
     
         .text {
             font-size: 14px;
+        }
+    }
+    
+}
+
+@media only screen and (max-width: 920px) {
+    .bonus {
+        width: 70px;
+        height: 30px;
+    
+        .logo {
+            width:  55px;
+            height: 55px;
+        }
+    
+        .text {
+            font-size: 8px;
         }
     }
     

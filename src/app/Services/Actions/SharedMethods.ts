@@ -5,6 +5,7 @@ export interface WinnObject {
     symbol: string;
     winType: string;
     lineId: number;
+    symbolCount: number;
 }
 export default class SharedMethods {
 
@@ -28,7 +29,8 @@ export default class SharedMethods {
             isWin: false,
             symbol: '',
             winType: '',
-            lineId: 0
+            lineId: 0,
+            symbolCount: 0
         };
         
         for (let i=0; i < data.specialSymbols.length; i++) {
@@ -44,8 +46,16 @@ export default class SharedMethods {
                 winObj.isWin = true;
                 winObj.symbol = this.symbols(data.lines[i].SymbolId);
                 winObj.lineId = data.lines[i].LineId;
+                winObj.symbolCount = data.lines[i].Number;
                 winObj.winType = 'line';
                 winningArray.push(winObj);
+                winObj = {
+                    isWin: false,
+                    symbol: '',
+                    winType: '',
+                    lineId: 0,
+                    symbolCount: 0
+                };;
             }
         }
         return winningArray;

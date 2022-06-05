@@ -9,7 +9,7 @@
         <app-dropdown [allElements]="nominales"></app-dropdown>
     </div> -->
     <div class="block nominales">
-        <app-bet-block *ngFor="let item of betMultipliers;let i=index" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
+        <app-bet-block *ngFor="let item of betMultipliers;let i=index" [spinning]="data.game.spinning" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
     </div>
     <div class="block last_win">
         <app-label-value label="last win" [value]="data.game.wonAmmount"></app-label-value>

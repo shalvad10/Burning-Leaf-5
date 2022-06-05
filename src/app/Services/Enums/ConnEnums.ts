@@ -55,30 +55,11 @@ export const ConnEnums = {
     Denied: -1,
     NotFound: -2,
     InsufficientFunds: -3,
+    PlayerNotFound: -4,
+    PlayerExists: -100,
     Exception: -1000
   },
   Errors: {
-    IncorrectBetScore: -101,
-    IncorrectMatchType: -102,
-    IncorrectTimeType: -103,
-    IncorrectDoubleType: -104,
-    IncorrectRule: -105,
-    MatchDoesNotExists: -106,
-    CannotAddMatch: -107,
-    PlayerDoesNotExists: -108,
-    CannotPlayWithYourSelf: -109,
-    PlayerOnDisconnect: -110,
-    PeerAlreadyCreatedMatch: -111,
-    LobbyPeerAlreadyExists: -112,
-    NotEndYet: -113,
-    MatchIsNull: -201,
-    NotYourTurn: -202,
-    InvalidCards: -203,
-    InvalidCardComeTry: -204,
-    NothingToBeat: -205,
-    NumberOfCardsIncorrect: -206,
-    DifferentRankCards: -207,
-    CannotBeatCards: -208,
-    InvalidAction: -209
+    PlayerNotFound: -4
   }
 };

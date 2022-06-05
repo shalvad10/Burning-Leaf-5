@@ -153,3 +153,88 @@
         }
     }
 }
+
+@media only screen and (max-width: 1400px) {
+    .cont {
+        width: 50px;
+        height: 400px;
+        margin-top: -80px;
+        
+        .buttons {
+            width: 135px;
+            height: 300px;
+            .block {
+                .nominales-selector {
+                    position: absolute;
+                    left: -325px;
+                }
+                .autospin {
+                    width: 75px;
+                    height: 105px;
+                    &.nominales_selector {
+                        .icon {
+                            width: 30px;
+                            height: 30px;
+                        }
+                        .value {
+                            font-size: 15px;
+                        }
+                    }
+                }
+                .spin {
+                    width: 145px;
+                    height: 185px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .cont {
+        width: 20px;
+        height: 230px;
+        margin-top: -10px;
+        .lines {
+            font-size: 20px;
+            font-weight: 900;
+            .fixedLines {
+                span {
+                    font-size: 15px;
+                    margin-bottom: 0px;
+                    &:last-child{
+                        margin-top: 19px;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+        .buttons {
+            width: 100px;
+            height: 180px;
+            .block {
+                .nominales-selector {
+                    position: absolute;
+                    left: -310px;
+                }
+                .autospin {
+                    width: 85px;
+                    height: 90px;
+                    &.nominales_selector {
+                        .icon {
+                            width: 25px;
+                            height: 25px;
+                        }
+                        .value {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .spin {
+                    width: 100px;
+                    height: 170px;
+                }
+            }
+        }
+    }
+}

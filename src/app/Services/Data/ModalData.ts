@@ -4,16 +4,16 @@ export class ModalData {
     modalParams: {
       bonus: {
         close: true,
+        title: 'BUY WILD BONUS',
         data: {}
       },
-      info:
-      {
-        close: false,
-        icon: false,
-        size  : { x: 400, y: 150, fullscreen: false },
-        infoText: 'informationText',
-        data: undefined,
-        buttons: []
+      info: {
+        infoText: '',
+        title: '',
+        data: {},
+        buttons: [
+          { text: 'OK', backgroundColor: '#5cb85c', action: 'closeGame' }
+        ]
       }
     }
   };
