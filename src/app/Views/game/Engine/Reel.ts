@@ -17,7 +17,7 @@ export default class Reel {
     this.animation = this.symbolContainer.animate(
       [
         { transform: "none", filter: "blur(0)" },
-        { filter: "blur(10px)", offset: 0.1 },
+        { filter: "blur(25px)", offset: 0.1 },
         {
           transform: `translateY(${  ((Math.floor(this.factor) * 10) / (3 + Math.floor(this.factor) * 10)) * 100 }%)`,
           filter: "blur(0)",
@@ -72,5 +72,9 @@ export default class Reel {
         this.symbolContainer.firstChild.remove();
       }
     });
+  }
+  
+  stop() {
+    this.animation.finish();
   }
 }

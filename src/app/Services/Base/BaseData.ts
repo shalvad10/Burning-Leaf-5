@@ -23,7 +23,8 @@ export class BaseData {
       freeSpins: {
         count: 0,
         bet: 0,
-        typeID: 0
+        typeID: 0,
+        showPopup: true
       },
       spinning: false,
       wonAmmount: 0,
@@ -43,9 +44,7 @@ export class BaseData {
       line5: [ [2,0],[1,1],[0,2],[1,3],[2,4] ],
     },
     freespinTypes: [
-      { id: 1, type: 'BIG BONUS',   price: 150, leafs: 2,   freespinsCount: 10  },
-      { id: 2, type: 'SUPER BONUS', price: 300, leafs: 2.5, freespinsCount: 10  },
-      { id: 3, type: 'MEGA BONUS',  price: 720, leafs: 3,   freespinsCount: 10  }
-    ]
+    ],
+    selectedFreespinID: 0
   };
 }

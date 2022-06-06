@@ -10,6 +10,7 @@ export default class Slot {
     public spinButton       : any;
     public autoPlayCheckbox : any;
     public config           : any;
+    public spinning         : boolean = false;
 
   constructor(domElement: any, config: any = {}) {
     Symbol.preload();
@@ -52,22 +53,12 @@ export default class Slot {
   }
 
   spin(customSymbols: any) {
-    console.error(customSymbols)
-    // this.nextSymbols = [
-    //   [Symbol.random(), Symbol.random(), Symbol.random()],
-    //   [Symbol.random(), Symbol.random(), Symbol.random()],
-    //   [Symbol.random(), Symbol.random(), Symbol.random()],
-    //   [Symbol.random(), Symbol.random(), Symbol.random()],
-    //   [Symbol.random(), Symbol.random(), Symbol.random()],
-    // ];
-    
     this.nextSymbols = customSymbols;
 
     this.onSpinStart(customSymbols);
 
     return Promise.all(
       this.reels.map((reel) => {
-        console.error(reel.index, customSymbols[reel.index]);
         reel.renderSymbols(customSymbols[reel.index]);
         return reel.spin();
       })

@@ -10,6 +10,7 @@ export class BonusItemComponent extends ComponentBase implements OnInit {
 
   @Input() freeSpin: any;
   @Input() selectedBet: any;
+  @Input() data: any;
 
   constructor(private ref: ChangeDetectorRef) {
     super(ref);
@@ -19,7 +20,33 @@ export class BonusItemComponent extends ComponentBase implements OnInit {
   }
 
   onClick() {
-    this.emitAction('buyFreeSpin', {freeSpinType: this.freeSpin.id});
+    if ( this.isSelected ) {
+      this.emitAction('buyFreeSpin', {freeSpinType: this.freeSpin.typeID});
+      this.data.selectedFreespinID = 0;
+    } else {
+      this.data.selectedFreespinID = this.freeSpin.typeID;
+    }
+  }
+
+  public get isSelected() {
+    return this.data.selectedFreespinID == this.freeSpin.typeID;
+  }
+
+  freeSpinName() {
+    switch (this.freeSpin.typeID) {
+      case 1: {
+        return 'BIG BONUS'
+      }
+      case 2: {
+        return 'SUPER BONUS'
+      }
+      case 3: {
+        return 'MEGA BONUS'
+      }
+      default: {
+        return '';
+      }
+    }
   }
 
 }

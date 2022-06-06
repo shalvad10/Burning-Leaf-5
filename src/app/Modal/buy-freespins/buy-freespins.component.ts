@@ -12,28 +12,36 @@ export class BuyFreespinsComponent extends ComponentBase implements OnInit {
   public betArr: number[] = [];
   public dataLoaded: boolean = false;
 
+  @Input() data: any;
   @Input() freeSpins:any;
   @Input() selectedBet: any;
   @Input() selectedNominale: any;
+  @Input() nominales: any;
   @Input() gameLine: any;
   @Input() set betMultipliers(val: any) {
+    console.warn(val);
+    console.warn(this.nominales);
     setTimeout( ()=> {
-      val.forEach( (mult: any) => {
-        this.betArr.push(this.bet(mult));
-      });
+      for(let i=0; i< val.length; i++) {
+        for(let j=0; j < this.nominales.length; j++) {
+          this.betArr.push(this.bet(val[i],this.nominales[j]));
+        }
+      }
+      // this.betArr.sort();
+      console.warn(this.betArr);
       this.dataLoaded = true;
     }, 100);
   }
 
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(ref: ChangeDetectorRef) {
     super(ref);
   }
 
   ngOnInit(): void {
     
   }
-  public bet(betMultiplier:number) {
-    return betMultiplier * this.gameLine * this.selectedNominale;
+  public bet(betMultiplier:number, nominale: number) {
+    return betMultiplier * this.gameLine * nominale;
   }
 
   public selectBet(direction: number) {

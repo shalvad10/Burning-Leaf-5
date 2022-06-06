@@ -34,3 +34,25 @@
         }
     }    
 }
+
+@media only screen and (max-width: 500px) {
+    .content {
+        .label {
+            font-size: 5px;
+        }
+        .value {
+            font-size: 8px;
+        }
+    }    
+}
+
+@media only screen and (max-width: 500px) {
+    .content {
+        .label {
+            font-size: 3px;
+        }
+        .value {
+            font-size: 6px;
+        }
+    }    
+}

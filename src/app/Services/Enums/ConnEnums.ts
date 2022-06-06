@@ -31,24 +31,31 @@ export const ConnEnums = {
     FreeSpinTypeId: 34
   },
   events: {
-    BalanceUpdated : 0,
-    RemainingFreeSpins : 10
+    BalanceUpdated      : 0,
+    ChipNominals        : 1,
+    Lines               : 2,
+    FreeSpinTypes       : 3,
+    RemainingFreeSpins  : 10
   },
   eventParams: {
-    Balance: 0,
-    PlayerName: 1,
-    PlayerId: 2,
-    StakeAmount: 3,
-    WinnedAmount: 4,
-    TableId: 5,
-    GameId: 6,
-    AccountId: 7,
-    DeviceTypeId: 8,
-    SessionId: 9,
-
-    FreespinsCount: 10,
-    BetAmmount: 20,
-    FrespinTypeID: 30
+    Balance         : 0,
+    PlayerName      : 1,
+    PlayerId        : 2,
+    StakeAmount     : 3,
+    WinnedAmount    : 4,
+    TableId         : 5,
+    GameId          : 6,
+    AccountId       : 7,
+    DeviceTypeId    : 8,
+    SessionId       : 9,
+    FreespinsCount  : 10,
+    Array           : 13,
+    BetAmmount      : 20,
+    WonAmount       : 21,
+    Rate            : 22,
+    Minimum         : 23,
+    Maximum         : 24,
+    FrespinTypeID   : 30
   },
   errorCodes: {
     NoError: 0,

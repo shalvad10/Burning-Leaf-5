@@ -1,0 +1,19 @@
+<div class="cont">
+    <div class="background"></div>
+    <div class="content">
+        <div class="title">
+            <span>
+                {{ data.headText }}
+            </span>
+        </div>
+        <div class="bonus-img" [ngClass]="getClass(data.data.typeID)"></div>
+        <div class="info">
+            {{ data.infoText }}
+        </div>
+        <div class="buttons" *ngIf="data.buttons.length > 0">
+            <div class="btn" *ngFor="let modal of data.buttons" [style.background]="modal.backgroundColor" (click)="onClick(modal.action, modal.actionData)">
+                {{ modal.text }}
+            </div>
+        </div>
+    </div>
+</div>

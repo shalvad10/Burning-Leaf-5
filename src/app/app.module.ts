@@ -18,6 +18,8 @@ import { BuyFreespinsComponent } from './Modal/buy-freespins/buy-freespins.compo
 import { BonusItemComponent } from './Views/Elements/bonus-item/bonus-item.component';
 import { BonusBetComponent } from './Views/Elements/bonus-bet/bonus-bet.component';
 import { InfoComponent } from './Modal/info/info.component';
+import { BonusTypeComponent } from './Modal/bonus-type/bonus-type.component';
+import { BonusWinComponent } from './Modal/bonus-win/bonus-win.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { InfoComponent } from './Modal/info/info.component';
     BuyFreespinsComponent,
     BonusItemComponent,
     BonusBetComponent,
-    InfoComponent
+    InfoComponent,
+    BonusTypeComponent,
+    BonusWinComponent
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,31 @@ export class AppMain {
       // this.data.setSettingsData(e);
     this.data.setProperties(this.params.getParams());
       this.conn    = new AppConnection(this.data.dataObject, isMobile);
+      if (this.mobile.any) {
+        
+        var targetelement: any = document.getElementsByTagName('body')[0];
+      
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          if (targetelement.requestFullscreen)
+          {
+            targetelement.requestFullscreen();
+          }
+          if (targetelement.webkitRequestFullscreen)
+          {
+            targetelement.webkitRequestFullscreen();
+          }
+          if (targetelement.mozRequestFullScreen)
+          {
+            targetelement.mozRequestFullScreen();
+          }
+          if (targetelement.msRequestFullscreen)
+          {
+            targetelement.msRequestFullscreen();
+          }
+        }
+      }
       this.actions = new Actions(this.data.dataObject, this.conn.senderObject);
       // this.configsLoaded = true;
       // this.checkLoaded();

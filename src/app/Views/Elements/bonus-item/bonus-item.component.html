@@ -1,18 +1,17 @@
 <div class="cont">
     <div class="text-block">
-        <div class="title">  {{ freeSpin.type }}  </div>
-        <div class="price" (click)="onClick()"> {{ selectedBet * freeSpin.price }} Euro - Buy </div>
+        <div class="title">  {{ freeSpinName() }}  </div>
+        <div class="price" *ngIf="isSelected == false" (click)="onClick()"> {{ selectedBet * freeSpin.price }} Euro - Buy </div>
+        <div class="price confirm" *ngIf="isSelected == true" (click)="onClick()"> Confirm Buy </div>
     </div>
     <div class="leafs-block">
-        <div class="leaf" *ngIf="freeSpin.leafs >= 2"></div>
-        <div class="leaf" *ngIf="freeSpin.leafs > 2"></div>
-        <div class="plus" *ngIf="freeSpin.leafs == 2.5">
-            +
-        </div>
+        <div class="leaf"></div>
+        <div class="leaf" *ngIf="freeSpin.minLeafs < freeSpin.maxLeafs || freeSpin.minLeafs == 3 "></div>
+        <div class="plus" *ngIf="freeSpin.minLeafs < freeSpin.maxLeafs"> + </div>
         <div class="leaf">
             <div class="free_spins">
                 <div class="content">
-                    <span class="number"> {{ freeSpin.freespinsCount }} </span>
+                    <span class="number"> {{ freeSpin.freeSpinCount }} </span>
                     <span class="text"> Free Spins </span>
                 </div>
             </div>

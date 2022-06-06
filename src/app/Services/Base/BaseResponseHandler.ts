@@ -61,6 +61,7 @@ export default abstract class BaseResponseHandler {
   }
 
   public buyFreeSpin(data: any): void {
+    this.data.game.freeSpins.showPopup = true;
     this.data.modal.currentModal = '';
   }
 }

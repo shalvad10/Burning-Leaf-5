@@ -62,3 +62,22 @@
     }
     
 }
+
+@media only screen and (max-width: 500px) {
+    .bonus {
+        width: 45px;
+        height: 20px;
+        border: 10px solid transparent;
+        border-image: url('../../../assets/borders/bottom_small.svg') 30 round;
+        .logo {
+            width: 60px;
+            height: 25px;
+        }
+    
+        .text {
+            font-size: 5px;
+            padding-left: 7px;
+        }
+    }
+    
+}

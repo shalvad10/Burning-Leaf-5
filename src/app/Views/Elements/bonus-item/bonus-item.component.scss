@@ -30,10 +30,14 @@
             margin-top: 10px;
             background-color: #EB5F08;
             border-radius: 20px;
-            font-size: 25px;
+            font-size: 22px;
             padding: 10px;
             font-weight: bold;
             color: #fff;
+            &.confirm {
+                background-color: #FEE900;
+                color: #000;
+            }
         }
     }
     .leafs-block {
