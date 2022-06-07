@@ -13,7 +13,7 @@ export default class BaseSender {
     console.warn(this.conn)
     const obj: any = {};
     obj[ConnEnums.operationParams.SessionId] = this.conn.data.connection.sessionKey;
-    obj[ConnEnums.operationParams.GameId] = 1;
+    obj[ConnEnums.operationParams.GameId] = 3;
 
     this.conn.sendObject(ConnEnums.operations.Login, obj);
   }

@@ -9,7 +9,7 @@ export default abstract class BaseEventHandler {
       case ConnEnums.events.RemainingFreeSpins    : { this.remainingFreespins(data);  break; }
       case ConnEnums.events.BalanceUpdated        : { this.updateBalance(data);       break; }
       case ConnEnums.events.FreeSpinTypes         : { this.freeSpinTypes(data);       break; }
-      // case ConnEnums.events.MatchDeleteEvent      : { this.deleteTable(data);         break; }
+      case ConnEnums.events.BonusLeafLines        : { this.bonusleaflines(data);      break; }
       // case ConnEnums.events.RejoinTables          : { this.setRejoinTables(data);     break; }
       // case ConnEnums.events.OnlinePlayersEvent    : { this.setLobbyInfo(data);        break; }
       // case ConnEnums.events.PlayerSettings        : { this.setPlayerSettings(data);   break; }
@@ -20,6 +20,11 @@ export default abstract class BaseEventHandler {
       // case ConnEnums.events.MatchesEnableState    : { this.changeMatchesState(data);  break; }
       // case ConnEnums.events.MyTournaments         : { this.setMyTournaments(data);    break; }
     }
+  }
+
+  public bonusleaflines(data: any): void {
+    this.data.game.bonusLeafLines = data.Array;
+    console.warn(this.data.game.bonusLeafLines);
   }
 
   public remainingFreespins(data: any): void {
@@ -34,6 +39,7 @@ export default abstract class BaseEventHandler {
           this.data.modal.currentModal = 'bonus_win';
           let modal = this.data.modal.modalParams[this.data.modal.currentModal];
           modal.ammount = data.WonAmount / this.data.ammountDivide;
+          this.data.game.bonusLeafLines = [];
         }, 4000);
       } else if (data.FreespinsCount == freesPinType.freeSpinCount) {
         this.data.modal.currentModal = 'bonus_type';

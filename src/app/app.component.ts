@@ -51,6 +51,10 @@ export class AppComponent extends ComponentBase {
     this.gameContainer.game.onAutoSpin();
   }
 
+  public get loading(): boolean {
+    return this.data.loading;
+  }
+
   handleAction (e: any) {
     this.app.doAction(e);
     if (e.action == 'selectBet') {

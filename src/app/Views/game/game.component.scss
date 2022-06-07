@@ -20,6 +20,12 @@
         &:not(:last-child) {
             margin-right: 10px;
         }
+
+        &.bonus {
+            box-shadow: 1px -1px 10px 7px rgba(255,255,255,0.75);
+            -webkit-box-shadow: 1px -1px 10px 7px rgba(255,255,255,0.75);
+            -moz-box-shadow: 1px -1px 10px 7px rgba(255,255,255,0.75);
+        }
     }
 }
 

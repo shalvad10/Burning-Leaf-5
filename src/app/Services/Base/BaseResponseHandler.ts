@@ -46,6 +46,7 @@ export default abstract class BaseResponseHandler {
   public login(data: any): void {
     this.data.user.userName = data.PlayerName;
     this.data.user.balance  = data.Balance / this.data.ammountDivide;
+    this.data.loading = false;
   }
 
   public spin(data: any): void {

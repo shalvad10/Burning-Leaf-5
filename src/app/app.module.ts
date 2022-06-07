@@ -20,6 +20,7 @@ import { BonusBetComponent } from './Views/Elements/bonus-bet/bonus-bet.componen
 import { InfoComponent } from './Modal/info/info.component';
 import { BonusTypeComponent } from './Modal/bonus-type/bonus-type.component';
 import { BonusWinComponent } from './Modal/bonus-win/bonus-win.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { BonusWinComponent } from './Modal/bonus-win/bonus-win.component';
     BonusBetComponent,
     InfoComponent,
     BonusTypeComponent,
-    BonusWinComponent
+    BonusWinComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

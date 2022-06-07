@@ -22,18 +22,28 @@ export class GameComponent extends ComponentBase implements OnInit {
 
   public autoSpin: boolean = false;
   public spinning: boolean = false;
+  public canChange: boolean = true;
 
   public config = {
     inverted: true, // true: reels spin from top to bottom; false: reels spin from bottom to top
     onSpinStart: (symbols: any) => {
       console.log("onSpinStart", symbols);
+      const reels = document.getElementsByClassName('reel');
+        for (let i = 0; i < reels.length; i++) {
+          if (this.gameData.bonusLeafLines.includes(i)) {
+            reels[i].classList.toggle('bonus');
+          }
+        }
       this.spinning = true;
     },
     onSpinEnd: (symbols: any) => {
       console.log("onSpinEnd", symbols, this.autoSpin);
       this.spinning = false;
       this.changeSymbols();
-      this.showWin(SharedMethods.checkWin(this.gameData));
+      const reels = document.getElementsByClassName('reel');
+      for (let i = 0; i < reels.length; i++) {
+        reels[i].classList.remove('bonus');
+      }
       // if (this.autoSpin == true) {
       //   setTimeout(() => {
       //     this.emitAction('autoSpin');
@@ -44,29 +54,47 @@ export class GameComponent extends ComponentBase implements OnInit {
 
   public changeSymbols() {
     let arr = this.gameData.changedMatrix;
-    for (let i=0; i<arr.length; i++) {
-      let reel = document.getElementsByClassName('reel')[i];
-      for ( let j=0; j<arr[i].length; j++) {
-        let img = reel.getElementsByTagName("img")[j];
-        let imgTag = img.src;
-        let srcArr = imgTag.split('/');
-        let symbol = srcArr[srcArr.length-1].split('.')[0];
-        if(symbol !== arr[i][j]) {
-          imgTag = imgTag.replace(symbol,arr[i][j]);
-          img.src = imgTag;
-        }
-      }
-    }
+    Promise.allSettled(
+      arr.map((matrix:any, ind: number) => {
+        matrix.map( (matrixEl: any, index: number) => {
+          setTimeout(() => {
+            return this.change({ symbol: matrixEl, symbolIndex: index, reelIndex: ind})
+          }, 200 * (index + ind));
+        })
+      })
+    ).then(() => setTimeout(() => { this.checkWin(SharedMethods.checkWin(this.gameData)) }, 2000 ));
   }
 
-  public showWin(data: WinnObject[]) {
-    console.warn(data);
-    if (data.length > 0) {
+  public change(data: any) {
+      let reel = document.getElementsByClassName('reel')[data.reelIndex];
+      let img = reel.getElementsByTagName("img")[data.symbolIndex];
+      let imgTag = img.src;
+      let srcArr = imgTag.split('/');
+      let symbol = srcArr[srcArr.length-1].split('.')[0];
+      if(symbol !== data.symbol) {
+        imgTag = imgTag.replace(symbol,data.symbol);
+        img.src = imgTag;
+        this.slot?.animateReel(data.reelIndex, data.symbolIndex);
+      }
+  }
+
+  public checkWin(data: WinnObject[]) {
+    Promise.allSettled(
+      data.map((winObj:any, ind: number) => {
+        setTimeout(() => {
+            return this.showWin(winObj);
+            // return winObj.lineId == 4 ? this.showWin(winObj) : {};
+        }, 1500 * ind);
+      })
+    ).then(() => {});
+  }
+
+  public showWin(data: WinnObject) {
+    if (data) {
       let reels = document.getElementsByClassName('reel');
       var symbolsCount = 0;
-      for (let k = 0; k < data.length;k++) {
-        if (data[k].winType == 'line') {
-          let winningLines = this.lines[`line${data[k].lineId}`];
+        if (data.winType == 'line') {
+          let winningLines = this.lines[`line${data.lineId}`];
           for (let i = 0; i < reels.length; i++) {
             let allowBorder = true;
             for (let j = 0; j< winningLines.length; j++) {
@@ -75,7 +103,7 @@ export class GameComponent extends ComponentBase implements OnInit {
                   if (reels[i].firstChild?.childNodes[winningLines[j][0]]) {
                       let srcArr = (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).getAttribute('src')?.split('/');
                       let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
-                       if ( (symbol === 'leaf' || symbol === data[k].symbol) && data[k].symbolCount >= symbolsCount) {
+                       if ( (symbol === 'leaf' || symbol === data.symbol) && data.symbolCount >= symbolsCount) {
                         symbolsCount++;
                         (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).style.cssText = `
                         width: calc(100% - 10px);
@@ -88,7 +116,7 @@ export class GameComponent extends ComponentBase implements OnInit {
                           height: 100%;
                           border: none;
                           `;
-                        }, 1000);
+                        }, 1100);
                       } else {
                         allowBorder = false;
                       }
@@ -105,7 +133,7 @@ export class GameComponent extends ComponentBase implements OnInit {
                 for (let l = 0; l<images.length; l++) {
                   let srcArr = images[l].getAttribute('src')?.split('/');
                   let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
-                  if (symbol === data[k].symbol) {
+                  if (symbol === data.symbol) {
                     images[l].style.cssText = `
                     width: calc(100% - 10px);
                     height: calc(100% - 10px);
@@ -116,7 +144,6 @@ export class GameComponent extends ComponentBase implements OnInit {
               }
             }
         }
-      }
     }
   }
 

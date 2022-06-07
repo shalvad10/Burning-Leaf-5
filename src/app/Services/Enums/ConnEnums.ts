@@ -35,7 +35,8 @@ export const ConnEnums = {
     ChipNominals        : 1,
     Lines               : 2,
     FreeSpinTypes       : 3,
-    RemainingFreeSpins  : 10
+    RemainingFreeSpins  : 10,
+    BonusLeafLines      : 11
   },
   eventParams: {
     Balance         : 0,

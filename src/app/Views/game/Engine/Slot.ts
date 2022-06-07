@@ -65,6 +65,10 @@ export default class Slot {
     ).then(() => this.onSpinEnd(customSymbols));
   }
 
+  animateReel(reelIndex: number, symbolIndex: number): void {
+    this.reels[reelIndex].animateSymbol(symbolIndex);
+  }
+
   onSpinStart(symbols: any) {
     // this.spinButton.disabled = true;
 

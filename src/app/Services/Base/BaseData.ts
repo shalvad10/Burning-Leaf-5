@@ -10,6 +10,7 @@ export class BaseData {
       deviceType: AppEnums.DeviceType.Desktop,
       sessionKey: undefined
     },
+    loading: true,
     ammountDivide: 10000,
     user: {
       userName: '',
@@ -30,6 +31,7 @@ export class BaseData {
       wonAmmount: 0,
       wonSymbolsCount: 0,
       gameLine: 5,
+      bonusLeafLines: [],
       nominales: [0.03,0.10,0.40,1,2,5],
       selectedNominale: 0.03,
       betMultipliers: [1,2,5,10,20],

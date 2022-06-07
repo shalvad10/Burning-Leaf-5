@@ -19,16 +19,15 @@ export class BuyFreespinsComponent extends ComponentBase implements OnInit {
   @Input() nominales: any;
   @Input() gameLine: any;
   @Input() set betMultipliers(val: any) {
-    console.warn(val);
-    console.warn(this.nominales);
     setTimeout( ()=> {
       for(let i=0; i< val.length; i++) {
         for(let j=0; j < this.nominales.length; j++) {
-          this.betArr.push(this.bet(val[i],this.nominales[j]));
+          if (this.betArr.includes(this.bet(val[i],this.nominales[j])) == false) {
+            this.betArr.push(this.bet(val[i],this.nominales[j]));
+          }
         }
       }
-      // this.betArr.sort();
-      console.warn(this.betArr);
+      this.betArr.sort((a,b) => a-b);
       this.dataLoaded = true;
     }, 100);
   }

@@ -1,10 +1,11 @@
 import Symbol from "./Symbol";
 
 export default class Reel {
-    public reelContainer: any;
-    public symbolContainer: any;
-    public index: number;
-    public animation: any
+    public reelContainer    : any;
+    public symbolContainer  : any;
+    public index            : number;
+    public animation        : any
+    public symbolAnimation  : any;
 
   constructor(reelContainer: any, index: number, initialSymbols: any) {
     this.reelContainer = reelContainer;
@@ -24,7 +25,7 @@ export default class Reel {
         },
       ],
       {
-        duration: this.factor * 666, // ლევანასგან 
+        duration: this.factor * 800, // ლევანასგან 
         easing: "ease-in-out",
       }
     );
@@ -37,6 +38,24 @@ export default class Reel {
 
   get factor() {
     return 1 + Math.pow(this.index / 2, 2);
+  }
+
+  animateSymbol(symbolIndex: number) {
+    this.symbolAnimation = this.symbolContainer.children[symbolIndex].animate(
+      [
+        { transform: "none", filter: "blur(0)" },
+        { filter: "blur(50px)", offset: 0.1 },
+        { transform: "none", filter: "blur(0)" },
+      ],
+      {
+        duration: 1000, // ლევანასგან 
+        easing: "ease-in-out",
+      }
+    );
+    this.symbolAnimation.play();
+    setTimeout(()=> {
+      this.symbolAnimation.cancel();
+    }, 700);
   }
 
   renderSymbols(nextSymbols: string[]) {

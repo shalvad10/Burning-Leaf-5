@@ -1,0 +1,52 @@
+section {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #3E0006;
+    .logo {
+        width: 100%;
+        max-width: 400px;
+        height: 60px;
+        background-image: url('../../assets/headline.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-bottom: 50px;
+    }
+    .container {
+        display: flex;
+        width: 100%;
+        max-width: 400px;
+        span {
+            background: #FE8112;
+            height: 10px;
+            width: 30px;
+            margin-left: 10px;
+       
+            animation: moving 1s linear infinite alternate-reverse;
+            animation-delay: calc(0.1s * var(--i));
+        }
+    }
+}
+
+ @keyframes moving {
+     0% {
+         opacity: 0;
+         transform: scale(0.4);
+         filter: blur(0px);
+     }
+
+     50%,
+     75% {
+         transform: translateY(10px);
+         filter: blur();
+     }
+
+     100% {
+         opacity: 1;
+         border-radius: 30%;
+         transform: translateY(0);
+     }
+ }
