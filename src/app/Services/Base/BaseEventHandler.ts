@@ -35,12 +35,10 @@ export default abstract class BaseEventHandler {
     if (this.data.game.freeSpins.showPopup == true || data.FreespinsCount == 0) {
       let freesPinType = this.data.freespinTypes.filter( (frsp:any) => frsp.typeID ==data.FrespinTypeID)[0];
       if(data.FreespinsCount == 0) {
-        setTimeout(() => {
-          this.data.modal.currentModal = 'bonus_win';
-          let modal = this.data.modal.modalParams[this.data.modal.currentModal];
-          modal.ammount = data.WonAmount / this.data.ammountDivide;
-          this.data.game.bonusLeafLines = [];
-        }, 4000);
+        this.data.modal.savedModal = 'bonus_win';
+        let modal = this.data.modal.modalParams[this.data.modal.savedModal];
+        modal.ammount = data.WonAmount / this.data.ammountDivide;
+        this.data.game.bonusLeafLines = [];
       } else if (data.FreespinsCount == freesPinType.freeSpinCount) {
         this.data.modal.currentModal = 'bonus_type';
         let modal = this.data.modal.modalParams[this.data.modal.currentModal];
@@ -60,6 +58,7 @@ export default abstract class BaseEventHandler {
   }
 
   public freeSpinTypes(data: any): void {
+    this.data.freespinTypes = [];
     data.Array.sort((a: any,b: any) => a.FrespinTypeID - b.FrespinTypeID).forEach((freespin:any) => {
       this.data.freespinTypes.push({
         freeSpinCount: freespin.FreespinsCount,
@@ -72,6 +71,10 @@ export default abstract class BaseEventHandler {
   }
 
   public updateBalance(data: any): void {
-    this.data.user.balance = data.Balance / this.data.ammountDivide;
+    if (this.data.user.holdBalance == true) {
+      this.data.user.balanceTohold = ((data.Balance / this.data.ammountDivide) - this.data.user.balance).toFixed(2);
+    } else {
+      this.data.user.balance = (data.Balance / this.data.ammountDivide).toFixed(2);
+    }
   }
 }

@@ -26,6 +26,8 @@ export default abstract class BaseResponseHandler {
         this.data.modal.currentModal = 'info';
         this.data.modal.modalParams[this.data.modal.currentModal].infoText = msg;
         this.sender.enableReconnect(false);
+        this.data.loading = false;
+        this.data.game.gameLoaded = false;
       }
     }
   }
@@ -47,6 +49,8 @@ export default abstract class BaseResponseHandler {
     this.data.user.userName = data.PlayerName;
     this.data.user.balance  = data.Balance / this.data.ammountDivide;
     this.data.loading = false;
+    console.warn('LOGIN', data)
+    this.data.game.gameLoaded = true;
   }
 
   public spin(data: any): void {
@@ -54,10 +58,9 @@ export default abstract class BaseResponseHandler {
     this.data.game.changedMatrix    = SharedMethods.generateArrFromObj(data.FinalMatrix);
     this.data.game.specialSymbols   = data.Scatters;
     this.data.game.lines            = data.Lines;
+    this.data.user.holdBalance      = data.WonAmount / this.data.ammountDivide > 0;
     setTimeout(() => {
-      this.data.game.spinning = false;
       this.data.game.wonAmmount = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : this.data.game.wonAmmount;
-      console.warn(this.data.game.spinning);
     }, 3000);
   }
 

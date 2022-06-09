@@ -18,14 +18,14 @@ export default class Reel {
     this.animation = this.symbolContainer.animate(
       [
         { transform: "none", filter: "blur(0)" },
-        { filter: "blur(25px)", offset: 0.1 },
+        { filter: "blur(50px)", offset: 0.1 },
         {
           transform: `translateY(${  ((Math.floor(this.factor) * 10) / (3 + Math.floor(this.factor) * 10)) * 100 }%)`,
           filter: "blur(0)",
         },
       ],
       {
-        duration: this.factor * 800, // ლევანასგან 
+        duration: this.factor * 666, // ლევანასგან 
         easing: "ease-in-out",
       }
     );
@@ -37,7 +37,7 @@ export default class Reel {
   }
 
   get factor() {
-    return 1 + Math.pow(this.index / 2, 2);
+    return 1 + Math.pow(this.index / 2, 1);
   }
 
   animateSymbol(symbolIndex: number) {
@@ -48,7 +48,7 @@ export default class Reel {
         { transform: "none", filter: "blur(0)" },
       ],
       {
-        duration: 1000, // ლევანასგან 
+        duration: 1000,
         easing: "ease-in-out",
       }
     );
@@ -77,7 +77,7 @@ export default class Reel {
       (resolve) => (this.animation.onfinish = resolve)
     );
     const timeoutPromise = new Promise((resolve) =>
-      setTimeout(resolve, this.factor * 500)
+      setTimeout(resolve, this.factor * 600)
     );
 
     this.animation.play();
@@ -94,6 +94,8 @@ export default class Reel {
   }
   
   stop() {
-    this.animation.finish();
+    if (this.animation.playState !== "finished") {
+      this.animation.finish();
+    }
   }
 }

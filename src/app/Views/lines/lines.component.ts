@@ -19,7 +19,7 @@ export class LinesComponent extends ComponentBase implements OnInit {
   @Input() hasButtons: boolean = false;
 
   @Input() nominales?: number[];
-  @Input() selectedNominale?: number;
+  @Input() selectedNominale!: number;
   @Input() data: any;
 
   @Output() spin = new EventEmitter<any>();
@@ -33,6 +33,10 @@ export class LinesComponent extends ComponentBase implements OnInit {
 
   showLines(val: number): boolean {
     return this.lines.indexOf(val) == this.lines.length-1;
+  }
+
+  public get nominale() {
+    return Number.parseFloat(this.selectedNominale.toString()).toFixed(2);
   }
 
   toggleNMSelector(): void {

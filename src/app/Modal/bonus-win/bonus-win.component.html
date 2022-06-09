@@ -1,11 +1,11 @@
 <div class="cont">
     <div class="content">
-        <div class="bonus-img" [ngClass]="getClass(data.data.typeID)"></div>
+        <div class="bonus-img" [ngClass]="getClass(_data.data.typeID)"></div>
         <div class="ammount">
-            {{ data.ammount }}
+            {{ ammount }}
         </div>
-        <div class="buttons" *ngIf="data.buttons.length > 0">
-            <div class="btn" *ngFor="let modal of data.buttons" [style.background]="modal.backgroundColor" (click)="onClick(modal.action, modal.actionData)">
+        <div class="buttons" *ngIf="_data.buttons.length > 0">
+            <div class="btn" *ngFor="let modal of _data.buttons" [style.background]="modal.backgroundColor" (click)="onClick(modal.action, modal.actionData)">
                 {{ modal.text }}
             </div>
         </div>

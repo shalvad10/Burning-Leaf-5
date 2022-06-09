@@ -38,13 +38,6 @@ export default class Slot {
       new Reel(reelContainer, idx, this.currentSymbols[idx])
     );
 
-    // this.spinButton = document.getElementById("spin");
-    // if ( this.spinButton) {
-    //   this.spinButton.addEventListener("click", () => this.spin());
-    // }
-
-    // this.autoPlayCheckbox = document.getElementById("autoplay");
-
     if (config.inverted) {
       this.container.classList.add("inverted");
     }
@@ -65,27 +58,24 @@ export default class Slot {
     ).then(() => this.onSpinEnd(customSymbols));
   }
 
+  stop(customSymbols: any) {
+    return Promise.all(
+      this.reels.map((reel) => {
+        return reel.stop();
+      })
+    ).then(() => this.onSpinEnd(customSymbols));
+  }
+
   animateReel(reelIndex: number, symbolIndex: number): void {
     this.reels[reelIndex].animateSymbol(symbolIndex);
   }
 
   onSpinStart(symbols: any) {
-    // this.spinButton.disabled = true;
-
     this.config.onSpinStart?.(symbols);
   }
 
   onSpinEnd(symbols: any): number | void {
     this.currentSymbols = this.nextSymbols;
-    console.warn('spin ENDED');
-    // this.spinButton.disabled = false;
-
     this.config.onSpinEnd?.(symbols);
-
-    // if (this.autoPlayCheckbox) {
-    //   if (this.autoPlayCheckbox == true) {
-    //     return window.setTimeout(() => this.spin(), 200);
-    //   }
-    // }
   }
 }

@@ -14,9 +14,12 @@ export class BaseData {
     ammountDivide: 10000,
     user: {
       userName: '',
-      balance: 0
+      balance: 0,
+      holdBalance: false,
+      balanceTohold: 0
     },
     game: {
+      gameLoaded: false,
       initialMatrix: [],
       changedMatrix: [],
       specialSymbols: [],

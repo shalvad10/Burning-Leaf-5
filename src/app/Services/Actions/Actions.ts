@@ -38,11 +38,24 @@ export default class Actions {
   }
 
   public spin(): void {
-    this.data.game.spinning = true;
-    if ( this.data.game.freeSpins.count == 0) {
-      this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
+    if (this.data.user.holdBalance == false) {
+      this.data.game.spinning = true;
+      if ( this.data.game.freeSpins.count == 0) {
+        this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
+      } else {
+        this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
+      }
     } else {
-      this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
+      console.warn('SPIIIIIIIIIIIIIIIIIIN',typeof this.data.user.balanceTohold, typeof this.data.user.balance);
+      this.data.user.balance = ((Number.parseFloat(this.data.user.balance) + Number.parseFloat(this.data.user.balanceTohold)).toFixed(2)).toString();
+      if ( this.data.modal.savedModal !== '') {
+        this.data.modal.currentModal = this.data.modal.savedModal;
+        this.data.modal.savedModal = '';
+      }
+      setTimeout(() => {
+        this.data.user.holdBalance = false;
+        this.data.user.balanceTohold = 0;
+      }, 600);
     }
   }
 
@@ -56,7 +69,11 @@ export default class Actions {
   }
 
   public buyFreeSpin(data: any): void {
-    this.sender.buyFreeSpin(data.freeSpinType, this.data.game.selectedBet * this.data.ammountDivide);
+    console.warn(data);
+    this.data.game.selectedNominale = data.nominale;
+    this.data.game.selectedBet = data.bet;
+    this.data.game.selectedMultiplierIndex = data.multiplier
+    this.sender.buyFreeSpin(data.freeSpinType, data.bet * this.data.ammountDivide);
   }
 
   public selectBet(data: any): void {

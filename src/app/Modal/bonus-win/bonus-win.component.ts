@@ -12,7 +12,13 @@ export class BonusWinComponent  extends ComponentBase implements OnInit {
     super(ref);
   }
 
-  @Input() data: any;
+  public _data: any;
+  public ammount: any;
+
+  @Input() set data(val: any) {
+    this._data = val;
+    this.animateValue(0, val.ammount.toFixed(2), 3000);
+  }
 
   ngOnInit(): void { }
 
@@ -22,6 +28,20 @@ export class BonusWinComponent  extends ComponentBase implements OnInit {
 
   getClass(id: number): string {
     return id === 1 ? 'big' : (id === 2 ? 'super' : 'mega');
+  }
+
+  
+  animateValue(start: any, end: any, duration: any) {
+    let startTimestamp: any = null;
+    const step = (timestamp: any) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      this.ammount = Number.parseFloat(progress * (end - start) + start).toFixed(2);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
   }
 
 }

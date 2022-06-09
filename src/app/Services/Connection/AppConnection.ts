@@ -17,7 +17,7 @@ export class AppConnection {
     this.eventHandler    = new EventHandler(this.data, this.sender);
     this.responseHandler = new ResponseHandler(this.data, this.sender);
 
-    this.conn            = new Connection(environment.connectionURL, ConnEnums, !environment.production);
+    this.conn            = new Connection(environment.connectionURL, ConnEnums, true);
     this.conn.onResponse = this.onResponse.bind(this);
     this.conn.onEvent    = this.onEvent.bind(this);
 

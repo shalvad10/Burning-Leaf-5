@@ -16,10 +16,10 @@ export class AppComponent extends ComponentBase {
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-      console.warn(data);
-      this.data.connection.sessionKey = data.sessionId;
-    });
+    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+    //   console.warn(data);
+    //   this.data.connection.sessionKey = data.sessionId;
+    // });
     this.app = new AppMain();
 
     // console.log(this.app.dataObject);
@@ -29,11 +29,14 @@ export class AppComponent extends ComponentBase {
       // this.app.dataObject.modal.currentModal = 'avatars';
     }, 2000);
     document.addEventListener('keypress', (e) => {
-      console.warn(e.keyCode);
-      if ( e.keyCode == 32 && this.data.game.spinning == false) {
-        this.onSpin();
-      } else {
-        console.warn(e.keyCode , this.data.game.spinning);
+      if (this.app.dataObject.game.gameLoaded == true) {
+        if ( e.keyCode == 32) {
+          if(this.data.game.spinning == false) {
+            this.onSpin();
+          } else {
+            this.gameContainer.game.onStop();
+          }
+        }
       }
     });
   }
@@ -42,9 +45,11 @@ export class AppComponent extends ComponentBase {
 
   onSpin() {
     this.app.doAction({action: 'spin', data: {}});
-    setTimeout(() => {
-      this.gameContainer.game.onSpin();
-    }, 500);
+    if (this.data.user.holdBalance == false) {
+      setTimeout(() => {
+          this.gameContainer.game.onSpin();
+      }, 500);
+    }
   }
 
   onAutoSpin() {
@@ -61,6 +66,8 @@ export class AppComponent extends ComponentBase {
       setTimeout(() => {
         this.gameContainer.game.onSpin();
       }, 1000);
+    } else if (e.action == 'stopSpin') {
+      this.gameContainer.game.onStop();
     } else if (e.action == 'autoSpin') {
       this.onSpin();
     }

@@ -21,11 +21,13 @@ export class BetBlockComponent extends ComponentBase implements OnInit {
   selectBet() {
     if (this.spinning == false) {
       this.emitAction('selectBet', { bet: this.value, index: this.index});
+    } else {
+      this.emitAction('stopSpin', {});
     }
   }
 
   transformText() {
-    return this.value >= 100 ? this.value : this.value.toFixed(2);
+    return this.spinning ? 'STOP' : (this.value >= 100 ? this.value : this.value.toFixed(2));
   }
 
   ngOnInit(): void { }

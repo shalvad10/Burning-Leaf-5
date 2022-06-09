@@ -1,6 +1,7 @@
 export class ModalData {
   public data: any = {
     currentModal: '',
+    savedModal: '',
     modalParams: {
       bonus: {
         close: true,

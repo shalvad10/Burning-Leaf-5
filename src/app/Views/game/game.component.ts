@@ -15,14 +15,15 @@ export class GameComponent extends ComponentBase implements OnInit {
     super(ref);
   }
 
+  @Input() data: any;
   @Input() gameData: any;
   @Input() lines: any;
 
   public slot?: Slot;
 
   public autoSpin: boolean = false;
-  public spinning: boolean = false;
   public canChange: boolean = true;
+  public winningLines!: WinnObject[];
 
   public config = {
     inverted: true, // true: reels spin from top to bottom; false: reels spin from bottom to top
@@ -34,16 +35,15 @@ export class GameComponent extends ComponentBase implements OnInit {
             reels[i].classList.toggle('bonus');
           }
         }
-      this.spinning = true;
     },
     onSpinEnd: (symbols: any) => {
       console.log("onSpinEnd", symbols, this.autoSpin);
-      this.spinning = false;
       this.changeSymbols();
       const reels = document.getElementsByClassName('reel');
       for (let i = 0; i < reels.length; i++) {
         reels[i].classList.remove('bonus');
       }
+      this.gameData.spinning = false;
       // if (this.autoSpin == true) {
       //   setTimeout(() => {
       //     this.emitAction('autoSpin');
@@ -52,8 +52,13 @@ export class GameComponent extends ComponentBase implements OnInit {
     },
   };
 
+  public get spinning() {
+    return this.gameData.spinning;
+  }
+
   public changeSymbols() {
     let arr = this.gameData.changedMatrix;
+    this.winningLines = SharedMethods.checkWin(this.gameData);
     Promise.allSettled(
       arr.map((matrix:any, ind: number) => {
         matrix.map( (matrixEl: any, index: number) => {
@@ -62,7 +67,7 @@ export class GameComponent extends ComponentBase implements OnInit {
           }, 200 * (index + ind));
         })
       })
-    ).then(() => setTimeout(() => { this.checkWin(SharedMethods.checkWin(this.gameData)) }, 2000 ));
+    ).then(() => setTimeout(() => { this.checkWin(this.winningLines) }, 2000 ));
   }
 
   public change(data: any) {
@@ -80,19 +85,18 @@ export class GameComponent extends ComponentBase implements OnInit {
 
   public checkWin(data: WinnObject[]) {
     Promise.allSettled(
-      data.map((winObj:any, ind: number) => {
+      data.map((winObj: any, ind: number) => {
         setTimeout(() => {
-            return this.showWin(winObj);
-            // return winObj.lineId == 4 ? this.showWin(winObj) : {};
-        }, 1500 * ind);
+          return this.showWin(winObj, ind);
+        }, 800 * ind);
       })
-    ).then(() => {});
+    );
   }
 
-  public showWin(data: WinnObject) {
+  public showWin(data: WinnObject, index: number) {
     if (data) {
       let reels = document.getElementsByClassName('reel');
-      var symbolsCount = 0;
+      var symbolsCount = 1;
         if (data.winType == 'line') {
           let winningLines = this.lines[`line${data.lineId}`];
           for (let i = 0; i < reels.length; i++) {
@@ -116,7 +120,7 @@ export class GameComponent extends ComponentBase implements OnInit {
                           height: 100%;
                           border: none;
                           `;
-                        }, 1100);
+                        }, 600);
                       } else {
                         allowBorder = false;
                       }
@@ -144,6 +148,11 @@ export class GameComponent extends ComponentBase implements OnInit {
               }
             }
         }
+        if (index === this.winningLines.length-1 && this.data.user.holdBalance == true) {
+          setTimeout(() => {
+            this.checkWin(this.winningLines);
+          }, 800);
+        }
     }
   }
 
@@ -157,14 +166,14 @@ export class GameComponent extends ComponentBase implements OnInit {
   }
 
   onSpin(): void {
-    console.warn(this.spinning, this.autoSpin);
-    if (this.spinning == false) {
-      this.slot?.spin(this.gameData.initialMatrix);
-    } else {
+    this.slot?.spin(this.gameData.initialMatrix);
       if (this.autoSpin == true) {
         this.autoSpin = false;
       }
-    }
+  }
+
+  onStop() {
+    this.slot?.stop(this.gameData.initialMatrix);
   }
 
   onAutoSpin() {

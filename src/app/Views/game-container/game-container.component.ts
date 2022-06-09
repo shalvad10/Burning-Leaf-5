@@ -15,6 +15,7 @@ export class GameContainerComponent extends ComponentBase implements OnInit {
   @ViewChild('gameContainer') game: any;
 
   @Input() gameData: any;
+  @Input() data: any;
   @Input() lines: any;
 
   ngOnInit(): void {

@@ -10,9 +10,10 @@ export class BonusItemComponent extends ComponentBase implements OnInit {
 
   @Input() freeSpin: any;
   @Input() selectedBet: any;
+  @Input() nominaleMultiplier!: any;
   @Input() data: any;
 
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(ref: ChangeDetectorRef) {
     super(ref);
   }
 
@@ -21,7 +22,7 @@ export class BonusItemComponent extends ComponentBase implements OnInit {
 
   onClick() {
     if ( this.isSelected ) {
-      this.emitAction('buyFreeSpin', {freeSpinType: this.freeSpin.typeID});
+      this.emitAction('buyFreeSpin', {freeSpinType: this.freeSpin.typeID, bet: this.selectedBet, nominale: this.nominaleMultiplier.nominale, multiplier: this.nominaleMultiplier.multiplier});
       this.data.selectedFreespinID = 0;
     } else {
       this.data.selectedFreespinID = this.freeSpin.typeID;
