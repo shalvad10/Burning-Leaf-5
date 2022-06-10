@@ -49,10 +49,12 @@ export default class Slot {
     this.nextSymbols = customSymbols;
 
     this.onSpinStart(customSymbols);
-
+    
     return Promise.all(
       this.reels.map((reel) => {
-        reel.renderSymbols(customSymbols[reel.index]);
+        setTimeout(() => {
+          reel.renderSymbols(customSymbols[reel.index]);
+        }, 1);
         return reel.spin();
       })
     ).then(() => this.onSpinEnd(customSymbols));
@@ -70,6 +72,13 @@ export default class Slot {
     this.reels[reelIndex].animateSymbol(symbolIndex);
   }
 
+  animateBorder(reelIndex:number, symbolIndex: number): void {
+    this.reels[reelIndex].animateBorders(symbolIndex);
+  }
+  cancelBorderAnimation(reelIndex:number): void {
+    this.reels[reelIndex].cancelBorderAnimation();
+  }
+
   onSpinStart(symbols: any) {
     this.config.onSpinStart?.(symbols);
   }
@@ -77,5 +86,9 @@ export default class Slot {
   onSpinEnd(symbols: any): number | void {
     this.currentSymbols = this.nextSymbols;
     this.config.onSpinEnd?.(symbols);
+  }
+
+  onBordersReset(): void {
+    this.config.onBordersReset?.();
   }
 }

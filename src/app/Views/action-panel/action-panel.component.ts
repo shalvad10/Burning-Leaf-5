@@ -63,10 +63,8 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
     }
 
   }
-  
-  
+    
   public get balance(): string {
-    return this.data.user.balance.toString();
+    return this.data.user.balance;
   }
-
 }

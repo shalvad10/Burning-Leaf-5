@@ -31,8 +31,14 @@ export class AppComponent extends ComponentBase {
     document.addEventListener('keypress', (e) => {
       if (this.app.dataObject.game.gameLoaded == true) {
         if ( e.keyCode == 32) {
-          if(this.data.game.spinning == false) {
+          if (this.data.user.holdBalance == true) {
+            this.app.doAction({action: 'addToBalance',data:{}});
+          } else if (this.data.game.autoSpin.inProgress == true) {
+            this.app.doAction({action: 'autoSpin', data: {inProgress: false, spinsCount: null}});
+            this.data.game.spinning = false;
+          } else if (this.data.game.spinning == false) {
             this.onSpin();
+            this.data.game.spinning = true;
           } else {
             this.gameContainer.game.onStop();
           }
@@ -61,16 +67,26 @@ export class AppComponent extends ComponentBase {
   }
 
   handleAction (e: any) {
-    this.app.doAction(e);
+    console.error(e);
     if (e.action == 'selectBet') {
-      setTimeout(() => {
-        this.gameContainer.game.onSpin();
-      }, 1000);
+      if (this.data.user.holdBalance == true) {
+        this.app.doAction({action: 'addToBalance',data:{}});
+      } else if (this.data.game.spinning == false) {
+          if (this.data.game.autoSpin.inProgress == true) {
+            this.app.doAction({action: 'autoSpin', data: {inProgress: false, spinsCount: null}});
+          } else {
+            setTimeout(() => {
+              this.gameContainer.game.onSpin();
+              this.data.game.spinning = true;
+            }, 500);
+          }
+      }
     } else if (e.action == 'stopSpin') {
       this.gameContainer.game.onStop();
     } else if (e.action == 'autoSpin') {
       this.onSpin();
     }
+    this.app.doAction(e);
   }
 
   public get informationText() {

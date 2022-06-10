@@ -39,6 +39,11 @@ export class LinesComponent extends ComponentBase implements OnInit {
     return Number.parseFloat(this.selectedNominale.toString()).toFixed(2);
   }
 
+  public get bonusInprogress() {
+    return false;
+    // return this.data.game.freeSpins.count > 0;
+  }
+
   toggleNMSelector(): void {
     this.showNMSelector = !this.showNMSelector;
   }
@@ -62,6 +67,7 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   onAutoSpin(): void {
+    console.warn(this.data.game.spinning);
     if (this.data.game.spinning == false) {
       this.autoSpin.emit();
     }

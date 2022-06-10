@@ -46,10 +46,11 @@ export default abstract class BaseResponseHandler {
   }
 
   public login(data: any): void {
-    this.data.user.userName = data.PlayerName;
-    this.data.user.balance  = data.Balance / this.data.ammountDivide;
-    this.data.loading = false;
-    console.warn('LOGIN', data)
+    console.warn('LOGIN', data);
+    this.data.user.userName   = data.PlayerName;
+    this.data.user.oldBalance = 0;
+    this.data.user.balance    = data.Balance / this.data.ammountDivide;
+    this.data.loading         = false;
     this.data.game.gameLoaded = true;
   }
 
@@ -58,7 +59,7 @@ export default abstract class BaseResponseHandler {
     this.data.game.changedMatrix    = SharedMethods.generateArrFromObj(data.FinalMatrix);
     this.data.game.specialSymbols   = data.Scatters;
     this.data.game.lines            = data.Lines;
-    this.data.user.holdBalance      = data.WonAmount / this.data.ammountDivide > 0;
+    // this.data.user.holdBalance      = data.WonAmount / this.data.ammountDivide > 0;
     setTimeout(() => {
       this.data.game.wonAmmount = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : this.data.game.wonAmmount;
     }, 3000);

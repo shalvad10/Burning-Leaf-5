@@ -9,32 +9,34 @@ export class LabelValueComponent implements OnInit {
 
   constructor() { }
 
-  public _value: string = '0';
+  public ammount: any = 0;
+
+  @Input() hasAnimation!: boolean;
   @Input() label!: string;
   @Input() set value(val: any) {
-    this._value = Number.parseFloat(val).toFixed(2),this._value;
-    console.warn(val);
-    // if (Number.parseInt(this._value) == 0) {
-    //   this.animateValue(this._value,Number.parseFloat(val).toFixed(2),1000);
-    // } else {
-    //   this.animateValue(Number.parseFloat(val).toFixed(2),this._value,1000);
-    // }
+    // console.warn('NEW', Number.parseFloat(val).toFixed(2));
+    if (this.hasAnimation) {
+      this.animateValue(0, Number.parseFloat(val).toFixed(2), 1000);  
+    } else {
+      this.ammount = Number.parseFloat(val).toFixed(2);
+    }
   }
 
 
   ngOnInit(): void { }
-
-  // animateValue(start: any, end: any, duration: any) {
-  //   let startTimestamp: any = null;
-  //   const step = (timestamp: any) => {
-  //     if (!startTimestamp) startTimestamp = timestamp;
-  //     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-  //     this._value = Number.parseFloat(progress * (end - start) + start).toFixed(2);
-  //     if (progress < 1) {
-  //       window.requestAnimationFrame(step);
-  //     }
-  //   };
-  //   window.requestAnimationFrame(step);
-  // }
+  
+  
+  animateValue(start: any, end: any, duration: any) {
+    let startTimestamp: any = null;
+    const step = (timestamp: any) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      this.ammount = Number.parseFloat(progress * (end - start) + start).toFixed(2);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
 
 }

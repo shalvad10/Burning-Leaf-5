@@ -28,9 +28,11 @@ export default abstract class BaseEventHandler {
   }
 
   public remainingFreespins(data: any): void {
+    this.data.game.freeSpins.isActive = data.FreespinsCount > 0;
     this.data.game.freeSpins.count = data.FreespinsCount;
     this.data.game.freeSpins.bet = data.BetAmmount / this.data.ammountDivide;
     this.data.game.freeSpins.typeID = data.FrespinTypeID;
+    this.data.game.freeSpins.won = data.WonAmount / this.data.ammountDivide;
 
     if (this.data.game.freeSpins.showPopup == true || data.FreespinsCount == 0) {
       let freesPinType = this.data.freespinTypes.filter( (frsp:any) => frsp.typeID ==data.FrespinTypeID)[0];
@@ -39,6 +41,9 @@ export default abstract class BaseEventHandler {
         let modal = this.data.modal.modalParams[this.data.modal.savedModal];
         modal.ammount = data.WonAmount / this.data.ammountDivide;
         this.data.game.bonusLeafLines = [];
+        this.data.game.autoSpin.inProgress      = false;
+        this.data.game.autoSpin.infiniteLoop    = false;
+        this.data.game.autoSpin.spinsRemaining  = data.spinsCount == null ? 0 : data.spinsCount;
       } else if (data.FreespinsCount == freesPinType.freeSpinCount) {
         this.data.modal.currentModal = 'bonus_type';
         let modal = this.data.modal.modalParams[this.data.modal.currentModal];
@@ -51,6 +56,7 @@ export default abstract class BaseEventHandler {
         modal.headText = '';
         modal.infoText =`${data.FreespinsCount} Free Spins reamining`;
         modal.data.typeID = data.FrespinTypeID;
+        modal.data.freespinsCount = data.FreespinsCount;
       }
       this.data.game.freeSpins.showPopup = false;
     }
@@ -74,6 +80,7 @@ export default abstract class BaseEventHandler {
     if (this.data.user.holdBalance == true) {
       this.data.user.balanceTohold = ((data.Balance / this.data.ammountDivide) - this.data.user.balance).toFixed(2);
     } else {
+      this.data.user.oldBalance = this.data.user.balance;
       this.data.user.balance = (data.Balance / this.data.ammountDivide).toFixed(2);
     }
   }

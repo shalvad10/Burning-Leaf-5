@@ -15,6 +15,9 @@ export default class Actions {
       case 'buyFreeSpin'    : { this.buyFreeSpin(data);     break; }
       case 'toggleModal'    : { this.toggleModal(data);     break; }
       case 'closeGame'      : { this.closeGame();           break; }
+      case 'spinning'       : { this.spinning(data);        break; }
+      case 'addToBalance'   : { this.addToBalance(data);    break; }
+      case 'autoSpin'       : { this.autoSpin(data);        break; }
       // case 'toggleTabs'             : { this.toggleTab(data);                     break; }
       // case 'joinGame'               : { this.joinGame(data);                      break; }
       // case 'openModal'              : { this.toggleModal(data);                   break; }
@@ -37,26 +40,33 @@ export default class Actions {
     }
   }
 
+  public autoSpin(data: any) {
+    this.data.game.autoSpin.inProgress      = data.inProgress;
+    this.data.game.autoSpin.infiniteLoop    = data.spinsCount == null;
+    this.data.game.autoSpin.spinsRemaining  = data.spinsCount == null ? 0 : data.spinsCount;
+  }
+
+  public spinning(data: boolean):void {
+    this.data.game.spinning = data;
+  }
+
+  public addToBalance(data: any): void {
+    this.data.user.balance = ((Number.parseFloat(this.data.user.balance) + Number.parseFloat(this.data.user.balanceTohold)).toFixed(2)).toString();
+    this.data.user.holdBalance = false;
+    this.data.user.balanceTohold = 0;
+  }
+
   public spin(): void {
-    if (this.data.user.holdBalance == false) {
-      this.data.game.spinning = true;
-      if ( this.data.game.freeSpins.count == 0) {
-        this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
-      } else {
-        this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
-      }
+    this.spinning(true);
+    if (this.data.game.freeSpins.count == 0) {
+      this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
     } else {
-      console.warn('SPIIIIIIIIIIIIIIIIIIN',typeof this.data.user.balanceTohold, typeof this.data.user.balance);
-      this.data.user.balance = ((Number.parseFloat(this.data.user.balance) + Number.parseFloat(this.data.user.balanceTohold)).toFixed(2)).toString();
-      if ( this.data.modal.savedModal !== '') {
-        this.data.modal.currentModal = this.data.modal.savedModal;
-        this.data.modal.savedModal = '';
-      }
-      setTimeout(() => {
-        this.data.user.holdBalance = false;
-        this.data.user.balanceTohold = 0;
-      }, 600);
+      this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
     }
+    // if (this.data.modal.savedModal !== '') {
+    //   this.data.modal.currentModal = this.data.modal.savedModal;
+    //   this.data.modal.savedModal = '';
+    // }
   }
 
   public closeGame(): void {

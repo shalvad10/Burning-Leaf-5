@@ -30,6 +30,11 @@ export class BaseData {
         typeID: 0,
         showPopup: true
       },
+      autoSpin: {
+        inProgress: false,
+        spinsRemaining: 0,
+        infiniteLoop: false
+      },
       spinning: false,
       wonAmmount: 0,
       wonSymbolsCount: 0,

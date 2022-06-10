@@ -17,7 +17,8 @@ export class BonusTypeComponent extends ComponentBase implements OnInit {
   ngOnInit(): void { }
 
   onClick(action: string, data: any): void {
-    this.emitAction(action, data);
+    this.emitAction('toggleModal', {modal: ''});
+    this.emitAction('autoSpin', {inProgress: true, spinsCount: this.data.data.freespinsCount});
   }
 
   getClass(id: number): string {

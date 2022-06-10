@@ -18,6 +18,19 @@ export default class SharedMethods {
         return [tmpArr1,tmpArr2,tmpArr3,tmpArr4,tmpArr5];
     }
 
+    public static matricCheck(matrix1: any, matrix2: any): boolean {
+        let isEqual = true;
+        for(let i=0; i<matrix1.length; i++) {
+            for(let j=0; j< matrix1[i].length;j++) {
+                if (matrix1[i][j] !== matrix2[i][j]) {
+                    isEqual = false;
+                    break;
+                }
+            }
+        }
+        return isEqual;
+    }
+
     public static symbols(id: number): string {
       let symbols = [ "leaf", "cherry", "lemon", "orange", "plum", "bell", "wintry", "grape", "seven", "dollar", "star" ];
       return id < 100 ? symbols[id] : (id == 100 ? symbols[symbols.length-2] : symbols[symbols.length-1]);
@@ -56,6 +69,27 @@ export default class SharedMethods {
                     lineId: 0,
                     symbolCount: 0
                 };;
+            }
+        }
+        return winningArray;
+    }
+    
+    public static checkSpecialWin(data: any): WinnObject[] {
+        let winningArray: WinnObject[] = [];
+        let winObj: WinnObject = {
+            isWin: false,
+            symbol: '',
+            winType: '',
+            lineId: 0,
+            symbolCount: 0
+        };
+        
+        for (let i=0; i < data.specialSymbols.length; i++) {
+            if (data.specialSymbols[i].Multiplier > 0) {
+                winObj.isWin = true;
+                winObj.symbol = this.symbols(data.specialSymbols[i].SymbolId);
+                winObj.winType = 'special';
+                winningArray.push(winObj);
             }
         }
         return winningArray;

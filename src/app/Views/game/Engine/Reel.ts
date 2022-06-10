@@ -6,6 +6,7 @@ export default class Reel {
     public index            : number;
     public animation        : any
     public symbolAnimation  : any;
+    public borderAnimation  : any;
 
   constructor(reelContainer: any, index: number, initialSymbols: any) {
     this.reelContainer = reelContainer;
@@ -25,7 +26,7 @@ export default class Reel {
         },
       ],
       {
-        duration: this.factor * 666, // ლევანასგან 
+        duration: this.factor * 800,
         easing: "ease-in-out",
       }
     );
@@ -38,6 +39,28 @@ export default class Reel {
 
   get factor() {
     return 1 + Math.pow(this.index / 2, 1);
+  }
+
+  animateBorders(symbolIndex: number) {
+    this.borderAnimation = this.symbolContainer.children[symbolIndex].animate(
+      [
+        { borderColor: "#FFF"},
+        { borderColor: "transparent"},
+        { borderColor: "#FFF"},
+        { borderColor: "transparent"}
+      ],
+      {
+        duration: 2000,
+        easing: 'linear'
+      }
+    );
+    this.borderAnimation.play();
+  }
+
+  cancelBorderAnimation() {
+    if (this.borderAnimation !== undefined) {
+      this.borderAnimation.cancel();
+    }
   }
 
   animateSymbol(symbolIndex: number) {
@@ -59,6 +82,7 @@ export default class Reel {
   }
 
   renderSymbols(nextSymbols: string[]) {
+    this.cancelBorderAnimation();
     const fragment = document.createDocumentFragment();
 
     for (let i = 3; i < 3 + Math.floor(this.factor) * 10; i++) {
