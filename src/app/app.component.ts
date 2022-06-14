@@ -16,10 +16,10 @@ export class AppComponent extends ComponentBase {
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-    //   console.warn(data);
-    //   this.data.connection.sessionKey = data.sessionId;
-    // });
+    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+      console.warn(data);
+      this.data.connection.sessionKey = data.sessionId;
+    });
     this.app = new AppMain();
 
     // console.log(this.app.dataObject);
@@ -33,9 +33,6 @@ export class AppComponent extends ComponentBase {
         if ( e.keyCode == 32) {
           if (this.data.user.holdBalance == true) {
             this.app.doAction({action: 'addToBalance',data:{}});
-          } else if (this.data.game.autoSpin.inProgress == true) {
-            this.app.doAction({action: 'autoSpin', data: {inProgress: false, spinsCount: null}});
-            this.data.game.spinning = false;
           } else if (this.data.game.spinning == false) {
             this.onSpin();
             this.data.game.spinning = true;

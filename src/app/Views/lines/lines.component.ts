@@ -40,8 +40,7 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   public get bonusInprogress() {
-    return false;
-    // return this.data.game.freeSpins.count > 0;
+    return this.data.game.autoSpin.inProgress;
   }
 
   toggleNMSelector(): void {
@@ -57,7 +56,9 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   onSpin(): void {
-    if (this.data.game.spinning == false) {
+    if (this.bonusInprogress) {
+      this.emitAction('stopAutospin', {});
+    } else if (this.data.game.spinning == false) {
       this.spinButton.nativeElement.classList.toggle('animate');
       this.spin.emit();
       setTimeout( () => {

@@ -6,11 +6,11 @@
         </div>
         {{ line }}
     </div>
-    <div class="buttons" *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true ? 0 : 1}">
+    <div class="buttons" *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true && bonusInprogress == false ? 0 : 1}">
         <div class="block">
             <app-nominales-selector class="nominales-selector" *ngIf="showNMSelector" [selectedNominale]="selectedNominale" [nominales]="nominales" (nominaleChanged)="nominaleChanged($event)"></app-nominales-selector>
             <div [ngStyle]="{'opacity': bonusInprogress == true ? 0 : 1}" class="autospin" (click)="onAutoSpin()"></div>
-            <div class="spin" [ngClass]="{'inBonus': bonusInprogress}" (click)="onSpin()" #spinButton></div>
+            <div class="spin" (click)="onSpin()" #spinButton></div>
             <div [ngStyle]="{'opacity': bonusInprogress == true ? 0 : 1}" class="nominales_selector autospin" (click)="toggleNMSelector()">
                 <div class="icon"></div>
                 <div class="value"> {{ nominale }} </div>

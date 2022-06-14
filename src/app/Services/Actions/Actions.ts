@@ -18,26 +18,14 @@ export default class Actions {
       case 'spinning'       : { this.spinning(data);        break; }
       case 'addToBalance'   : { this.addToBalance(data);    break; }
       case 'autoSpin'       : { this.autoSpin(data);        break; }
-      // case 'toggleTabs'             : { this.toggleTab(data);                     break; }
-      // case 'joinGame'               : { this.joinGame(data);                      break; }
-      // case 'openModal'              : { this.toggleModal(data);                   break; }
-      // case 'filterTables'           : { this.Filter(data);                        break; }
-      // case 'getTournamentTables'    : { this.getTournamentTables(data);           break; }
-      // case 'setPlayerSettings'      : { this.setPlayerSettings(false, data);      break; }
-      // case 'resetPlayerSettings'    : { this.setPlayerSettings(true, data);       break; }
-      // case 'createBuraGame'         : { this.createGame(data);                    break; }
-      // case 'createBackgammonGame'   : { this.createGame(data);                    break; }
-      // case 'selectTournemant'       : { this.selectTournament(data);              break; }
-      // case 'changeGame'             : { this.changeGame(data);                    break; }
-      // case 'rakebackExchange'       : { this.rakebackExchange(data);              break; }
-      // case 'tournamentInfo'         : { this.onTournament(data);                  break; }
-      // case 'openHistory'            : { this.openHistory(data);                   break; }
-      // case 'mytournaments'          : { this.myTournaments(data);                 break; }
-      // case 'changeColors'           : { this.changeColors(data);                  break; }
-      // case 'changeMoney'            : { this.changeMoney(data);                   break; }
-      // case 'freeBet'                : { this.freeBet(data);                       break; }
-      // case 'sortTables'             : { this.sortTables(data);                    break; }
+      case 'stopAutospin'   : { this.stopAutospin(data);    break; }
     }
+  }
+
+  public stopAutospin(data: any) {
+    this.data.game.autoSpin.inProgress      = false;
+    this.data.game.autoSpin.infiniteLoop    = false;
+    this.data.game.autoSpin.spinsRemaining  = 0;
   }
 
   public autoSpin(data: any) {

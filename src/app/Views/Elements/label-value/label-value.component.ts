@@ -14,9 +14,10 @@ export class LabelValueComponent implements OnInit {
   @Input() hasAnimation!: boolean;
   @Input() label!: string;
   @Input() set value(val: any) {
-    // console.warn('NEW', Number.parseFloat(val).toFixed(2));
+    console.warn('OLD', this.ammount);
+    console.warn('NEW',val, Number.parseFloat(val).toFixed(2));
     if (this.hasAnimation) {
-      this.animateValue(0, Number.parseFloat(val).toFixed(2), 1000);  
+      this.animateValue(this.ammount, Number.parseFloat(val).toFixed(2), 1000);  
     } else {
       this.ammount = Number.parseFloat(val).toFixed(2);
     }
