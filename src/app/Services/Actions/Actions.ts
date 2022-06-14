@@ -1,3 +1,4 @@
+import { Sounds } from '../Libs/sounds';
 import { Sender } from './Sender';
 
 export default class Actions {
@@ -45,6 +46,7 @@ export default class Actions {
   }
 
   public spin(): void {
+    Sounds.instance.play('start_spin');
     this.spinning(true);
     if (this.data.game.freeSpins.count == 0) {
       this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);

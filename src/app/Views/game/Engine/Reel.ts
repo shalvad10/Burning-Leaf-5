@@ -1,3 +1,4 @@
+import { Sounds } from "src/app/Services/Libs/sounds";
 import Symbol from "./Symbol";
 
 export default class Reel {
@@ -113,6 +114,28 @@ export default class Reel {
 
       for (let i = 0; i < max; i++) {
         this.symbolContainer.firstChild.remove();
+      }
+      
+      let counter = 0;
+      let isScatter = false;
+      for (const key in this.symbolContainer.children) {
+        if (Object.prototype.hasOwnProperty.call(this.symbolContainer.children, key)) {
+          const element = this.symbolContainer.children[key];
+          const srcArr = element.src.split('/');
+          const elementSRC = srcArr[srcArr.length-1].split('.')[0];
+          counter++;
+          if (elementSRC == 'dollar' || elementSRC == 'star') {
+            isScatter = true;
+          }
+          if (counter == 2) {
+            if (isScatter) {
+              Sounds.instance.play('scatter');
+            } else {
+              Sounds.instance.play('start_spin');
+            }
+            counter = 0;
+          }
+        }
       }
     });
   }
