@@ -17,7 +17,7 @@ export class BonusButtonComponent extends ComponentBase implements OnInit {
   ngOnInit(): void { }
 
   onClick() {
-    if (this.freeSpins == 0) {
+    if (this.freeSpins < 0) {
       this.emitAction('toggleModal', {modal: 'bonus', data: undefined});
     }
   }

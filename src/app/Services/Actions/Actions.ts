@@ -10,25 +10,30 @@ export default class Actions {
     console.warn(type,data);
 
     switch (type) {
-      case 'spin'           : { this.spin();                break; }
-      case 'selectNominale' : { this.selectNominale(data);  break; }
-      case 'selectBet'      : { this.selectBet(data);       break; }
-      case 'buyFreeSpin'    : { this.buyFreeSpin(data);     break; }
-      case 'toggleModal'    : { this.toggleModal(data);     break; }
-      case 'closeGame'      : { this.closeGame();           break; }
-      case 'spinning'       : { this.spinning(data);        break; }
-      case 'addToBalance'   : { this.addToBalance(data);    break; }
-      case 'autoSpin'       : { this.autoSpin(data);        break; }
-      case 'stopAutospin'   : { this.stopAutospin(data);    break; }
-      case 'winText'        : { this.setWinText(data);    break; }
+      case 'spin'               : { this.spin();                break; }
+      case 'selectNominale'     : { this.selectNominale(data);  break; }
+      case 'selectBet'          : { this.selectBet(data);       break; }
+      case 'buyFreeSpin'        : { this.buyFreeSpin(data);     break; }
+      case 'toggleModal'        : { this.toggleModal(data);     break; }
+      case 'closeGame'          : { this.closeGame();           break; }
+      case 'spinning'           : { this.spinning(data);        break; }
+      case 'addToBalance'       : { this.addToBalance();        break; }
+      case 'autoSpin'           : { this.autoSpin(data);        break; }
+      case 'stopAutospin'       : { this.stopAutospin();        break; }
+      case 'winText'            : { this.setWinText(data);      break; }
+      case 'freespinsFinished'  : { this.finishFreespins();     break; }
     }
+  }
+
+  public finishFreespins() {
+    this.data.game.freeSpins.count = -1;
   }
 
   public setWinText(data: any) {
     this.data.game.winningInfo = data;
   }
 
-  public stopAutospin(data: any) {
+  public stopAutospin() {
     this.data.game.autoSpin.inProgress      = false;
     this.data.game.autoSpin.infiniteLoop    = false;
     this.data.game.autoSpin.spinsRemaining  = 0;
@@ -44,7 +49,7 @@ export default class Actions {
     this.data.game.spinning = data;
   }
 
-  public addToBalance(data: any): void {
+  public addToBalance(): void {
     this.data.user.balance = ((Number.parseFloat(this.data.user.balance) + Number.parseFloat(this.data.user.balanceTohold)).toFixed(2)).toString();
     this.data.user.holdBalance = false;
     this.data.user.balanceTohold = 0;
@@ -52,6 +57,7 @@ export default class Actions {
 
   public spin(): void {
     // Sounds.instance.play('start_spin');
+    this.data.game.winningInfo = undefined;
     this.data.game.showWin = true;
     this.data.game.stopBTNCount = 0;
     this.spinning(true);

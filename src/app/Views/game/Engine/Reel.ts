@@ -98,6 +98,7 @@ export default class Reel {
   }
 
   spin() {
+      
     const animationPromise = new Promise(
       (resolve) => (this.animation.onfinish = resolve)
     );

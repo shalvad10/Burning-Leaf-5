@@ -16,7 +16,8 @@ export class BaseData {
       userName: '',
       balance: 0,
       holdBalance: false,
-      balanceTohold: 0
+      balanceTohold: 0,
+      currency: '₾'
     },
     game: {
       gameLoaded: false,

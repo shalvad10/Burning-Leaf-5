@@ -41,51 +41,49 @@ export class GameComponent extends ComponentBase implements OnInit {
         }
     },
     onSpinEnd: (symbols: any) => {
-      if ( this.spinStarted == true ) {
+      if (this.spinStarted == true) {
         this.spinStarted = false;
         console.log("onSpinEnd", symbols, this.autoSpin);
-        this.winningLines = SharedMethods.checkWin(this.gameData);
-        this.winningSpecials = SharedMethods.checkSpecialWin(this.gameData);
-          setTimeout(() => {
-            if (this.winningSpecials.length > 0) {
-              Promise.allSettled(
-                this.winningSpecials.map((winObj: any, ind: number) => {
-                  if (winObj.winType == 'special') {
-                    setTimeout(() => {
-                      return this.showSpecial(winObj, ind);
-                    }, 800 * ind);
-                  }
-                })
-              ).then( () => {
-                if (this.winningLines.length==0) {
-                  console.warn('FROM SPECIAL SYMBOLS THEN', this.autoSpin == true);
-                  if (this.autoSpin == true) {
-                    if (this.gameData.showWin == true) {
-                      setTimeout(() => {
-                        this.emitAction('autoSpin', {inProgress: true, spinsCount: null});
-                      }, 100);
-                    }
-                  } else {
-                    setTimeout(() => {
-                      this.emitAction('spinning', false);
-                    }, 10);
-                  }
+        this.winningLines = SharedMethods.checkWin(this.gameData, this.data.ammountDivide);
+        this.winningSpecials = SharedMethods.checkSpecialWin(this.gameData, this.data.ammountDivide);
+        if (this.winningSpecials.length > 0) {
+          Promise.allSettled(
+            this.winningSpecials.map((winObj: any, ind: number) => {
+              if (winObj.winType == 'special') {
+                setTimeout(() => {
+                  return this.showSpecial(winObj, ind);
+                }, 800 * ind);
+              }
+            })
+          ).then(() => {
+            if (this.winningLines.length == 0) {
+              console.warn('FROM SPECIAL SYMBOLS THEN', this.autoSpin == true);
+              if (this.autoSpin == true) {
+                if (this.gameData.showWin == true) {
+                  setTimeout(() => {
+                    this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+                  }, 100);
                 }
-              });
-            } else {
-              this.changeSymbols();
+              } else {
+                setTimeout(() => {
+                  this.emitAction('spinning', false);
+                }, 10);
+              }
             }
-            const reels = document.getElementsByClassName('reel');
-            for (let i = 0; i < reels.length; i++) {
-              reels[i].classList.remove('bonus');
-            }
-            // if (this.gameData.showWin == false) {
-            //   console.warn('HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
-            //   // setTimeout(() => {
-            //     this.emitAction('spinning', false);
-            //   // }, 10);
-            // }
-          }, 10);
+          });
+        } else {
+          this.changeSymbols();
+        }
+        const reels = document.getElementsByClassName('reel');
+        for (let i = 0; i < reels.length; i++) {
+          reels[i].classList.remove('bonus');
+        }
+        // if (this.gameData.showWin == false) {
+        //   console.warn('HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
+        //   // setTimeout(() => {
+        //     this.emitAction('spinning', false);
+        //   // }, 10);
+        // }
       }
     }
   };
@@ -203,6 +201,7 @@ export class GameComponent extends ComponentBase implements OnInit {
                       this.emitAction('winText', data);
                       this.slot?.animateBorder(i, winningLines[j][0]);
                         setTimeout(() => {
+                          this.emitAction('winText', undefined);
                           this.slot?.cancelBorderAnimation(i);
                         }, 1000);
                     }, 1000);
@@ -249,12 +248,14 @@ export class GameComponent extends ComponentBase implements OnInit {
           let srcArr = images[l].getAttribute('src')?.split('/');
           let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
           if (symbol === data.symbol) {
+            this.emitAction('winText', data);
             images[l].style.cssText = `
             width: calc(100% - 4px);
             height: calc(100% - 4px);
             border: 2px solid rgb(255, 255, 255);
             `;
             setTimeout(() => {
+              this.emitAction('winText', undefined);
               images[l].style.cssText = `
                 width: 100%;
                 height: 100%;

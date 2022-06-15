@@ -11,8 +11,19 @@
         <div class="game">
           <app-game-container class="container" [data]="data" [gameData]="data.game" [lines]="data.winByLines" (onAction)="handleAction($event)" #gameContainer></app-game-container>
         </div>
-        <div class="informationText">
+        <div *ngIf="!winninSymbols" class="informationText">
           <span> {{ informationText }}</span>
+        </div>
+        <div *ngIf="winninSymbols" class="informationText">
+          <div class="line">
+            <span> Line {{ winninSymbols.lineId }}</span>
+          </div>
+          <div class="symbols">
+            <div *ngFor="let symbol of winninSymbols.symbols" class="symbol" [ngStyle]="{'background-image': 'url(../assets/symbols/'+symbol+'.svg)'}"></div>
+          </div>
+          <div class="ammount">
+            <span> {{ winninSymbols.wonAmmount }} {{ data.user.currency }}</span>
+          </div>
         </div>
         <div class="bottom-panel">
             <app-bonus-button [freeSpins]="data.game.freeSpins.count" (onAction)="handleAction($event)"></app-bonus-button>

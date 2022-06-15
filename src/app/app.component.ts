@@ -72,6 +72,16 @@ export class AppComponent extends ComponentBase {
     return this.data.loading;
   }
 
+  public get winninSymbols() {
+    if (this.data.game.winningInfo) {
+      this.data.game.winningInfo.symbols = [];
+      for (let i = 0; i < this.data.game.winningInfo.symbolCount; i++) {
+        this.data.game.winningInfo.symbols.push(this.data.game.winningInfo.symbol)
+      }
+    }
+    return this.data.game.winningInfo;
+  }
+
   handleAction (e: any) {
     console.error(e);
     if (e.action == 'selectBet') {
@@ -96,7 +106,7 @@ export class AppComponent extends ComponentBase {
   }
 
   public get informationText() {
-    return this.data.game.winningInfo !== undefined ? `Line ${this.data.game.winningInfo.lineId} ${this.returnSymbols(this.data.game.winningInfo.symbol, this.data.game.winningInfo.symbolCount)} 10 GEL` : (this.freeSpins >= 0 ? `remaining freespins: ${this.freeSpins}`: (this.data.game.spinning ? '' : 'please place your bet' ));
+    return this.freeSpins >= 0 ? `remaining freespins: ${this.freeSpins}`: (this.data.game.spinning ? '' : 'please place your bet' );
   }
 
   public returnSymbols(symbol: string, count: number): string {

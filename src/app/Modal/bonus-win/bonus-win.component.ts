@@ -23,6 +23,7 @@ export class BonusWinComponent  extends ComponentBase implements OnInit {
   ngOnInit(): void { }
 
   onClick(action: string, data: any): void {
+    this.emitAction('freespinsFinished',{});
     this.emitAction(action, data);
   }
 

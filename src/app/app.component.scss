@@ -59,6 +59,20 @@
                         color: #fff;
                         font-weight: bold;
                     }
+                    .symbols {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5px;
+                        margin: 0px 10px;
+                        .symbol {
+                            width: 25px;
+                            height: 25px;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                        }
+                    }
                 }
 
                 .bottom-panel {

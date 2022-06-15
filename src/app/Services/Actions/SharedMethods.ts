@@ -6,6 +6,7 @@ export interface WinnObject {
     winType: string;
     lineId: number;
     symbolCount: number;
+    wonAmmount: number;
 }
 export default class SharedMethods {
 
@@ -36,24 +37,16 @@ export default class SharedMethods {
       return id < 100 ? symbols[id] : (id == 100 ? symbols[symbols.length-2] : symbols[symbols.length-1]);
     }
     
-    public static checkWin(data: any): WinnObject[] {
+    public static checkWin(data: any, divide: any): WinnObject[] {
         let winningArray: WinnObject[] = [];
         let winObj: WinnObject = {
             isWin: false,
             symbol: '',
             winType: '',
             lineId: 0,
-            symbolCount: 0
+            symbolCount: 0,
+            wonAmmount: 0
         };
-        
-        for (let i=0; i < data.specialSymbols.length; i++) {
-            if (data.specialSymbols[i].Multiplier > 0) {
-                winObj.isWin = true;
-                winObj.symbol = this.symbols(data.specialSymbols[i].SymbolId);
-                winObj.winType = 'special';
-                winningArray.push(winObj);
-            }
-        }
         for (let i=0; i<data.lines.length; i++) {
             if (data.lines[i].Multiplier > 0) {
                 winObj.isWin = true;
@@ -61,33 +54,37 @@ export default class SharedMethods {
                 winObj.lineId = data.lines[i].LineId;
                 winObj.symbolCount = data.lines[i].Number;
                 winObj.winType = 'line';
+                winObj.wonAmmount = data.lines[i].WonAmount / divide;
                 winningArray.push(winObj);
                 winObj = {
                     isWin: false,
                     symbol: '',
                     winType: '',
                     lineId: 0,
-                    symbolCount: 0
+                    symbolCount: 0,
+                    wonAmmount: 0
                 };;
             }
         }
         return winningArray;
     }
     
-    public static checkSpecialWin(data: any): WinnObject[] {
+    public static checkSpecialWin(data: any, divide: any): WinnObject[] {
         let winningArray: WinnObject[] = [];
         let winObj: WinnObject = {
             isWin: false,
             symbol: '',
             winType: '',
             lineId: 0,
-            symbolCount: 0
+            symbolCount: 0,
+            wonAmmount: 0
         };
         
         for (let i=0; i < data.specialSymbols.length; i++) {
             if (data.specialSymbols[i].Multiplier > 0) {
                 winObj.isWin = true;
                 winObj.symbol = this.symbols(data.specialSymbols[i].SymbolId);
+                winObj.wonAmmount = data.specialSymbols[i].WonAmount / divide;
                 winObj.winType = 'special';
                 winningArray.push(winObj);
             }
