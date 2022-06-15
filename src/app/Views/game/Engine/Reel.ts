@@ -129,9 +129,9 @@ export default class Reel {
           }
           if (counter == 2) {
             if (isScatter) {
-              Sounds.instance.play('scatter');
+              // Sounds.instance.play('scatter');
             } else {
-              Sounds.instance.play('start_spin');
+              // Sounds.instance.play('start_spin');
             }
             counter = 0;
           }

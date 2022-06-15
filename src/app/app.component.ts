@@ -35,9 +35,18 @@ export class AppComponent extends ComponentBase {
             this.app.doAction({action: 'addToBalance',data:{}});
           } else if (this.data.game.spinning == false) {
             this.onSpin();
+            this.gameContainer.game.onStop();
             this.data.game.spinning = true;
           } else {
             this.gameContainer.game.onStop();
+            this.data.game.stopBTNCount++;
+            if (this.data.game.stopBTNCount == 2) {
+              if (this.data.game.showWin == true) {
+                console.error('HERE')
+                this.data.game.showWin = false;
+                this.gameContainer.game.stopAnimation();
+              }
+            }
           }
         }
       }
@@ -87,8 +96,17 @@ export class AppComponent extends ComponentBase {
   }
 
   public get informationText() {
-    return this.freeSpins > 0 ? `remaining freespins: ${this.freeSpins}`: (this.data.game.spinning ? '' : 'please place your bet' );
+    return this.data.game.winningInfo !== undefined ? `Line ${this.data.game.winningInfo.lineId} ${this.returnSymbols(this.data.game.winningInfo.symbol, this.data.game.winningInfo.symbolCount)} 10 GEL` : (this.freeSpins >= 0 ? `remaining freespins: ${this.freeSpins}`: (this.data.game.spinning ? '' : 'please place your bet' ));
   }
+
+  public returnSymbols(symbol: string, count: number): string {
+    let tmp = '';
+    for(let i = 0; i<count; i++) {
+      tmp+= `<div class='symbol_small_icon ${symbol}'></div>`;
+    }
+    return tmp;
+  }
+  
 
   public get data() {
     return this.app.dataObject;

@@ -75,8 +75,15 @@ export default class Slot {
   animateBorder(reelIndex:number, symbolIndex: number): void {
     this.reels[reelIndex].animateBorders(symbolIndex);
   }
-  cancelBorderAnimation(reelIndex:number): void {
-    this.reels[reelIndex].cancelBorderAnimation();
+
+  cancelBorderAnimation(reelIndex:number = -1): void {
+    if (reelIndex >= 0) {
+      this.reels[reelIndex].cancelBorderAnimation();
+    } else {
+      this.reels.forEach((reel) => {
+        reel.cancelBorderAnimation();
+      });
+    }
   }
 
   onSpinStart(symbols: any) {

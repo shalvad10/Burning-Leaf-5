@@ -24,8 +24,9 @@ export class BaseData {
       changedMatrix: [],
       specialSymbols: [],
       lines: [],
+      winningInfo: undefined,
       freeSpins: {
-        count: 0,
+        count: -1,
         bet: 0,
         typeID: 0,
         showPopup: true
@@ -35,6 +36,8 @@ export class BaseData {
         spinsRemaining: 0,
         infiniteLoop: false
       },
+      showWin: false,
+      stopBTNCount: 0,
       spinning: false,
       wonAmmount: 0,
       wonSymbolsCount: 0,

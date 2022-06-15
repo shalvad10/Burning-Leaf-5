@@ -20,7 +20,12 @@ export default class Actions {
       case 'addToBalance'   : { this.addToBalance(data);    break; }
       case 'autoSpin'       : { this.autoSpin(data);        break; }
       case 'stopAutospin'   : { this.stopAutospin(data);    break; }
+      case 'winText'        : { this.setWinText(data);    break; }
     }
+  }
+
+  public setWinText(data: any) {
+    this.data.game.winningInfo = data;
   }
 
   public stopAutospin(data: any) {
@@ -46,9 +51,11 @@ export default class Actions {
   }
 
   public spin(): void {
-    Sounds.instance.play('start_spin');
+    // Sounds.instance.play('start_spin');
+    this.data.game.showWin = true;
+    this.data.game.stopBTNCount = 0;
     this.spinning(true);
-    if (this.data.game.freeSpins.count == 0) {
+    if (this.data.game.freeSpins.count < 0) {
       this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
     } else {
       this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
