@@ -51,11 +51,10 @@ export default class Reel {
         { borderColor: "transparent"}
       ],
       {
-        duration: 2000,
+        duration: 1000,
         easing: 'linear'
       }
     );
-    this.borderAnimation.play();
   }
 
   cancelBorderAnimation() {
@@ -77,6 +76,7 @@ export default class Reel {
       }
     );
     this.symbolAnimation.play();
+    
     setTimeout(()=> {
       this.symbolAnimation.cancel();
     }, 700);
@@ -119,6 +119,7 @@ export default class Reel {
       
       let counter = 0;
       let isScatter = false;
+      let isLeaf = false;
       for (const key in this.symbolContainer.children) {
         if (Object.prototype.hasOwnProperty.call(this.symbolContainer.children, key)) {
           const element = this.symbolContainer.children[key];
@@ -128,16 +129,37 @@ export default class Reel {
           if (elementSRC == 'dollar' || elementSRC == 'star') {
             isScatter = true;
           }
+          if (elementSRC == 'leaf') {
+            isLeaf = true;
+          }
           if (counter == 2) {
             if (isScatter) {
-              // Sounds.instance.play('scatter');
+              Sounds.instance.play('scatter');
+            } if (isLeaf) {
+              Sounds.instance.play('leaf');
             } else {
-              // Sounds.instance.play('start_spin');
+              Sounds.instance.play('start_spin');
             }
             counter = 0;
           }
         }
       }
+    });
+  }
+
+  animateBorder(index:any) {
+      this.animateBorders(index);
+    const animationPromise = new Promise(
+      (resolve) => (this.borderAnimation.onfinish = resolve)
+    );
+    const timeoutPromise = new Promise((resolve) =>
+      setTimeout(resolve, 10000)
+    );
+
+    this.borderAnimation.play();
+
+    return Promise.race([animationPromise, timeoutPromise]).then(() => {
+      if (this.borderAnimation.playState == "finished") this.borderAnimation.play();
     });
   }
   

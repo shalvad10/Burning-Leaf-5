@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ComponentBase } from 'src/app/Base/ComponentBase';
+import { Sounds } from 'src/app/Services/Libs/sounds';
 
 @Component({
   selector: 'app-bonus-type',
@@ -19,6 +20,7 @@ export class BonusTypeComponent extends ComponentBase implements OnInit {
   onClick(action: string, data: any): void {
     this.emitAction('toggleModal', {modal: ''});
     this.emitAction('autoSpin', {inProgress: true, spinsCount: this.data.data.freespinsCount});
+    Sounds.instance.play('bonus_started');
   }
 
   getClass(id: number): string {

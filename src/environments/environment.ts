@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://113.30.191.222:8088',
-  connectionURL: 'ws://113.30.191.222:10010'
+  apiURL: 'https://bereta.tech:8088',
+  connectionURL: 'wss://www.bereta.tech:10010'
 };
 
 /*

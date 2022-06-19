@@ -34,7 +34,7 @@ export default abstract class BaseEventHandler {
     this.data.game.freeSpins.typeID = data.FrespinTypeID;
     // this.data.game.freeSpins.oldWin = this.data.game.freeSpins.won;
     // setTimeout(() => {
-      this.data.game.freeSpins.won = data.WonAmount / this.data.ammountDivide;
+      this.data.game.freeSpins.won = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : 0;
     // }, 1);
 
     if (this.data.game.freeSpins.showPopup == true || data.FreespinsCount == 0) {

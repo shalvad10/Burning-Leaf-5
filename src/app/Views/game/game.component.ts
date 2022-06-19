@@ -174,9 +174,7 @@ export class GameComponent extends ComponentBase implements OnInit {
   public checkWin(data: WinnObject[]) {
     Promise.allSettled(
       data.map((winObj: any, ind: number) => {
-        setTimeout(() => {
-          return this.showWin(winObj, ind);
-        }, 1500 * ind);
+        return this.showWin(winObj, ind);
       })
     );
   }
@@ -261,7 +259,7 @@ export class GameComponent extends ComponentBase implements OnInit {
                 height: 100%;
                 border: none;
                 `;
-            }, 600);
+            }, 500);
             // setTimeout(() => {
             //   this.slot?.animateBorder(i, j);
             //     setTimeout(() => {

@@ -1,6 +1,7 @@
 import { ConnEnums    } from '../Enums/ConnEnums';
 import { Sender } from '../Actions/Sender';
 import SharedMethods from '../Actions/SharedMethods';
+import { Sounds } from '../Libs/sounds';
 
 export default abstract class BaseResponseHandler {
 
@@ -59,9 +60,14 @@ export default abstract class BaseResponseHandler {
     this.data.game.changedMatrix    = SharedMethods.generateArrFromObj(data.FinalMatrix);
     this.data.game.specialSymbols   = data.Scatters;
     this.data.game.lines            = data.Lines;
-    // this.data.user.holdBalance      = data.WonAmount / this.data.ammountDivide > 0;
     setTimeout(() => {
-      this.data.game.wonAmmount = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : this.data.game.wonAmmount;
+      this.data.game.wonAmmount   = data.WonAmount > 0 ? 0 : this.data.game.wonAmmount;
+      setTimeout(() => {
+        if (data.WonAmount > 0) {
+          Sounds.instance.play('win');
+        }
+        this.data.game.wonAmmount = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : this.data.game.wonAmmount;
+      }, 1);
     }, 3000);
   }
 

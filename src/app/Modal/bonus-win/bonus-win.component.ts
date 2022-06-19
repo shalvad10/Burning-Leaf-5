@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ComponentBase } from 'src/app/Base/ComponentBase';
+import { Sounds } from 'src/app/Services/Libs/sounds';
 
 @Component({
   selector: 'app-bonus-win',
@@ -20,7 +21,9 @@ export class BonusWinComponent  extends ComponentBase implements OnInit {
     this.animateValue(0, val.ammount.toFixed(2), 3000);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    Sounds.instance.play('bonus_finished');
+  }
 
   onClick(action: string, data: any): void {
     this.emitAction('freespinsFinished',{});

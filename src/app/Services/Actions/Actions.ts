@@ -22,10 +22,15 @@ export default class Actions {
       case 'stopAutospin'       : { this.stopAutospin();        break; }
       case 'winText'            : { this.setWinText(data);      break; }
       case 'freespinsFinished'  : { this.finishFreespins();     break; }
+      case 'toggleVolume'       : { this.toggleVolume(data);    break; }
     }
   }
 
-  public finishFreespins() {
+  public toggleVolume(data: number):void {
+    Sounds.instance.volume = data;
+  }
+
+  public finishFreespins():void  {
     this.data.game.freeSpins.count = -1;
   }
 
@@ -56,7 +61,7 @@ export default class Actions {
   }
 
   public spin(): void {
-    // Sounds.instance.play('start_spin');
+    Sounds.instance.play('start_spin');
     this.data.game.winningInfo = undefined;
     this.data.game.showWin = true;
     this.data.game.stopBTNCount = 0;

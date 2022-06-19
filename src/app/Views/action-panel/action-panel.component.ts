@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ComponentBase } from 'src/app/Base/ComponentBase';
+import { Sounds } from 'src/app/Services/Libs/sounds';
 
 @Component({
   selector: 'app-action-panel',
@@ -8,17 +9,20 @@ import { ComponentBase } from 'src/app/Base/ComponentBase';
 })
 export class ActionPanelComponent extends ComponentBase implements OnInit {
 
-  public volume: boolean = true;
+  public volume!: boolean;
   @Input() data: any;
 
   constructor(public ref: ChangeDetectorRef) {
     super(ref);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.volume = Sounds.instance.volume>0 ? true : false;
+  }
 
   toggleVolume(): void {
     this.volume = !this.volume;
+    this.emitAction('toggleVolume', this.volume ? 1 : 0);
   }
 
   public get selectedBet(): number {
@@ -26,6 +30,9 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
   }
   public get gameLine(): number {
     return this.data.game.gameLine;
+  }
+  public get isBonus(): boolean {
+    return this.data.game.freeSpins.count >= 0;
   }
   public get betMultipliers(): number[] {
     return this.data.game.betMultipliers;
@@ -63,9 +70,11 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
     }
 
   }
+
   public wonAmmount() {
     return this.data.game.freeSpins.isActive ? this.data.game.freeSpins.won : this.data.game.wonAmmount;
   }
+
   public get balance(): string {
     return this.data.user.balance;
   }

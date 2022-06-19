@@ -25,8 +25,12 @@ export class Sounds {
   private _spriteVolume: number = 1;
 
   public loadSounds() {
-    this.sounds['start_spin'] = new Howl({src: [this._rootDirectory + 'start_spin.wav']});
-    this.sounds['scatter'   ] = new Howl({src: [this._rootDirectory + 'scatter.wav']});
+    this.sounds['start_spin'      ] = new Howl({src: [this._rootDirectory + 'start_spin.wav']});
+    this.sounds['scatter'         ] = new Howl({src: [this._rootDirectory + 'scatter_symbol.wav']});
+    this.sounds['leaf'            ] = new Howl({src: [this._rootDirectory + 'bonus-symbol-leaf.wav']});
+    this.sounds['win'             ] = new Howl({src: [this._rootDirectory + 'win_sound.wav']});
+    this.sounds['bonus_started'   ] = new Howl({src: [this._rootDirectory + 'free_spin_start.wav']});
+    this.sounds['bonus_finished'  ] = new Howl({src: [this._rootDirectory + 'free_spin_end.wav']});
 
     console.log(this.sounds);
   }
@@ -63,27 +67,29 @@ export class Sounds {
     return obj;
   }
 
-  public play(snd1: any,snd2: any = undefined):Boolean {
+  public play(snd1: any,interval: any = undefined):Boolean {
     if (this.sounds[snd1]) {
       if (this.sounds[snd1].playing() === true) {
         this.sounds[snd1].stop();
       }
       this.sounds[snd1].play();
-      setTimeout(() => {
-        this.sounds[snd1].stop();
-      }, 250);
+      if (interval) {
+        setTimeout(() => {
+          this.sounds[snd1].stop();
+        }, interval);
+      }
       return true;
     }
-    if (this.sounds['sound_sprite']) {
-      if(this.sounds['sound_sprite']._sprite[snd1] && snd1 !== undefined) {
-        this.sounds['sound_sprite'].play(snd1);
-        return true;
-      }
-      if(this.sounds['sound_sprite']._sprite[snd2] && snd2 !== undefined) {
-        this.sounds['sound_sprite'].play(snd2);
-        return true;
-      }
-    }
+    // if (this.sounds['sound_sprite']) {
+    //   if(this.sounds['sound_sprite']._sprite[snd1] && snd1 !== undefined) {
+    //     this.sounds['sound_sprite'].play(snd1);
+    //     return true;
+    //   }
+    //   if(this.sounds['sound_sprite']._sprite[snd2] && snd2 !== undefined) {
+    //     this.sounds['sound_sprite'].play(snd2);
+    //     return true;
+    //   }
+    // }
     return false;
   }
 
