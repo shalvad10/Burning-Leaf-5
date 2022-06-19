@@ -72,7 +72,7 @@ export default class Slot {
     this.reels[reelIndex].animateSymbol(symbolIndex);
   }
 
-  animateBorder(reelIndex:number, symbolIndex: number): void {
+  animateBorder(reelIndex:number, symbolIndex: number): any {
     this.reels[reelIndex].animateBorder(symbolIndex);
   }
 

@@ -1,7 +1,7 @@
 <div class="cont" [ngClass]="{'open': open == true}">
     <div class="block">
         <div class="item" [ngClass]="{'selected': nominale == selectedNominale}" *ngFor="let nominale of nominales" (click)="selectNominale(nominale)">
-            {{ nominale.toFixed(2) }}
+            {{ nominale > 0 ? nominale : '&#8734;' }}
         </div>
     </div>
 </div>

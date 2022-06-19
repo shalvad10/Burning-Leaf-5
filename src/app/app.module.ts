@@ -21,6 +21,7 @@ import { InfoComponent } from './Modal/info/info.component';
 import { BonusTypeComponent } from './Modal/bonus-type/bonus-type.component';
 import { BonusWinComponent } from './Modal/bonus-win/bonus-win.component';
 import { LoaderComponent } from './loader/loader.component';
+import { AutospinSelectorComponent } from './Views/Elements/autospin-selector/autospin-selector.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LoaderComponent } from './loader/loader.component';
     InfoComponent,
     BonusTypeComponent,
     BonusWinComponent,
-    LoaderComponent
+    LoaderComponent,
+    AutospinSelectorComponent
   ],
   imports: [
     BrowserModule,

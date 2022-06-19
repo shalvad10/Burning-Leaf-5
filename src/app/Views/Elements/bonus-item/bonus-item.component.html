@@ -1,7 +1,7 @@
 <div class="cont">
     <div class="text-block">
         <div class="title">  {{ freeSpinName() }}  </div>
-        <div class="price" *ngIf="isSelected == false" (click)="onClick()"> {{ selectedBet * freeSpin.price }} Euro - Buy </div>
+        <div class="price" *ngIf="isSelected == false" (click)="onClick()"> {{ selectedBet * freeSpin.price }} GEL - Buy </div>
         <div class="price confirm" *ngIf="isSelected == true" (click)="onClick()"> Confirm Buy </div>
     </div>
     <div class="leafs-block">

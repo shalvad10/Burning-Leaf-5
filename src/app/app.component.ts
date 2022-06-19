@@ -64,8 +64,8 @@ export class AppComponent extends ComponentBase {
     }
   }
 
-  onAutoSpin() {
-    this.gameContainer.game.onAutoSpin();
+  onAutoSpin(ev: any) {
+    this.gameContainer.game.onAutoSpin(ev);
   }
 
   public get loading(): boolean {

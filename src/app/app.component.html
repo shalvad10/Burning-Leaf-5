@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="side right">
-        <app-lines [hasButtons]="true" [data]="data" [nominales]="data.game.nominales" [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin()" (onAction)="handleAction($event)"></app-lines>
+        <app-lines [hasButtons]="true" [data]="data" [nominales]="data.game.nominales" [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)" (onAction)="handleAction($event)"></app-lines>
       </div>
     </div>
   </div>

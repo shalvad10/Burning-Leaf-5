@@ -148,18 +148,18 @@ export default class Reel {
   }
 
   animateBorder(index:any) {
-      this.animateBorders(index);
+    this.animateBorders(index);
     const animationPromise = new Promise(
       (resolve) => (this.borderAnimation.onfinish = resolve)
     );
     const timeoutPromise = new Promise((resolve) =>
-      setTimeout(resolve, 10000)
+      setTimeout(resolve, 1000)
     );
 
     this.borderAnimation.play();
 
     return Promise.race([animationPromise, timeoutPromise]).then(() => {
-      if (this.borderAnimation.playState == "finished") this.borderAnimation.play();
+      if (this.borderAnimation.playState != "finished") this.borderAnimation.finish();
     });
   }
   

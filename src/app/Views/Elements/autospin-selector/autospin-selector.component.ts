@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-nominales-selector',
-  templateUrl: './nominales-selector.component.html',
-  styleUrls: ['./nominales-selector.component.scss']
+  selector: 'app-autospin-selector',
+  templateUrl: './autospin-selector.component.html',
+  styleUrls: ['./autospin-selector.component.scss']
 })
-export class NominalesSelectorComponent implements OnInit {
+export class AutospinSelectorComponent implements OnInit {
 
   constructor() { }
   @Input() open!:boolean;
@@ -19,4 +19,5 @@ export class NominalesSelectorComponent implements OnInit {
   selectNominale(nominale: number): void {
     this.nominaleChanged.emit(nominale);
   }
+
 }

@@ -6,7 +6,7 @@
         <app-bet-block *ngFor="let item of betMultipliers;let i=index" [spinning]="data.game.spinning" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
     </div>
     <div class="block last_win">
-        <app-label-value label="last win" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
+        <app-label-value [label]="isBonus ? 'win' : 'last win'" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
     </div>
     <div class="block action_buttons">
         <div class="icon info"></div>

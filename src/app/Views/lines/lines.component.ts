@@ -9,8 +9,10 @@ import { ComponentBase } from 'src/app/Base/ComponentBase';
 export class LinesComponent extends ComponentBase implements OnInit {
 
   public lines: number[] = [1,2,3,4,5];
+  public autoSpinCount: number[] = [10,20,50,100,-1];
   public fixedLines: boolean = true;
   public showNMSelector: boolean = false;
+  public showAutospinSelector: boolean = false;
   // public nominales: number[] = [0.03,0.5,1,2,3];
   // public selectedNominale: number = 0.03;
 
@@ -47,11 +49,22 @@ export class LinesComponent extends ComponentBase implements OnInit {
     this.showNMSelector = !this.showNMSelector;
   }
 
+  toggleAutospinSelector(): void {
+    this.showAutospinSelector = !this.showAutospinSelector;
+  }
+
   nominaleChanged(nominale: number): void {
     if (this.data.game.spinning == false) {
       this.showNMSelector = !this.showNMSelector;
       this.selectedNominale = nominale;
       this.emitAction('selectNominale', nominale);
+    }
+  }
+
+  autoSpinSelected(autiSpin: number): void {
+    if (this.data.game.spinning == false) {
+      this.showAutospinSelector = !this.showAutospinSelector;
+      this.autoSpin.emit(autiSpin);
     }
   }
 
@@ -68,10 +81,7 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   onAutoSpin(): void {
-    console.warn(this.data.game.spinning);
-    if (this.data.game.spinning == false) {
-      this.autoSpin.emit();
-    }
+    this.toggleAutospinSelector();
   }
 
 }

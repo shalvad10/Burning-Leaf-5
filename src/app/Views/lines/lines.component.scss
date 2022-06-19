@@ -53,7 +53,11 @@
             flex-direction: column;
             .nominales-selector {
                 position: absolute;
-                left: -310px;
+                left: 50px;
+                transition: .3s all ease-in-out;
+                &.open {
+                    left: -310px;
+                }
             }
             .autospin {
                 cursor: pointer;
