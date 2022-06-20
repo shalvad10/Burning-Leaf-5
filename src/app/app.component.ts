@@ -100,7 +100,9 @@ export class AppComponent extends ComponentBase {
     } else if (e.action == 'stopSpin') {
       this.gameContainer.game.onStop();
     } else if (e.action == 'autoSpin') {
-      this.onSpin();
+      if (e.data.inProgress == true) {
+        this.onSpin();
+      }
     }
     this.app.doAction(e);
   }

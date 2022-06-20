@@ -5,8 +5,16 @@ export class ModalData {
     modalParams: {
       bonus: {
         close: true,
+        closePositions: { x: -50, y: 10 },
         title: 'BUY WILD BONUS',
         data: {}
+      },
+      game_info: {
+        close: true,
+        closePositions: { x: 70, y: 70 },
+        activeTab: '',
+        title: '',
+        data: {},
       },
       info: {
         infoText: '',

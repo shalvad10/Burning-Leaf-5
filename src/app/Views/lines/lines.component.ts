@@ -9,7 +9,7 @@ import { ComponentBase } from 'src/app/Base/ComponentBase';
 export class LinesComponent extends ComponentBase implements OnInit {
 
   public lines: number[] = [1,2,3,4,5];
-  public autoSpinCount: number[] = [10,20,50,100,-1];
+  public autoSpinCount: any[] = [10,20,50,100,null];
   public fixedLines: boolean = true;
   public showNMSelector: boolean = false;
   public showAutospinSelector: boolean = false;
@@ -41,8 +41,14 @@ export class LinesComponent extends ComponentBase implements OnInit {
     return Number.parseFloat(this.selectedNominale.toString()).toFixed(2);
   }
 
-  public get bonusInprogress() {
+  public get autoSpinInProgress() {
     return this.data.game.autoSpin.inProgress;
+  }
+  public get isInfinite() {
+    return this.data.game.autoSpin.infiniteLoop;
+  }
+  public get spinsRemaining() {
+    return this.data.game.autoSpin.spinsRemaining;
   }
 
   toggleNMSelector(): void {
@@ -69,7 +75,7 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   onSpin(): void {
-    if (this.bonusInprogress) {
+    if (this.autoSpinInProgress) {
       this.emitAction('stopAutospin', {});
     } else if (this.data.game.spinning == false) {
       this.spinButton.nativeElement.classList.toggle('animate');
@@ -78,6 +84,10 @@ export class LinesComponent extends ComponentBase implements OnInit {
         this.spinButton.nativeElement.classList.toggle('animate');
       }, 100);
     }
+  }
+
+  onStop(): void {
+    
   }
 
   onAutoSpin(): void {

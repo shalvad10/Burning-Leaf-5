@@ -6,13 +6,17 @@
         </div>
         {{ line }}
     </div>
-    <div class="buttons" *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true && bonusInprogress == false ? 0 : 1}">
+    <div class="buttons" *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}">
         <div class="block">
             <app-nominales-selector class="nominales-selector" [ngClass]="{'open': showNMSelector}" [open]="showNMSelector" [selectedNominale]="selectedNominale" [nominales]="nominales" (nominaleChanged)="nominaleChanged($event)"></app-nominales-selector>
-            <app-autospin-selector class="nominales-selector" [ngClass]="{'open': showAutospinSelector}" [open]="showAutospinSelector" [selectedNominale]="selectedNominale" [nominales]="autoSpinCount" (nominaleChanged)="autoSpinSelected($event)"></app-autospin-selector>
-            <div [ngStyle]="{'opacity': bonusInprogress == true ? 0 : 1}" class="autospin" (click)="onAutoSpin()"></div>
-            <div class="spin" (click)="onSpin()" #spinButton></div>
-            <div [ngStyle]="{'opacity': bonusInprogress == true ? 0 : 1}" class="nominales_selector autospin" (click)="toggleNMSelector()">
+            <app-autospin-selector class="nominales-selector" [ngClass]="{'open': showAutospinSelector}" [open]="showAutospinSelector" [selectedCounter]="selectedNominale" [spinCounters]="autoSpinCount" (nominaleChanged)="autoSpinSelected($event)"></app-autospin-selector>
+            <div [ngStyle]="{'opacity': autoSpinInProgress == true ? 0 : 1}" class="autospin" (click)="onAutoSpin()"></div>
+            <div class="spin stop" [ngClass]="{'stop': autoSpinInProgress}" (click)="onSpin()" #spinButton>
+                <div *ngIf="autoSpinInProgress" class="spinsCounter" [ngClass]="{'infiniteLoop': isInfinite}">
+                    {{ isInfinite ? '&#8734;' : spinsRemaining }}
+                </div>
+            </div>
+            <div [ngStyle]="{'opacity': autoSpinInProgress == true ? 0 : 1}" class="nominales_selector autospin" (click)="toggleNMSelector()">
                 <div class="icon"></div>
                 <div class="value"> {{ nominale }} </div>
             </div>

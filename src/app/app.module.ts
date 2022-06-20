@@ -22,6 +22,7 @@ import { BonusTypeComponent } from './Modal/bonus-type/bonus-type.component';
 import { BonusWinComponent } from './Modal/bonus-win/bonus-win.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AutospinSelectorComponent } from './Views/Elements/autospin-selector/autospin-selector.component';
+import { GameInformationComponent } from './Modal/game-information/game-information.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AutospinSelectorComponent } from './Views/Elements/autospin-selector/au
     BonusTypeComponent,
     BonusWinComponent,
     LoaderComponent,
-    AutospinSelectorComponent
+    AutospinSelectorComponent,
+    GameInformationComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@
             </span>
         </div>
         <div class="content">
-            <span *ngIf="activeModal.close" class="close" (click)="close()"> X </span>
+            <span *ngIf="activeModal.close" class="close" [ngStyle]="{'top': activeModal.closePositions.x + 'px','right': activeModal.closePositions.y + 'px' }" (click)="close()"> X </span>
             <app-info
                 *ngIf="data.modal.currentModal == 'info'"
                 [modalData]="activeModal"
@@ -26,6 +26,7 @@
             ></app-buy-freespins>
             <app-bonus-type *ngIf="data.modal.currentModal == 'bonus_type'" [data]="activeModal" (onAction)="bubbleAction($event)"></app-bonus-type>
             <app-bonus-win *ngIf="data.modal.currentModal == 'bonus_win'" [data]="activeModal" (onAction)="bubbleAction($event)"></app-bonus-win>
+            <app-game-information *ngIf="data.modal.currentModal == 'game_info'"></app-game-information>
         </div>
     </div>
 </div>

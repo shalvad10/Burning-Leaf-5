@@ -17,7 +17,7 @@ export class BaseData {
       balance: 0,
       holdBalance: false,
       balanceTohold: 0,
-      currency: '₾'
+      currency: 'GEL'
     },
     game: {
       gameLoaded: false,

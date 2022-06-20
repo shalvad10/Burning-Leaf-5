@@ -69,6 +69,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                       if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                         this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
                       } else {
+                        if (this.data.game.autoSpin.inProgress) {
+                          this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+                        }
                         this.emitAction('spinning', false);
                       }
                     }, 100);
@@ -129,6 +132,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                 if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                   this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
                 } else {
+                  if (this.data.game.autoSpin.inProgress) {
+                    this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+                  }
                   this.emitAction('spinning', false);
                 }
               }, 10);
@@ -158,6 +164,9 @@ export class GameComponent extends ComponentBase implements OnInit {
               if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                 this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
               } else {
+                if (this.data.game.autoSpin.inProgress) {
+                  this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+                }
                 this.emitAction('spinning', false);
               }
             }, 10);
@@ -170,6 +179,7 @@ export class GameComponent extends ComponentBase implements OnInit {
           }, 500);
         } else {
           setTimeout(() => {
+            this.emitAction('winText', undefined);
             this.emitAction('spinning', false);
           }, 10);
         }
@@ -239,6 +249,9 @@ export class GameComponent extends ComponentBase implements OnInit {
               if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                 this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
               } else {
+                if (this.data.game.autoSpin.inProgress) {
+                  this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+                }
                 this.emitAction('spinning', false);
               }
             }, 1500);

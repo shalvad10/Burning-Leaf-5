@@ -1,0 +1,145 @@
+<div class="cont">
+    <div class="content">
+        <div class="logo"></div>
+        <div class="title">
+            PAYTABLE
+        </div>
+        <div class="info">
+            <div class="row">
+                <div class="data big_data">
+                    <div class="item">
+                        <div class="symbol leaf"></div>
+                        <div class="info_text">
+                            on 2nd and 4th reels substitutes for all symbols on the same reel
+                        </div>
+                        <hr>
+                        <div class="exept">
+                            <div class="small_symbol dollar"></div>
+                            <div class="info_text">
+                                EXEPT
+                            </div>
+                            <div class="small_symbol star"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="item">
+                        <div class="symbol dollar"></div>
+                        <div class="info">
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 300 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 300 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 300 GEL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="symbol star"></div>
+                        <div class="info">
+                            <div class="ammount_count info_text">
+                                anywhere on 1st, 3rd and 5th reels
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 300 GEL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="data">
+                    <div class="item">
+                        <div class="symbol seven"></div>
+                        <div class="info">
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 3000 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">4</div>
+                                <div class="ammount"> 200 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">3</div>
+                                <div class="ammount"> 50 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">2</div>
+                                <div class="ammount"> 10 GEL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="symbol wintry"></div>
+                        <div class="info">
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 500 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">4</div>
+                                <div class="ammount"> 100 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">3</div>
+                                <div class="ammount"> 40 GEL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="item">
+                        <div class="symbol grape"></div>
+                        <div class="info">
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 500 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">4</div>
+                                <div class="ammount"> 100 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">3</div>
+                                <div class="ammount"> 40 GEL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="symbol bell"></div>
+                        <div class="info">
+                            <div class="ammount_count">
+                                <div class="count">5</div>
+                                <div class="ammount"> 200 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">4</div>
+                                <div class="ammount"> 50 GEL</div>
+                            </div>
+                            <div class="ammount_count">
+                                <div class="count">3</div>
+                                <div class="ammount"> 20 GEL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu">
+        <div class="items">
+            <div class="item settings disabled" [ngClass]="{'selected': selectedTab == 'settings'}" (click)="selectTab(null);"></div>
+            <div class="item play disabled" [ngClass]="{'selected': selectedTab == 'play'}" (click)="selectTab(null);"></div>
+            <div class="item info" [ngClass]="{'selected': selectedTab == 'info'}" (click)="selectTab('info');"></div>
+            <div class="item question disabled" [ngClass]="{'selected': selectedTab == 'question'}" (click)="selectTab(null);"></div>
+        </div>
+    </div>
+</div>

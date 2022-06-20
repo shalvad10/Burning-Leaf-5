@@ -45,6 +45,14 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
     return betMultiplier * this.gameLine * this.selectedNominale;
   }
 
+  gameInfo(tab: any): void {
+    this.data.modal.currentModal = 'game_info';
+    const modal = this.data.modal.modalParams[this.data.modal.currentModal];
+    if (tab !== null) {
+      modal.activeTab = tab;
+    }
+  }
+
   fullScreen(): void {
     var targetelement: any = document.getElementsByTagName('body')[0];
   

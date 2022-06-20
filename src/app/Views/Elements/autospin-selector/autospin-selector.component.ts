@@ -9,8 +9,8 @@ export class AutospinSelectorComponent implements OnInit {
 
   constructor() { }
   @Input() open!:boolean;
-  @Input() nominales?: number[];
-  @Input() selectedNominale?: number;
+  @Input() spinCounters?: number[];
+  @Input() selectedCounter?: number;
   
   @Output() nominaleChanged = new EventEmitter<number>();
 

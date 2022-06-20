@@ -9,9 +9,9 @@
         <app-label-value [label]="isBonus ? 'win' : 'last win'" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
     </div>
     <div class="block action_buttons">
-        <div class="icon info"></div>
+        <div class="icon info" (click)="gameInfo('info')"></div>
         <div class="icon volume" [ngClass]="[volume ? 'on' : 'off']" (click)="toggleVolume()"></div>
-        <div class="icon menu"></div>
+        <div class="icon menu" (click)="gameInfo(null)"></div>
         <div class="icon full_screen" (click)="fullScreen()"></div>
     </div>
 </div>
