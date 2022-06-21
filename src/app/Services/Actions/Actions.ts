@@ -48,7 +48,7 @@ export default class Actions {
     console.warn('AQ NAXE', data.spinsCount);
     this.data.game.autoSpin.inProgress      = data.inProgress;
     this.data.game.autoSpin.infiniteLoop    = data.spinsCount == null;
-    this.data.game.autoSpin.spinsRemaining  = data.spinsCount == null ? 0 : data.spinsCount;
+    this.data.game.autoSpin.spinsRemaining  = data.spinsCount;
   }
 
   public spinning(data: boolean):void {

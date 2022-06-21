@@ -66,7 +66,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                 if (this.autoSpin == true) {
                   if (this.gameData.showWin == true) {
                     setTimeout(() => {
-                      if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+                      if (this.data.game.autoSpin.spinsRemaining == null) {
+                        this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+                      } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                         this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
                       } else {
                         if (this.data.game.autoSpin.inProgress) {
@@ -129,7 +131,9 @@ export class GameComponent extends ComponentBase implements OnInit {
           if (this.autoSpin == true) {
             if (this.gameData.showWin == true) {
               setTimeout(() => {
-                if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+                if (this.data.game.autoSpin.spinsRemaining == null) {
+                  this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+                } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                   this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
                 } else {
                   if (this.data.game.autoSpin.inProgress) {
@@ -161,7 +165,9 @@ export class GameComponent extends ComponentBase implements OnInit {
         if (this.autoSpin == true) {
           if (this.gameData.showWin == true) {
             setTimeout(() => {
-              if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+              if (this.data.game.autoSpin.spinsRemaining == null) {
+                this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+              } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                 this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
               } else {
                 if (this.data.game.autoSpin.inProgress) {
@@ -245,8 +251,10 @@ export class GameComponent extends ComponentBase implements OnInit {
         console.warn('FROM CHECK WIN THEN', this.autoSpin == true);
         if (this.autoSpin == true) {
           if (this.gameData.showWin == true) {
-            setTimeout(() => { 
-              if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+            setTimeout(() => {
+              if (this.data.game.autoSpin.spinsRemaining == null) {
+                this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+              } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
                 this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
               } else {
                 if (this.data.game.autoSpin.inProgress) {
