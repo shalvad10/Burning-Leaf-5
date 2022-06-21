@@ -32,10 +32,10 @@ export default abstract class BaseEventHandler {
     this.data.game.freeSpins.count = data.FreespinsCount;
     this.data.game.freeSpins.bet = data.BetAmmount / this.data.ammountDivide;
     this.data.game.freeSpins.typeID = data.FrespinTypeID;
-    // this.data.game.freeSpins.oldWin = this.data.game.freeSpins.won;
-    // setTimeout(() => {
+    
+    setTimeout(() => {
       this.data.game.freeSpins.won = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : 0;
-    // }, 1);
+    }, 2000);
 
     if (this.data.game.freeSpins.showPopup == true || data.FreespinsCount == 0) {
       let freesPinType = this.data.freespinTypes.filter( (frsp:any) => frsp.typeID ==data.FrespinTypeID)[0];

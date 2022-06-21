@@ -50,6 +50,12 @@ export class LinesComponent extends ComponentBase implements OnInit {
   public get spinsRemaining() {
     return this.data.game.autoSpin.spinsRemaining;
   }
+  public get bonusInProgress() {
+    return this.data.game.freeSpins.isActive;
+  }
+  public get bonusSpinsCount() {
+    return this.data.game.freeSpins.count;
+  }
 
   toggleNMSelector(): void {
     this.showNMSelector = !this.showNMSelector;

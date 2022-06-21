@@ -116,6 +116,39 @@
                         }
                         
                     }
+                    &.full_width {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .item {
+                            width: 715px;
+                            .symbol {
+                                width: 350px;
+                                height: 168px;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                background-size: contain;
+                                margin: 0px 5px;
+                                &.cherry {
+                                    background-image: url('../../../assets/symbols/cherry.svg');
+                                }
+                                &.lemon {
+                                    background-image: url('../../../assets/symbols/lemon.svg');
+                                }
+                                &.plum {
+                                    background-image: url('../../../assets/symbols/plum.svg');
+                                }
+                                &.orange {
+                                    background-image: url('../../../assets/symbols/orange.svg');
+                                }
+                            }
+                            .ammount_count {
+                                &.info_text {
+                                    padding-top: 15px;
+                                }
+                            }
+                        }
+                    }
                     &.big_data {
                         display: flex;
                         justify-content: center;

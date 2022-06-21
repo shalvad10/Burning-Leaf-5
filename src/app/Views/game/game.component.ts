@@ -139,7 +139,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                   if (this.data.game.autoSpin.inProgress) {
                     this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
                   }
-                  this.emitAction('spinning', false);
+                  setTimeout(() => {
+                    this.emitAction('spinning', false);
+                  }, 500);
                 }
               }, 10);
             }
@@ -173,7 +175,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                 if (this.data.game.autoSpin.inProgress) {
                   this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
                 }
-                this.emitAction('spinning', false);
+                setTimeout(() => {
+                  this.emitAction('spinning', false);
+                }, 500);
               }
             }, 10);
           }
@@ -209,7 +213,9 @@ export class GameComponent extends ComponentBase implements OnInit {
   public checkWin(data: WinnObject[]) {
     Promise.allSettled(
       data.map((winObj: any, ind: number) => {
-        return this.showWin(winObj, ind);
+        setTimeout(() => {
+          return this.showWin(winObj, ind);
+        }, 1500 * ind);
       })
     );
   }
@@ -260,7 +266,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                 if (this.data.game.autoSpin.inProgress) {
                   this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
                 }
-                this.emitAction('spinning', false);
+                setTimeout(() => {
+                  this.emitAction('spinning', false);
+                }, 500);
               }
             }, 1500);
           }
