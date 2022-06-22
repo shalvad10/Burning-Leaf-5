@@ -31,7 +31,27 @@ export class LinesComponent extends ComponentBase implements OnInit {
     super(ref);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    document.addEventListener( 'click', (e) => {
+      if (this.showNMSelector == true && !this.hasAttributeInHierarchy(e.target, 'isNomminaleSelector') && !this.hasAttributeInHierarchy(e.target, 'isSelector')) {
+        this.showNMSelector = false;
+        this.showAutospinSelector = false;
+      }
+      if (this.showAutospinSelector == true && !this.hasAttributeInHierarchy(e.target, 'isAutospinSelector') && !this.hasAttributeInHierarchy(e.target, 'isSelector')) {
+        this.showNMSelector = false;
+        this.showAutospinSelector = false;
+      }
+    });
+  }
+  public hasAttributeInHierarchy(el: any,attr: any): boolean {
+    if(el) {
+      if(el.getAttribute(attr)) {
+        return true;
+      }
+      return this.hasAttributeInHierarchy(el.parentElement,attr);
+    }
+    return false;
+  }
 
   showLines(val: number): boolean {
     return this.lines.indexOf(val) == this.lines.length-1;
@@ -58,11 +78,17 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   toggleNMSelector(): void {
-    this.showNMSelector = !this.showNMSelector;
+    if (this.data.game.spinning == false) {
+      this.showNMSelector = !this.showNMSelector;
+      this.showAutospinSelector = false;
+    }
   }
 
   toggleAutospinSelector(): void {
-    this.showAutospinSelector = !this.showAutospinSelector;
+    if (this.data.game.spinning == false) {
+      this.showNMSelector = false;
+      this.showAutospinSelector = !this.showAutospinSelector;
+    }
   }
 
   nominaleChanged(nominale: number): void {
@@ -81,6 +107,8 @@ export class LinesComponent extends ComponentBase implements OnInit {
   }
 
   onSpin(): void {
+    this.showNMSelector = false;
+    this.showAutospinSelector = false;
     if (this.autoSpinInProgress) {
       this.emitAction('stopAutospin', {});
     } else if (this.data.game.spinning == false) {
@@ -90,10 +118,6 @@ export class LinesComponent extends ComponentBase implements OnInit {
         this.spinButton.nativeElement.classList.toggle('animate');
       }, 100);
     }
-  }
-
-  onStop(): void {
-    
   }
 
   onAutoSpin(): void {
