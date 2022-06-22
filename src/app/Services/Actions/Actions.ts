@@ -45,7 +45,6 @@ export default class Actions {
   }
 
   public autoSpin(data: any) {
-    console.warn('AQ NAXE', data.spinsCount);
     this.data.game.autoSpin.inProgress      = data.inProgress;
     this.data.game.autoSpin.infiniteLoop    = data.spinsCount == null;
     this.data.game.autoSpin.spinsRemaining  = data.spinsCount;
@@ -64,18 +63,15 @@ export default class Actions {
   public spin(): void {
     Sounds.instance.play('start_spin');
     this.data.game.winningInfo = undefined;
-    this.data.game.showWin = true;
     this.data.game.stopBTNCount = 0;
-    this.spinning(true);
-    if (this.data.game.freeSpins.count < 0) {
-      this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
-    } else {
-      this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
+    if (this.data.game.spinning == false) {
+      if (this.data.game.freeSpins.count < 0) {
+        this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
+      } else {
+        this.sender.freeSpin(this.data.game.freeSpins.bet * this.data.ammountDivide);
+      }
     }
-    // if (this.data.modal.savedModal !== '') {
-    //   this.data.modal.currentModal = this.data.modal.savedModal;
-    //   this.data.modal.savedModal = '';
-    // }
+    this.data.game.spinning = true;
   }
 
   public closeGame(): void {

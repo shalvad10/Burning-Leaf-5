@@ -40,6 +40,7 @@ export class BaseData {
       showWin: false,
       stopBTNCount: 0,
       spinning: false,
+      cancelAnimations: false,
       wonAmmount: 0,
       wonSymbolsCount: 0,
       gameLine: 5,

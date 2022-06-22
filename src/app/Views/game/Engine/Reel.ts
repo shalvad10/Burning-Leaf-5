@@ -42,24 +42,22 @@ export default class Reel {
     return 1 + Math.pow(this.index / 2, 1);
   }
 
-  animateBorders(symbolIndex: number) {
-    this.borderAnimation = this.symbolContainer.children[symbolIndex].animate(
-      [
-        { borderColor: "#FFF"},
-        { borderColor: "transparent"},
-        { borderColor: "#FFF"},
-        { borderColor: "transparent"}
-      ],
-      {
-        duration: 1000,
-        easing: 'linear'
-      }
-    );
-  }
-
-  cancelBorderAnimation() {
-    if (this.borderAnimation !== undefined) {
-      this.borderAnimation.cancel();
+  animateBorders(symbolIndex: number, finish: boolean = false) {
+    if (finish) {
+      this.borderAnimation = this.symbolContainer.children[symbolIndex].cancel();
+    } else {
+      this.borderAnimation = this.symbolContainer.children[symbolIndex].animate(
+        [
+          { borderColor: "#FFF"},
+          { borderColor: "transparent"},
+          { borderColor: "#FFF"},
+          { borderColor: "transparent"}
+        ],
+        {
+          duration: 1000,
+          easing: 'linear'
+        }
+      );
     }
   }
 
@@ -83,7 +81,6 @@ export default class Reel {
   }
 
   renderSymbols(nextSymbols: string[]) {
-    this.cancelBorderAnimation();
     const fragment = document.createDocumentFragment();
 
     for (let i = 3; i < 3 + Math.floor(this.factor) * 10; i++) {
@@ -147,7 +144,7 @@ export default class Reel {
     });
   }
 
-  animateBorder(index:any) {
+  animateBorder(index: any) {
     this.animateBorders(index);
     const animationPromise = new Promise(
       (resolve) => (this.borderAnimation.onfinish = resolve)
@@ -157,6 +154,22 @@ export default class Reel {
     );
 
     this.borderAnimation.play();
+
+    return Promise.race([animationPromise, timeoutPromise]).then(() => {
+      if (this.borderAnimation.playState != "finished") this.borderAnimation.finish();
+    });
+  }
+
+  cancelBorderAnimation(index: any) {
+    this.animateBorders(index,true);
+    const animationPromise = new Promise(
+      (resolve) => (this.borderAnimation.onfinish = resolve)
+    );
+    const timeoutPromise = new Promise((resolve) =>
+      setTimeout(resolve, 1000)
+    );
+
+    this.borderAnimation.finish();
 
     return Promise.race([animationPromise, timeoutPromise]).then(() => {
       if (this.borderAnimation.playState != "finished") this.borderAnimation.finish();

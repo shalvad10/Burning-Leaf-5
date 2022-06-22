@@ -16,10 +16,10 @@ export class AppComponent extends ComponentBase {
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-      console.warn(data);
-      this.data.connection.sessionKey = data.sessionId;
-    });
+    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+    //   console.warn(data);
+    //   this.data.connection.sessionKey = data.sessionId;
+    // });
     this.app = new AppMain();
 
     // console.log(this.app.dataObject);
@@ -35,17 +35,17 @@ export class AppComponent extends ComponentBase {
             this.app.doAction({action: 'addToBalance',data:{}});
           } else if (this.data.game.spinning == false) {
             this.onSpin();
-            this.gameContainer.game.onStop();
+            // this.gameContainer.game.onStop();
             this.data.game.spinning = true;
           } else {
             this.gameContainer.game.onStop();
             this.data.game.stopBTNCount++;
             if (this.data.game.stopBTNCount == 2) {
-              if (this.data.game.showWin == true) {
-                console.error('HERE')
-                this.data.game.showWin = false;
-                this.gameContainer.game.stopAnimation();
-              }
+              // if (this.data.game.showWin == true) {
+              //   console.error('HERE')
+              //   this.data.game.showWin = false;
+              //   this.data.game.cancelAnimations = true;
+              // }
             }
           }
         }

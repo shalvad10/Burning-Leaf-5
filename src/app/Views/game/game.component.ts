@@ -19,6 +19,12 @@ export class GameComponent extends ComponentBase implements OnInit {
   @Input() gameData: any;
   @Input() lines: any;
 
+  @Input() set cancelAnimations(val: any) {
+    if (val) {
+      window.clearTimeout(this.showWinTimeout);
+    }
+  }
+
   public slot?: Slot;
   public spinStarted: boolean = false;
 
@@ -27,9 +33,12 @@ export class GameComponent extends ComponentBase implements OnInit {
   public winningSpecials!: WinnObject[];
   public animatingBorders: any = [];
 
+  public showWinTimeout: any;
+
   public config = {
     inverted: true, // true: reels spin from top to bottom; false: reels spin from bottom to top
     onSpinStart: (symbols: any) => {
+      this.gameData.cancelAnimations = false;
       this.emitAction('winText', undefined);
       this.spinStarted = true;
       this.winningLines = [];
@@ -43,63 +52,47 @@ export class GameComponent extends ComponentBase implements OnInit {
         }
     },
     onSpinEnd: (symbols: any) => {
-      Promise.allSettled( this.animatingBorders.map( (br: any) => {
-        return this.slot?.cancelBorderAnimation(br);
-      })).finally( () => {
-        if (this.spinStarted == true) {
-          this.spinStarted = false;
-          console.log("onSpinEnd", symbols, this.autoSpin);
-          this.winningLines = SharedMethods.checkWin(this.gameData, this.data.ammountDivide);
-          this.winningSpecials = SharedMethods.checkSpecialWin(this.gameData, this.data.ammountDivide);
-          if (this.winningSpecials.length > 0) {
-            Promise.allSettled(
-              this.winningSpecials.map((winObj: any, ind: number) => {
-                if (winObj.winType == 'special') {
+      if (this.spinStarted == true) {
+        this.spinStarted = false;
+        console.log("onSpinEnd", symbols, this.autoSpin);
+        this.winningLines = SharedMethods.checkWin(this.gameData, this.data.ammountDivide);
+        this.winningSpecials = SharedMethods.checkSpecialWin(this.gameData, this.data.ammountDivide);
+        if (this.winningSpecials.length > 0) {
+          Promise.allSettled(
+            this.winningSpecials.map((winObj: any, ind: number) => {
+              if (winObj.winType == 'special') {
+                setTimeout(() => {
+                  return this.showSpecial(winObj, ind);
+                }, 800 * ind);
+              }
+            })
+          ).then(() => {
+            if (this.winningLines.length == 0) {
+              if (this.autoSpin == true) {
+                if (this.gameData.showWin == true) {
                   setTimeout(() => {
-                    return this.showSpecial(winObj, ind);
-                  }, 800 * ind);
-                }
-              })
-            ).then(() => {
-              if (this.winningLines.length == 0) {
-                console.warn('FROM SPECIAL SYMBOLS THEN', this.autoSpin == true);
-                if (this.autoSpin == true) {
-                  if (this.gameData.showWin == true) {
-                    setTimeout(() => {
-                      if (this.data.game.autoSpin.spinsRemaining == null) {
-                        this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
-                      } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
-                        this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
-                      } else {
-                        if (this.data.game.autoSpin.inProgress) {
-                          this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
-                        }
-                        this.emitAction('spinning', false);
+                    if (this.data.game.autoSpin.spinsRemaining == null) {
+                      this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+                    } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+                      this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
+                    } else {
+                      if (this.data.game.autoSpin.inProgress) {
+                        this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
                       }
-                    }, 100);
-                  }
-                } else {
-                  setTimeout(() => {
-                    this.emitAction('spinning', false);
-                  }, 10);
+                    }
+                  }, 100);
                 }
               }
-            });
-          } else {
-            this.changeSymbols();
-          }
-          const reels = document.getElementsByClassName('reel');
-          for (let i = 0; i < reels.length; i++) {
-            reels[i].classList.remove('bonus');
-          }
-          // if (this.gameData.showWin == false) {
-          //   console.warn('HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
-          //   // setTimeout(() => {
-          //     this.emitAction('spinning', false);
-          //   // }, 10);
-          // }
+            }
+          });
+        } else {
+          this.changeSymbols();
         }
-      })
+        const reels = document.getElementsByClassName('reel');
+        for (let i = 0; i < reels.length; i++) {
+          reels[i].classList.remove('bonus');
+        }
+      }
     }
   };
 
@@ -112,7 +105,6 @@ export class GameComponent extends ComponentBase implements OnInit {
   }
 
   public changeSymbols() {
-    console.warn('CHANGE SYMBOLS');
     let arr = this.gameData.changedMatrix;
     if (SharedMethods.matricCheck(this.gameData.initialMatrix , this.gameData.changedMatrix) == false) {
       Promise.allSettled(
@@ -127,45 +119,7 @@ export class GameComponent extends ComponentBase implements OnInit {
         if(this.winningLines.length > 0) {
           this.checkWin(this.winningLines);
         } else {
-          console.warn('FROM CHANGE SYMBOLS THEN CHANGING', this.autoSpin == true);
           if (this.autoSpin == true) {
-            if (this.gameData.showWin == true) {
-              setTimeout(() => {
-                if (this.data.game.autoSpin.spinsRemaining == null) {
-                  this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
-                } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
-                  this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
-                } else {
-                  if (this.data.game.autoSpin.inProgress) {
-                    this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
-                  }
-                  setTimeout(() => {
-                    this.emitAction('spinning', false);
-                  }, 500);
-                }
-              }, 10);
-            }
-          } else if (this.data.modal.savedModal !== '') {
-            setTimeout(() => {
-              this.data.modal.currentModal = this.data.modal.savedModal;
-              this.data.modal.savedModal = '';
-              this.emitAction('spinning', false);
-            }, 500);
-          } else {
-            setTimeout(() => {
-              this.emitAction('spinning', false);
-            }, 10);
-          }
-        }
-      }, 1000 ));
-    } else {
-      if(this.winningLines.length > 0) {
-        console.error('AQEDAN ARIS DZMAAAAAAAAAAAAAAAA')
-        this.checkWin(this.winningLines);
-      } else {
-        console.warn('FROM CHANGE SYMBOLS THEN NOT CHANGING', this.autoSpin == true);
-        if (this.autoSpin == true) {
-          if (this.gameData.showWin == true) {
             setTimeout(() => {
               if (this.data.game.autoSpin.spinsRemaining == null) {
                 this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
@@ -175,23 +129,48 @@ export class GameComponent extends ComponentBase implements OnInit {
                 if (this.data.game.autoSpin.inProgress) {
                   this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
                 }
-                setTimeout(() => {
-                  this.emitAction('spinning', false);
-                }, 500);
               }
             }, 10);
+          } else {
+            if (this.data.modal.savedModal !== '') {
+              setTimeout(() => {
+                this.data.modal.currentModal = this.data.modal.savedModal;
+                this.data.modal.savedModal = '';
+              }, 500);
+            }
+            setTimeout(() => {
+              this.emitAction('spinning', false);
+            }, 500);
           }
-        } else if (this.data.modal.savedModal !== '') {
+        }
+      }, 1000 ));
+    } else {
+      if(this.winningLines.length > 0) {
+        this.checkWin(this.winningLines);
+      } else {
+        if (this.autoSpin == true) {
           setTimeout(() => {
-            this.data.modal.currentModal = this.data.modal.savedModal;
-            this.data.modal.savedModal = '';
-            this.emitAction('spinning', false);
-          }, 500);
+            if (this.data.game.autoSpin.spinsRemaining == null) {
+              this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+            } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+              this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
+            } else {
+              if (this.data.game.autoSpin.inProgress) {
+                this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+              }
+            }
+          }, 10);
         } else {
+          if (this.data.modal.savedModal !== '') {
+            setTimeout(() => {
+              this.data.modal.currentModal = this.data.modal.savedModal;
+              this.data.modal.savedModal = '';
+            }, 500);
+          }
           setTimeout(() => {
             this.emitAction('winText', undefined);
             this.emitAction('spinning', false);
-          }, 10);
+          }, 500);
         }
       }
     }
@@ -213,79 +192,78 @@ export class GameComponent extends ComponentBase implements OnInit {
   public checkWin(data: WinnObject[]) {
     Promise.allSettled(
       data.map((winObj: any, ind: number) => {
-        setTimeout(() => {
           return this.showWin(winObj, ind);
-        }, 1500 * ind);
       })
     );
   }
 
-  public showWin(data: WinnObject, index: number) {
-    if (data !== undefined) {
-      let reels = document.getElementsByClassName('reel');
-      var symbolsCount = 1;
-      let winningLines = this.lines[`line${data.lineId}`];
-      if (winningLines) {
-        for (let i = 0; i < reels.length; i++) {
-          let allowBorder = true;
-          for (let j = 0; j < winningLines.length; j++) {
-            if (i == winningLines[j][1]) {
-              if (allowBorder == true) {
-                if (reels[i].firstChild?.childNodes[winningLines[j][0]]) {
-                  let srcArr = (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).getAttribute('src')?.split('/');
-                  let symbol = srcArr ? srcArr[srcArr.length - 1].toString().split('.')[0] : '';
-                  if ((symbol === 'leaf' || symbol === data.symbol) && data.symbolCount >= symbolsCount) {
-                    symbolsCount++;
-                    setTimeout(() => {
-                      this.emitAction('winText', data);
-                      console.warn(this.slot?.animateBorder(i, winningLines[j][0]));
-                      this.animatingBorders.push(i);
-                        setTimeout(() => {
-                          this.slot?.cancelBorderAnimation(i);
-                        }, 1000);
-                    }, 1000);
-                  } else {
-                    allowBorder = false;
+  public showWin(data: WinnObject, index: number, hide: boolean = false) {
+    setTimeout(() => {
+      if (data !== undefined) {
+        let reels = document.getElementsByClassName('reel');
+        var symbolsCount = 1;
+        let winningLines = this.lines[`line${data.lineId}`];
+        if (winningLines) {
+          for (let i = 0; i < reels.length; i++) {
+            let allowBorder = true;
+            for (let j = 0; j < winningLines.length; j++) {
+              if (i == winningLines[j][1]) {
+                if (allowBorder == true) {
+                  if (reels[i].firstChild?.childNodes[winningLines[j][0]]) {
+                    let srcArr = (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).getAttribute('src')?.split('/');
+                    let symbol = srcArr ? srcArr[srcArr.length - 1].toString().split('.')[0] : '';
+                    if ((symbol === 'leaf' || symbol === data.symbol) && data.symbolCount >= symbolsCount) {
+                      symbolsCount++;
+                      setTimeout(() => {
+                        this.emitAction('winText', data);
+                        if (hide) {
+                          this.slot?.cancelBorderAnimation(i, winningLines[j][0]);
+                        } else {
+                          if (this.spinning == false) {
+                            this.slot?.animateBorder(i, winningLines[j][0]);
+                          }
+                        }
+                        
+                        this.animatingBorders.push(i);
+                      }, 500);
+                    } else {
+                      allowBorder = false;
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-      if (index === this.winningLines.length - 1) {
-        console.warn('FROM CHECK WIN THEN', this.autoSpin == true);
-        if (this.autoSpin == true) {
-          if (this.gameData.showWin == true) {
-            setTimeout(() => {
-              if (this.data.game.autoSpin.spinsRemaining == null) {
-                this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
-              } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
-                this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
-              } else {
-                if (this.data.game.autoSpin.inProgress) {
-                  this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+        if (index === this.winningLines.length - 1) {
+          if (this.autoSpin == true) {
+            if (this.gameData.showWin == true) {
+              setTimeout(() => {
+                if (this.data.game.autoSpin.spinsRemaining == null) {
+                  this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
+                } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
+                  this.emitAction('autoSpin', { inProgress: true, spinsCount: this.data.game.autoSpin.spinsRemaining - 1 });
+                } else {
+                  if (this.data.game.autoSpin.inProgress) {
+                    this.emitAction('autoSpin', { inProgress: false, spinsCount: null });
+                  }
                 }
-                setTimeout(() => {
-                  this.emitAction('spinning', false);
-                }, 500);
-              }
-            }, 1500);
+              }, 1500);
+            }
+          } else if (this.data.modal.savedModal !== '') {
+            setTimeout(() => {
+              this.data.modal.currentModal = this.data.modal.savedModal;
+              this.data.modal.savedModal = '';
+            }, 500);
+          } else {
+            setTimeout(() => {
+              this.checkWin(this.winningLines);
+              this.emitAction('spinning', false);
+            }, 1000);
           }
-        } else if (this.data.modal.savedModal !== '') {
-          setTimeout(() => {
-            this.data.modal.currentModal = this.data.modal.savedModal;
-            this.data.modal.savedModal = '';
-            this.emitAction('spinning', false);
-          }, 500);
-        } else {
-          setTimeout(() => {
-            this.checkWin(this.winningLines);
-            this.emitAction('spinning', false);
-          }, 1500);
         }
       }
-    }
+    }, 1500 * index);
   }
 
   public showSpecial(data: WinnObject, index: number) {
@@ -312,12 +290,6 @@ export class GameComponent extends ComponentBase implements OnInit {
                 border: none;
                 `;
             }, 500);
-            // setTimeout(() => {
-            //   this.slot?.animateBorder(i, j);
-            //     setTimeout(() => {
-            //       this.slot?.cancelBorderAnimation(i);
-            //     }, 1000);
-            // }, 1000);
           }
         }
       }
@@ -343,18 +315,11 @@ export class GameComponent extends ComponentBase implements OnInit {
   }
 
   onStop() {
-    // this.stopAnimation();
-    if (this.spinning == true){
+    setTimeout(() => {
+      this.emitAction('spinning', false);
+    }, 500);
+    if (this.spinning == true) {
       this.slot?.stop(this.gameData.initialMatrix);
-    }
-  }
-
-  stopAnimation() {
-    this.emitAction('spinning', false);
-    if (this.autoSpin == true) {
-      setTimeout(() => {
-        // this.onAutoSpin();
-      }, 10);
     }
   }
 
