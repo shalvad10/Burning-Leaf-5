@@ -69,8 +69,8 @@ export class GameComponent extends ComponentBase implements OnInit {
           ).then(() => {
             if (this.winningLines.length == 0) {
               if (this.autoSpin == true) {
-                if (this.gameData.showWin == true) {
                   setTimeout(() => {
+                    this.emitAction('spinning', false);
                     if (this.data.game.autoSpin.spinsRemaining == null) {
                       this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
                     } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
@@ -81,7 +81,6 @@ export class GameComponent extends ComponentBase implements OnInit {
                       }
                     }
                   }, 100);
-                }
               }
             }
           });
@@ -117,10 +116,12 @@ export class GameComponent extends ComponentBase implements OnInit {
         })
       ).finally(() => setTimeout(() => { 
         if(this.winningLines.length > 0) {
+          this.emitAction('spinning', false);
           this.checkWin(this.winningLines);
         } else {
           if (this.autoSpin == true) {
             setTimeout(() => {
+              this.emitAction('spinning', false);
               if (this.data.game.autoSpin.spinsRemaining == null) {
                 this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
               } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
@@ -140,16 +141,18 @@ export class GameComponent extends ComponentBase implements OnInit {
             }
             setTimeout(() => {
               this.emitAction('spinning', false);
-            }, 500);
+            }, 100);
           }
         }
       }, 1000 ));
     } else {
       if(this.winningLines.length > 0) {
+        this.emitAction('spinning', false);
         this.checkWin(this.winningLines);
       } else {
         if (this.autoSpin == true) {
           setTimeout(() => {
+            this.emitAction('spinning', false);
             if (this.data.game.autoSpin.spinsRemaining == null) {
               this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
             } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
@@ -219,7 +222,9 @@ export class GameComponent extends ComponentBase implements OnInit {
                         if (hide) {
                           this.slot?.cancelBorderAnimation(i, winningLines[j][0]);
                         } else {
+                          console.warn(1111111111111, this.spinning, this.spinning == false);
                           if (this.spinning == false) {
+                            console.warn(111111111111111111111111111111111111,i, winningLines[j][0]);
                             this.slot?.animateBorder(i, winningLines[j][0]);
                           }
                         }
@@ -237,8 +242,8 @@ export class GameComponent extends ComponentBase implements OnInit {
         }
         if (index === this.winningLines.length - 1) {
           if (this.autoSpin == true) {
-            if (this.gameData.showWin == true) {
               setTimeout(() => {
+                this.emitAction('spinning', false);
                 if (this.data.game.autoSpin.spinsRemaining == null) {
                   this.emitAction('autoSpin', { inProgress: true, spinsCount: null });
                 } else if (this.data.game.autoSpin.spinsRemaining - 1 >= 0) {
@@ -249,7 +254,6 @@ export class GameComponent extends ComponentBase implements OnInit {
                   }
                 }
               }, 1500);
-            }
           } else if (this.data.modal.savedModal !== '') {
             setTimeout(() => {
               this.data.modal.currentModal = this.data.modal.savedModal;
