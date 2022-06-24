@@ -1,4 +1,4 @@
-<div class="content" *ngIf="loading == false">
+<div class="content" [hidden]="loading == true">
   <div class="container">
     <div class="header">
       <div class="title"></div>
@@ -37,4 +37,4 @@
   </div>
 </div>
 <app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)"></app-modal>
-<app-loader *ngIf="loading == true"></app-loader>
+<app-loader class="loader" *ngIf="loading == true"></app-loader>

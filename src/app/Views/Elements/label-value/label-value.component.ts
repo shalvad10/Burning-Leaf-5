@@ -10,16 +10,27 @@ export class LabelValueComponent implements OnInit {
   constructor() { }
 
   public ammount: any = 0;
+  public maxAmmount: any = 0;
   public step: number = 0.01;
+  public int: any;
 
   @Input() hasAnimation!: boolean;
+  @Input() set spinning(val:boolean) {
+    console.warn('AAAAAAAAAAAQQQQQQQQQQ', val)
+    if (val) {
+      clearInterval(this.int);
+      this.ammount = this.maxAmmount;
+    }
+  }
   @Input() isBonus!: boolean;
   @Input() label!: string;
   @Input() set value(val: any) {
+    this.maxAmmount = 0;
     if (this.hasAnimation) {
       if(this.isBonus == false) { this.ammount = 0.00; }
       setTimeout(() => {
         if (val < this.ammount) this.ammount = 0; 
+        this.maxAmmount = Number.parseFloat(val);
         this.increaseValue(Number.parseFloat(val));
       }, 10);
     } else {
@@ -28,11 +39,11 @@ export class LabelValueComponent implements OnInit {
   }
 
   public increaseValue(maxValue: number): void {
-    let int = setInterval( () => {
+    this.int = setInterval( () => {
       if (this.ammount < maxValue) {
         this.ammount = ((this.ammount * 100) + (this.step * 100)) / 100;
       } else {
-        clearInterval(int);
+        clearInterval(this.int);
       }
     },5);
   }

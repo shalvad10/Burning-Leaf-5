@@ -116,7 +116,9 @@ export class GameComponent extends ComponentBase implements OnInit {
         })
       ).finally(() => setTimeout(() => { 
         if(this.winningLines.length > 0) {
-          this.emitAction('spinning', false);
+          setTimeout(() => {
+            this.emitAction('spinning', false);
+          }, 500);
           this.checkWin(this.winningLines);
         } else {
           if (this.autoSpin == true) {
@@ -141,13 +143,15 @@ export class GameComponent extends ComponentBase implements OnInit {
             }
             setTimeout(() => {
               this.emitAction('spinning', false);
-            }, 100);
+            }, 500);
           }
         }
       }, 1000 ));
     } else {
       if(this.winningLines.length > 0) {
-        this.emitAction('spinning', false);
+        setTimeout(() => {
+          this.emitAction('spinning', false);
+        }, 500);
         this.checkWin(this.winningLines);
       } else {
         if (this.autoSpin == true) {
@@ -200,7 +204,7 @@ export class GameComponent extends ComponentBase implements OnInit {
     );
   }
 
-  public showWin(data: WinnObject, index: number, hide: boolean = false) {
+  public showWin(data: WinnObject, index: number) {
     setTimeout(() => {
       if (data !== undefined) {
         let reels = document.getElementsByClassName('reel');
@@ -219,18 +223,12 @@ export class GameComponent extends ComponentBase implements OnInit {
                       symbolsCount++;
                       setTimeout(() => {
                         this.emitAction('winText', data);
-                        if (hide) {
-                          this.slot?.cancelBorderAnimation(i, winningLines[j][0]);
-                        } else {
-                          console.warn(1111111111111, this.spinning, this.spinning == false);
-                          if (this.spinning == false) {
-                            console.warn(111111111111111111111111111111111111,i, winningLines[j][0]);
-                            this.slot?.animateBorder(i, winningLines[j][0]);
-                          }
+                        if (this.spinning == false) {
+                          this.slot?.animateBorder(i, winningLines[j][0]);
                         }
                         
                         this.animatingBorders.push(i);
-                      }, 500);
+                      }, 700);
                     } else {
                       allowBorder = false;
                     }
@@ -262,7 +260,7 @@ export class GameComponent extends ComponentBase implements OnInit {
           } else {
             setTimeout(() => {
               this.checkWin(this.winningLines);
-              this.emitAction('spinning', false);
+              // this.emitAction('spinning', false);
             }, 1000);
           }
         }

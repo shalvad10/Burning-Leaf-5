@@ -51,8 +51,10 @@ export default abstract class BaseResponseHandler {
     this.data.user.userName   = data.PlayerName;
     this.data.user.oldBalance = 0;
     this.data.user.balance    = data.Balance / this.data.ammountDivide;
-    this.data.loading         = false;
-    this.data.game.gameLoaded = true;
+    setTimeout(() => {
+      this.data.loading         = false;
+      this.data.game.gameLoaded = true;
+    }, 5000);
   }
 
   public spin(data: any): void {
