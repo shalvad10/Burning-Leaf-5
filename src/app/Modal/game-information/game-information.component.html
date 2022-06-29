@@ -8,47 +8,47 @@
             <div class="row">
                 <div class="data big_data">
                     <div class="item">
-                        <div class="symbol leaf"></div>
-                        <div class="info_text">
-                            on 2nd and 4th reels substitutes for all symbols on the same reel
-                        </div>
-                        <hr>
-                        <div class="exept">
-                            <div class="small_symbol dollar"></div>
+                        <div class="item_cont">
+                            <div class="symbol leaf"></div>
                             <div class="info_text">
-                                EXEPT
+                                on 2nd and 4th reels substitutes for all symbols on the same reel
                             </div>
-                            <div class="small_symbol star"></div>
+                            <hr>
+                            <div class="exept">
+                                <div class="small_symbol dollar"></div>
+                                <div class="info_text">
+                                    EXEPT
+                                </div>
+                                <div class="small_symbol star"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="data">
                     <div class="item">
-                        <div class="symbol dollar"></div>
-                        <div class="info">
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 300 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 300 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 300 GEL</div>
+                        <div class="item_cont">
+                            <div class="symbol dollar"></div>
+                            <div class="info">
+                                <div class="ammount_count" *ngFor="let info of dollar.info">
+                                    <div class="count"> {{ info.count }} </div>
+                                    <div class="ammount"> {{ returnX(info.x, false) | number: '1.2-2'}}  GEL</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="symbol star"></div>
-                        <div class="info">
-                            <div class="ammount_count info_text">
-                                anywhere on 1st, 3rd and 5th reels
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 300 GEL</div>
+                    <div class="item star">
+                        <div class="item_cont">
+                            <div class="symbol star"></div>
+                            <div class="info">
+                                <div class="ammount_count info_text">
+                                    anywhere on 1st, 3rd and 5th reels
+                                </div>
+                                <div class="info">
+                                    <div class="ammount_count" *ngFor="let info of star.info">
+                                        <div class="count"> {{ info.count }} </div>
+                                        <div class="ammount"> {{ returnX(info.x, false) | number: '1.2-2'}}  GEL</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -57,76 +57,48 @@
             <div class="row">
                 <div class="data">
                     <div class="item">
-                        <div class="symbol seven"></div>
-                        <div class="info">
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 3000 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">4</div>
-                                <div class="ammount"> 200 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">3</div>
-                                <div class="ammount"> 50 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">2</div>
-                                <div class="ammount"> 10 GEL</div>
+                        <div class="item_cont">
+                            <div class="symbol seven"></div>
+                            <div class="info">
+                                <div class="ammount_count" *ngFor="let info of seven.info">
+                                    <div class="count"> {{ info.count }} </div>
+                                    <div class="ammount"> {{ returnX(info.x) | number: '1.2-2'}}  GEL</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="item">
-                        <div class="symbol wintry"></div>
-                        <div class="info">
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 500 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">4</div>
-                                <div class="ammount"> 100 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">3</div>
-                                <div class="ammount"> 40 GEL</div>
+                        <div class="item_cont">
+                            <div class="symbol wintry"></div>
+                            <div class="info">
+                                <div class="ammount_count" *ngFor="let info of wintry.info">
+                                    <div class="count"> {{ info.count }} </div>
+                                    <div class="ammount"> {{ returnX(info.x) | number: '1.2-2'}}  GEL</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="data">
                     <div class="item">
-                        <div class="symbol grape"></div>
-                        <div class="info">
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 500 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">4</div>
-                                <div class="ammount"> 100 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">3</div>
-                                <div class="ammount"> 40 GEL</div>
+                        <div class="item_cont">
+                            <div class="symbol grape"></div>
+                            <div class="info">
+                                <div class="ammount_count" *ngFor="let info of grapes.info">
+                                    <div class="count"> {{ info.count }} </div>
+                                    <div class="ammount"> {{ returnX(info.x) | number: '1.2-2'}}  GEL</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="item">
-                        <div class="symbol bell"></div>
-                        <div class="info">
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 200 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">4</div>
-                                <div class="ammount"> 50 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">3</div>
-                                <div class="ammount"> 20 GEL</div>
+                        <div class="item_cont">
+                            <div class="symbol bell"></div>
+                            <div class="info">
+                                <div class="ammount_count" *ngFor="let info of bell.info">
+                                    <div class="count"> {{ info.count }} </div>
+                                    <div class="ammount"> {{ returnX(info.x) | number: '1.2-2'}}  GEL</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,24 +107,18 @@
             <div class="row">
                 <div class="data full_width">
                     <div class="item">
-                        <div class="symbol cherry"></div>
-                        <div class="symbol lemon"></div>
-                        <div class="info">
-                            <div class="ammount_count">
-                                <div class="count">5</div>
-                                <div class="ammount"> 100 GEL</div>
+                        <div class="item_cont">
+                            <div class="symbol cherry"></div>
+                            <div class="symbol lemon"></div>
+                            <div class="info">
+                                <div class="ammount_count" *ngFor="let item of groupItems[0].info">
+                                    <div class="count">{{ item.count }}</div>
+                                    <div class="ammount"> {{ returnX(item.x) | number: '1.2-2'}} GEL</div>
+                                </div>
                             </div>
-                            <div class="ammount_count">
-                                <div class="count">4</div>
-                                <div class="ammount"> 30 GEL</div>
-                            </div>
-                            <div class="ammount_count">
-                                <div class="count">3</div>
-                                <div class="ammount"> 10 GEL</div>
-                            </div>
+                            <div class="symbol plum"></div>
+                            <div class="symbol orange"></div>
                         </div>
-                        <div class="symbol plum"></div>
-                        <div class="symbol orange"></div>
                     </div>
                 </div>
             </div>

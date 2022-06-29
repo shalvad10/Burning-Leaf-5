@@ -19,7 +19,7 @@
             <span> Line {{ winninSymbols.lineId }}</span>
           </div>
           <div class="symbols">
-            <div *ngFor="let symbol of winninSymbols.symbols" class="symbol" [ngStyle]="{'background-image': 'url(../assets/symbols/'+symbol+'.svg)'}"></div>
+            <div *ngFor="let symbol of winninSymbols.symbols" class="symbol" [ngStyle]="{'background-image': 'url(./assets/symbols/'+symbol+'.svg)'}"></div>
           </div>
           <div class="ammount">
             <span> {{ winninSymbols.wonAmmount }} {{ data.user.currency }}</span>

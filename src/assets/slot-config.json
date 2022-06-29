@@ -1,3 +1,93 @@
 {
-    "data" : "1231321"
+    "info": [
+        {
+            "symbol": "dollar",
+            "info": [
+                { "count": 5, "x": 100 },
+                { "count": 4, "x": 20 },
+                { "count": 3, "x": 3 }
+            ],
+            "group": false
+        },
+        {
+            "symbol": "star",
+            "info": [
+                { "count": 3, "x": 20 }
+            ],
+            "group": false
+        },
+        {
+            "symbol": "cherry",
+            "info": [
+                { "count": 5, "x": 100 },
+                { "count": 4, "x": 30 },
+                { "count": 3, "x": 10 }
+            ],
+            "group": true
+        },
+        {
+            "symbol": "lemon",
+            "info": [
+                { "count": 5, "x": 100 },
+                { "count": 4, "x": 30 },
+                { "count": 3, "x": 10 }
+            ],
+            "group": true
+        },
+        {
+            "symbol": "orange",
+            "info": [
+                { "count": 5, "x": 100 },
+                { "count": 4, "x": 30 },
+                { "count": 3, "x": 10 }
+            ],
+            "group": true
+        },
+        {
+            "symbol": "plum",
+            "info": [
+                { "count": 5, "x": 100 },
+                { "count": 4, "x": 30 },
+                { "count": 3, "x": 10 }
+            ],
+            "group": true
+        },
+        {
+            "symbol": "bell",
+            "info": [
+                { "count": 5, "x": 200 },
+                { "count": 4, "x": 50 },
+                { "count": 3, "x": 20 }
+            ],
+            "group": false
+        },
+        {
+            "symbol": "wintry",
+            "info": [
+                { "count": 5, "x": 500 },
+                { "count": 4, "x": 100 },
+                { "count": 3, "x": 40 }
+            ],
+            "group": false
+        },
+        {
+            "symbol": "grapes",
+            "info": [
+                { "count": 5, "x": 500 },
+                { "count": 4, "x": 100 },
+                { "count": 3, "x": 40 }
+            ],
+            "group": false
+        },
+        {
+            "symbol": "seven",
+            "info": [
+                { "count": 5, "x": 3000 },
+                { "count": 4, "x": 200 },
+                { "count": 3, "x": 50 },
+                { "count": 2, "x": 10 }
+            ],
+            "group": false
+        }
+    ]
 }

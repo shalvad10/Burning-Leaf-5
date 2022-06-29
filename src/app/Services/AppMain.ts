@@ -22,6 +22,7 @@ export class AppMain {
 
     window.addEventListener('resize', this.resize.bind(this));
     Helpers.ajaxLoad(`./assets/slot-config.json`, (e: any) => {
+      this.data.base.data.game.infoObject = e.info;
       // this.data.setBaseData(e);
       // this.data.setSettingsData(e);
     this.data.setProperties(this.params.getParams());

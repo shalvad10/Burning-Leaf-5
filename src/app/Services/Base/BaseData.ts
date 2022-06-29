@@ -20,6 +20,7 @@ export class BaseData {
       currency: 'GEL'
     },
     game: {
+      infoObject: null,
       gameLoaded: false,
       initialMatrix: [],
       changedMatrix: [],
