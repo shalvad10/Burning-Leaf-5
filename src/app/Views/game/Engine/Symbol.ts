@@ -12,7 +12,7 @@ export default class Symbol {
         } else {
             this.img = new Image();
             this.img.src = `/assets/symbols/${name}.svg`;
-            this.img.style = "width: calc(100% - 4px); height: calc(100% - 4px);border: 2px solid transparent"
+            this.img.style = "width: calc(100% - 20px); height: calc(100% - 20px); margin-left:10px; border: 2px solid transparent"
         
             cache[name] = this.img;
         }

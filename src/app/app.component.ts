@@ -12,15 +12,15 @@ import { environment } from 'src/environments/environment';
 export class AppComponent extends ComponentBase {
   title = 'slot-game';
   public app!: AppMain;
-
+ 
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-    //   console.warn(data);
-    //   this.data.connection.sessionKey = data.sessionId;
-    // });
-    this.app = new AppMain();
+    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'rezo', password: '1234'}).subscribe((data: any) => {
+       console.warn(data);
+       this.data.connection.sessionKey = data.sessionId;
+    });
+    this.app = new AppMain(); 
 
     // console.log(this.app.dataObject);
     // this.app.dataObject.modal.currentModal = '';

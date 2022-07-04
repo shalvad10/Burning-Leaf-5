@@ -1,9 +1,12 @@
 #reels {
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 520px;
+    @media (min-width: 1601px) {
+        height:610px
+    }
     .reel {
-        width: 200px;
+        width: 20%;
         height: 100%;
         border: 15px solid transparent;
         border-image: url('../../../assets/borders/middle.svg') 25 round;
@@ -15,10 +18,10 @@
         overflow: hidden;
         padding: 10px 0px;
         &:not(:first-child) {
-            margin-left: 10px;
+            margin-left: 2px;
         }
         &:not(:last-child) {
-            margin-right: 10px;
+            margin-right: 2px;
         }
 
         &.bonus {
@@ -28,6 +31,9 @@
         }
     }
 }
+
+
+/*
 
 @media only screen and (max-width: 1600px) {
     #reels {
@@ -112,3 +118,5 @@
         }
     }
 }
+
+*/

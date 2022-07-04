@@ -300,9 +300,10 @@ export class GameComponent extends ComponentBase implements OnInit {
           if (symbol === data.symbol) {
             this.emitAction('winText', data);
             images[l].style.cssText = `
-            width: calc(100% - 4px);
-            height: calc(100% - 4px);
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
             border: 2px solid rgb(255, 255, 255);
+            margin-left:10px;
             `;
             setTimeout(() => {
               this.emitAction('winText', undefined);
