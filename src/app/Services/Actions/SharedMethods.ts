@@ -85,6 +85,7 @@ export default class SharedMethods {
                 winObj.isWin = true;
                 winObj.symbol = this.symbols(data.specialSymbols[i].SymbolId);
                 winObj.wonAmmount = data.specialSymbols[i].WonAmount / divide;
+                winObj.symbolCount = data.specialSymbols[i].Number;
                 winObj.winType = 'special';
                 winningArray.push(winObj);
             }

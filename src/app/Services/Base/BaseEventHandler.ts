@@ -43,7 +43,6 @@ export default abstract class BaseEventHandler {
         this.data.modal.savedModal = 'bonus_win';
         let modal = this.data.modal.modalParams[this.data.modal.savedModal];
         modal.ammount = data.WonAmount / this.data.ammountDivide;
-        this.data.game.bonusLeafLines = [];
         this.data.game.autoSpin.inProgress      = false;
         this.data.game.autoSpin.infiniteLoop    = false;
         this.data.game.autoSpin.spinsRemaining  = data.spinsCount == null ? 0 : data.spinsCount;

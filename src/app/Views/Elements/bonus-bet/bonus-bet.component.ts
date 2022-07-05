@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class BonusBetComponent implements OnInit {
 
   @Input() bet: any;
+  @Input() currency!: string;
   @Output() selectBet:any = new EventEmitter();
 
   constructor() { }

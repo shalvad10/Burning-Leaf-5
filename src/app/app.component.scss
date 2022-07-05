@@ -87,8 +87,11 @@
                     margin-top: 0px;
                     padding: 5px;
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: flex-start;
                     align-items: center;
+                    .bonus_button {
+                        margin-right: 20px;
+                    }
                 }
             }
         }
@@ -147,18 +150,19 @@
             .cont {
                 .side {
                     height: 400px;
+                    margin-bottom: 125px;
                     &.right {
                         margin-left: 25px;
                     }
                     
                 }
                 .middle {
-                    width: calc(100vw - 480px);
+                    width: calc(100vw - 645px);
                     .game {
                         height: 400px;
                     }
                     .informationText {
-                        margin-top: 50px;
+                        margin-top: 0px;
                         padding-bottom: 6px;
                     }
                     .bottom-panel {

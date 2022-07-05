@@ -38,6 +38,7 @@ export class GameComponent extends ComponentBase implements OnInit {
   public config = {
     inverted: true, // true: reels spin from top to bottom; false: reels spin from bottom to top
     onSpinStart: (symbols: any) => {
+      this.animatingBorders = [];
       this.gameData.cancelAnimations = false;
       this.emitAction('winText', undefined);
       this.spinStarted = true;
@@ -137,6 +138,7 @@ export class GameComponent extends ComponentBase implements OnInit {
           } else {
             if (this.data.modal.savedModal !== '') {
               setTimeout(() => {
+                console.warn('AQEDAN 2');
                 this.data.modal.currentModal = this.data.modal.savedModal;
                 this.data.modal.savedModal = '';
               }, 500);
@@ -170,6 +172,7 @@ export class GameComponent extends ComponentBase implements OnInit {
         } else {
           if (this.data.modal.savedModal !== '') {
             setTimeout(() => {
+              console.warn('AQEDAN 3');
               this.data.modal.currentModal = this.data.modal.savedModal;
               this.data.modal.savedModal = '';
             }, 500);
@@ -216,8 +219,8 @@ export class GameComponent extends ComponentBase implements OnInit {
             for (let j = 0; j < winningLines.length; j++) {
               if (i == winningLines[j][1]) {
                 if (allowBorder == true) {
-                  if (reels[i].firstChild?.childNodes[winningLines[j][0]]) {
-                    let srcArr = (reels[i].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).getAttribute('src')?.split('/');
+                  if (reels[i].getElementsByClassName('cont')[0].firstChild?.childNodes[winningLines[j][0]]) {
+                    let srcArr = (reels[i].getElementsByClassName('cont')[0].firstChild?.childNodes[winningLines[j][0]] as HTMLElement).getAttribute('src')?.split('/');
                     let symbol = srcArr ? srcArr[srcArr.length - 1].toString().split('.')[0] : '';
                     if ((symbol === 'leaf' || symbol === data.symbol) && data.symbolCount >= symbolsCount) {
                       symbolsCount++;
@@ -254,9 +257,10 @@ export class GameComponent extends ComponentBase implements OnInit {
               }, 1500);
           } else if (this.data.modal.savedModal !== '') {
             setTimeout(() => {
+              console.warn('AQEDAN 1');
               this.data.modal.currentModal = this.data.modal.savedModal;
               this.data.modal.savedModal = '';
-            }, 500);
+            }, 3000);
           } else {
             setTimeout(() => {
               this.checkWin(this.winningLines);
@@ -271,27 +275,20 @@ export class GameComponent extends ComponentBase implements OnInit {
   public showSpecial(data: WinnObject, index: number) {
     let reels = document.getElementsByClassName('reel');
     for (let i = 0; i < reels.length; i++) {
-      let childNodes: any = reels[i].childNodes;
+      let childNodes: any = reels[i].getElementsByClassName('cont')[0].childNodes;
       for (let j = 0; j<childNodes.length; j++) {
         let images = childNodes[j].childNodes;
         for (let l = 0; l<images.length; l++) {
           let srcArr = images[l].getAttribute('src')?.split('/');
           let symbol = srcArr ? srcArr[srcArr.length-1].toString().split('.')[0] : '';
           if (symbol === data.symbol) {
-            this.emitAction('winText', data);
-            images[l].style.cssText = `
-            width: calc(100% - 4px);
-            height: calc(100% - 4px);
-            border: 2px solid rgb(255, 255, 255);
-            `;
             setTimeout(() => {
-              this.emitAction('winText', undefined);
-              images[l].style.cssText = `
-                width: 100%;
-                height: 100%;
-                border: none;
-                `;
-            }, 500);
+              this.emitAction('winText', data);
+              if (this.spinning == false) {
+                this.slot?.animateBorder(i, l);
+              }
+              this.animatingBorders.push(i);
+            }, 700);
           }
         }
       }

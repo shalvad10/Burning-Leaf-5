@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="bottom-panel">
-            <app-bonus-button [freeSpins]="data.game.freeSpins.count" (onAction)="handleAction($event)"></app-bonus-button>
+            <app-bonus-button class="bonus_button" [freeSpins]="data.game.freeSpins.count" (onAction)="handleAction($event)"></app-bonus-button>
             <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
         </div>
       </div>

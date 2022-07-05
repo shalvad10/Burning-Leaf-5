@@ -1,129 +1,139 @@
 .cont {
     position: relative;
+    margin-top: 5px;
+    width: 80px;
+    height: 615px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column-reverse;
-    width: 50px;
-    height: 570px;
-    background-image: url('../../../assets/background_side.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto;
-    border: 15px solid transparent;
-    border-image: url('../../../assets/borders/side.svg') 25 round;
-    border-radius: 15px;
-    .lines {
+    background: linear-gradient(#fe8900 0%, #df2314 50%, #fe8900 100%);
+
+    .content {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        background-image: url('../../../assets/background_side.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto;
+        border-radius: 10px;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        flex: 1;
-        color: #FFEA00;
-        font-size: 45px;
-        font-weight: 900;
-        position: relative;
-        .fixedLines {
-            position: absolute;
+        flex-direction: column-reverse;
+        .lines {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            text-shadow: rgb(255, 144, 0) 5px 0px 0px, rgb(255, 144, 0) 4.90033px 0.993347px 0px, rgb(255, 144, 0) 4.60531px 1.94709px 0px, rgb(255, 144, 0) 4.12668px 2.82321px 0px, rgb(255, 144, 0) 3.48353px 3.58678px 0px, rgb(255, 144, 0) 2.70151px 4.20736px 0px, rgb(255, 144, 0) 1.81179px 4.6602px 0px, rgb(255, 144, 0) 0.849836px 4.92725px 0px, rgb(255, 144, 0) -0.145998px 4.99787px 0px, rgb(255, 144, 0) -1.13601px 4.86924px 0px, rgb(255, 144, 0) -2.08073px 4.54649px 0px, rgb(255, 144, 0) -2.94251px 4.04248px 0px, rgb(255, 144, 0) -3.68697px 3.37732px 0px, rgb(255, 144, 0) -4.28444px 2.57751px 0px, rgb(255, 144, 0) -4.71111px 1.67494px 0px, rgb(255, 144, 0) -4.94996px 0.7056px 0px, rgb(255, 144, 0) -4.99147px -0.291871px 0px, rgb(255, 144, 0) -4.83399px -1.27771px 0px, rgb(255, 144, 0) -4.48379px -2.2126px 0px, rgb(255, 144, 0) -3.95484px -3.05929px 0px, rgb(255, 144, 0) -3.26822px -3.78401px 0px, rgb(255, 144, 0) -2.4513px -4.35788px 0px, rgb(255, 144, 0) -1.53666px -4.75801px 0px, rgb(255, 144, 0) -0.560763px -4.96846px 0px, rgb(255, 144, 0) 0.437495px -4.98082px 0px, rgb(255, 144, 0) 1.41831px -4.79462px 0px, rgb(255, 144, 0) 2.34258px -4.41727px 0px, rgb(255, 144, 0) 3.17346px -3.86382px 0px, rgb(255, 144, 0) 3.87783px -3.15633px 0px, rgb(255, 144, 0) 4.4276px -2.32301px 0px, rgb(255, 144, 0) 4.80085px -1.39708px 0px, rgb(255, 144, 0) 4.98271px -0.415447px 0px;
-            span {
-                font-size: 25px;
-                margin-bottom: 7px;
-                &:last-child{
-                    margin-top: 30px;
-                    font-size: 18px;
+            flex: 1;
+            color: #FFEA00;
+            font-size: 45px;
+            font-weight: 900;
+            position: relative;
+            .fixedLines {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                text-shadow: rgb(255, 144, 0) 5px 0px 0px, rgb(255, 144, 0) 4.90033px 0.993347px 0px, rgb(255, 144, 0) 4.60531px 1.94709px 0px, rgb(255, 144, 0) 4.12668px 2.82321px 0px, rgb(255, 144, 0) 3.48353px 3.58678px 0px, rgb(255, 144, 0) 2.70151px 4.20736px 0px, rgb(255, 144, 0) 1.81179px 4.6602px 0px, rgb(255, 144, 0) 0.849836px 4.92725px 0px, rgb(255, 144, 0) -0.145998px 4.99787px 0px, rgb(255, 144, 0) -1.13601px 4.86924px 0px, rgb(255, 144, 0) -2.08073px 4.54649px 0px, rgb(255, 144, 0) -2.94251px 4.04248px 0px, rgb(255, 144, 0) -3.68697px 3.37732px 0px, rgb(255, 144, 0) -4.28444px 2.57751px 0px, rgb(255, 144, 0) -4.71111px 1.67494px 0px, rgb(255, 144, 0) -4.94996px 0.7056px 0px, rgb(255, 144, 0) -4.99147px -0.291871px 0px, rgb(255, 144, 0) -4.83399px -1.27771px 0px, rgb(255, 144, 0) -4.48379px -2.2126px 0px, rgb(255, 144, 0) -3.95484px -3.05929px 0px, rgb(255, 144, 0) -3.26822px -3.78401px 0px, rgb(255, 144, 0) -2.4513px -4.35788px 0px, rgb(255, 144, 0) -1.53666px -4.75801px 0px, rgb(255, 144, 0) -0.560763px -4.96846px 0px, rgb(255, 144, 0) 0.437495px -4.98082px 0px, rgb(255, 144, 0) 1.41831px -4.79462px 0px, rgb(255, 144, 0) 2.34258px -4.41727px 0px, rgb(255, 144, 0) 3.17346px -3.86382px 0px, rgb(255, 144, 0) 3.87783px -3.15633px 0px, rgb(255, 144, 0) 4.4276px -2.32301px 0px, rgb(255, 144, 0) 4.80085px -1.39708px 0px, rgb(255, 144, 0) 4.98271px -0.415447px 0px;
+                span {
+                    font-size: 25px;
+                    margin-bottom: 7px;
+                    &:last-child{
+                        margin-top: 30px;
+                        font-size: 18px;
+                    }
                 }
             }
         }
-    }
-    .buttons {
-        position: absolute;
-        width: 175px;
-        height: 350px;
-        .block {
-            position: relative;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            .nominales-selector {
-                position: absolute;
-                left: 50px;
-                transition: .3s all ease-in-out;
-                &.open {
-                    left: -310px;
-                }
-            }
-            .autospin {
-                cursor: pointer;
-                width: 95px;
-                height: 125px;
-                background-image: url('../../../assets/autospin.svg');
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: contain;
-                margin-bottom: -15px;
-                &.nominales_selector {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column-reverse;
-                    transform: rotate(180deg);
-                    margin-top: -15px;
-                    background-image: url('../../../assets/nominale_selector.svg');
-                    .icon {
-                        width: 40px;
-                        height: 40px;
-                        background-image: url('../../../assets/nominal_settings.svg');
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        background-size: contain;
-                    }
-                    .value {
-                        transform: rotate(-180deg);
-                        font-weight: 900;
-                        font-size: 27px;
-                        color: #FFD900;
-                        text-align: left;
+        .buttons {
+            position: absolute;
+            width: 175px;
+            height: 350px;
+            .block {
+                position: relative;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .nominales-selector {
+                    position: absolute;
+                    left: 50px;
+                    transition: .3s all ease-in-out;
+                    &.open {
+                        left: -310px;
                     }
                 }
-            }
-            .spin {
-                cursor: pointer;
-                width: 175px;
-                height: 205px;
-                background-image: url('../../../assets/spin.svg');
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                &.animate {
-                    transform: scale(1.1);
-                }
-                &.stop {
-                    background-image: none;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: rgba(0, 0, 0, 0.8);
-                    border: 3px solid #ccc;
-                    border-radius: 100%;
-                    width: 175px;
-                    height: 175px;
-                    .spinsCounter {
-                        width: 45px;
-                        height: 45px;
-                        background: linear-gradient(#DDDDDD,#7B7B7B);
-                        font-size: 17px;
+                .autospin {
+                    cursor: pointer;
+                    width: 95px;
+                    height: 125px;
+                    background-image: url('../../../assets/autospin.svg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    margin-bottom: -15px;
+                    &.nominales_selector {
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        &.infiniteLoop {
-                            font-size: 25px;
+                        flex-direction: column-reverse;
+                        transform: rotate(180deg);
+                        margin-top: -15px;
+                        background-image: url('../../../assets/nominale_selector.svg');
+                        .icon {
+                            width: 40px;
+                            height: 40px;
+                            background-image: url('../../../assets/nominal_settings.svg');
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                        }
+                        .value {
+                            transform: rotate(-180deg);
+                            font-weight: 900;
+                            font-size: 27px;
+                            color: #FFD900;
+                            text-align: left;
+                        }
+                    }
+                }
+                .spin {
+                    cursor: pointer;
+                    width: 175px;
+                    height: 205px;
+                    background-image: url('../../../assets/spin.svg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    &.animate {
+                        transform: scale(1.1);
+                    }
+                    &.stop {
+                        background-image: none;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        border: 3px solid #ccc;
+                        border-radius: 100%;
+                        width: 175px;
+                        height: 175px;
+                        .spinsCounter {
+                            width: 45px;
+                            height: 45px;
+                            background: linear-gradient(#DDDDDD,#7B7B7B);
+                            font-size: 17px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            &.infiniteLoop {
+                                font-size: 25px;
+                            }
                         }
                     }
                 }
@@ -136,48 +146,50 @@
     .cont {
         width: 50px;
         height: 500px;
-        margin-top: -55px;
-        .lines {
-            font-size: 30px;
-            font-weight: 900;
-            .fixedLines {
-                span {
-                    font-size: 20px;
-                    margin-bottom: 5px;
-                    &:last-child{
-                        margin-top: 20px;
-                        font-size: 18px;
+        // margin-top: -55px;
+        .content {
+            .lines {
+                font-size: 30px;
+                font-weight: 900;
+                .fixedLines {
+                    span {
+                        font-size: 20px;
+                        margin-bottom: 5px;
+                        &:last-child{
+                            margin-top: 20px;
+                            font-size: 18px;
+                        }
                     }
                 }
             }
-        }
-        .buttons {
-            width: 155px;
-            height: 300px;
-            .block {
-                .nominales-selector {
-                    position: absolute;
-                    left: -310px;
-                }
-                .autospin {
-                    width: 95px;
-                    height: 125px;
-                    &.nominales_selector {
-                        .icon {
-                            width: 35px;
-                            height: 35px;
-                        }
-                        .value {
-                            font-size: 17px;
+            .buttons {
+                width: 155px;
+                height: 300px;
+                .block {
+                    .nominales-selector {
+                        position: absolute;
+                        left: -310px;
+                    }
+                    .autospin {
+                        width: 95px;
+                        height: 125px;
+                        &.nominales_selector {
+                            .icon {
+                                width: 35px;
+                                height: 35px;
+                            }
+                            .value {
+                                font-size: 17px;
+                            }
                         }
                     }
-                }
-                .spin {
-                    width: 155px;
-                    height: 200px;
-                    &.stop {
+                    .spin {
                         width: 155px;
-                        height: 155px;
+                        height: 200px;
+                        &.stop {
+                            width: 155px;
+                            height: 155px;
+                        }
                     }
                 }
             }
@@ -189,35 +201,37 @@
     .cont {
         width: 50px;
         height: 400px;
-        margin-top: -80px;
+        // margin-top: -80px;
+        .content {
         
-        .buttons {
-            width: 135px;
-            height: 300px;
-            .block {
-                .nominales-selector {
-                    position: absolute;
-                    left: -325px;
-                }
-                .autospin {
-                    width: 75px;
-                    height: 105px;
-                    &.nominales_selector {
-                        .icon {
-                            width: 30px;
-                            height: 30px;
-                        }
-                        .value {
-                            font-size: 15px;
+            .buttons {
+                width: 135px;
+                height: 300px;
+                .block {
+                    .nominales-selector {
+                        position: absolute;
+                        left: -325px;
+                    }
+                    .autospin {
+                        width: 75px;
+                        height: 105px;
+                        &.nominales_selector {
+                            .icon {
+                                width: 30px;
+                                height: 30px;
+                            }
+                            .value {
+                                font-size: 15px;
+                            }
                         }
                     }
-                }
-                .spin {
-                    width: 145px;
-                    height: 185px;
-                    &.stop {
+                    .spin {
                         width: 145px;
-                        height: 145px;
+                        height: 185px;
+                        &.stop {
+                            width: 145px;
+                            height: 145px;
+                        }
                     }
                 }
             }

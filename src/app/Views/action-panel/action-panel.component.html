@@ -1,17 +1,19 @@
 <div class="content">
-    <div class="block balance">
-        <app-label-value label="balance" [spinning]="data.game.spinning" [hasAnimation]="false" [value]="balance"></app-label-value>
-    </div>
-    <div class="block nominales">
-        <app-bet-block *ngFor="let item of betMultipliers;let i=index" [spinning]="data.game.spinning" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
-    </div>
-    <div class="block last_win">
-        <app-label-value [spinning]="data.game.spinning" [label]="isBonus ? 'win' : 'last win'" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
-    </div>
-    <div class="block action_buttons">
-        <div class="icon info" (click)="gameInfo('info')"></div>
-        <div class="icon volume" [ngClass]="[volume ? 'on' : 'off']" (click)="toggleVolume()"></div>
-        <div class="icon menu" (click)="gameInfo(null)"></div>
-        <div class="icon full_screen" (click)="fullScreen()"></div>
+    <div class="data">
+        <div class="block balance">
+            <app-label-value label="balance" [spinning]="data.game.spinning" [hasAnimation]="false" [value]="balance"></app-label-value>
+        </div>
+        <div class="block nominales">
+            <app-bet-block *ngFor="let item of betMultipliers;let i=index" [spinning]="data.game.spinning" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
+        </div>
+        <div class="block last_win">
+            <app-label-value [spinning]="data.game.spinning" [label]="isBonus ? 'win' : 'last win'" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
+        </div>
+        <div class="block action_buttons">
+            <div class="icon info" (click)="gameInfo('info')"></div>
+            <div class="icon volume" [ngClass]="[volume ? 'on' : 'off']" (click)="toggleVolume()"></div>
+            <div class="icon menu" (click)="gameInfo(null)"></div>
+            <div class="icon full_screen" (click)="fullScreen()"></div>
+        </div>
     </div>
 </div>

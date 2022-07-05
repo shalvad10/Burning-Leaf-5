@@ -7,7 +7,7 @@ export default class Actions {
 
   public onAction(type: string, data: any) {
 
-    console.warn(type,data);
+    // console.warn(type,data);
 
     switch (type) {
       case 'spin'               : { this.spin();                break; }
@@ -65,6 +65,7 @@ export default class Actions {
     this.data.game.winningInfo = undefined;
     this.data.game.stopBTNCount = 0;
     if (this.data.game.spinning == false) {
+      this.data.game.bonusLeafLines = [];
       if (this.data.game.freeSpins.count < 0) {
         this.sender.spin(this.data.game.selectedBet * this.data.ammountDivide);
       } else {

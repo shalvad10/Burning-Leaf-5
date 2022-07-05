@@ -18,6 +18,7 @@ export class BuyFreespinsComponent extends ComponentBase implements OnInit {
   @Input() data: any;
   @Input() freeSpins:any;
   @Input() selectedBet: any;
+  @Input() currency!: string;
   @Input() selectedNominale: any;
   @Input() nominales: any;
   @Input() gameLine: any;

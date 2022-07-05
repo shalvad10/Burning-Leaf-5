@@ -1,64 +1,71 @@
 .content {
-    width: 970px;
-    height: 70px;
-    background-color: #3E0006;
-    border: 15px solid transparent;
-    border-image: url('../../../assets/borders/bottom_big.svg') 30 round;
-    border-radius: 15px;
+    width: 950px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #b80011;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    .data {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #3E0006;
+        border-radius: 10px;
 
-    .block {
-        margin: 15px;
-        &.balance {
-            flex: 2;
-        }
-        &.value {
-            flex: 1;
-        }
-        &.bet {
-            flex: 1;
-        }
-        &.nominales {
-            flex: 3;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            gap: 15px;
-        }
-        &.last_win {
-            flex: 1;
-        }
-        &.action_buttons {
-            flex: 2;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            .icon {
-                cursor: pointer;
-                margin: 5px;
-                width: 35px;
-                height: 35px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: contain;
-                &.info {
-                    background-image: url('../../../assets/icons/info.svg');
-                }
-                &.volume {
-                    &.on{
-                        background-image: url('../../../assets/icons/volume.svg');
+        .block {
+            margin: 15px;
+            &.balance {
+                flex: 2;
+            }
+            &.value {
+                flex: 1;
+            }
+            &.bet {
+                flex: 1;
+            }
+            &.nominales {
+                flex: 3;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                gap: 15px;
+            }
+            &.last_win {
+                flex: 1;
+            }
+            &.action_buttons {
+                flex: 2;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                .icon {
+                    cursor: pointer;
+                    margin: 5px;
+                    width: 35px;
+                    height: 35px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    &.info {
+                        background-image: url('../../../assets/icons/info.svg');
                     }
-                    &.off{
-                        background-image: url('../../../assets/icons/volume_off.svg');
+                    &.volume {
+                        &.on{
+                            background-image: url('../../../assets/icons/volume.svg');
+                        }
+                        &.off{
+                            background-image: url('../../../assets/icons/volume_off.svg');
+                        }
                     }
-                }
-                &.menu {
-                    background-image: url('../../../assets/icons/list.svg');
-                }
-                &.full_screen {
-                    background-image: url('../../../assets/icons/full-screen.svg');
+                    &.menu {
+                        background-image: url('../../../assets/icons/list.svg');
+                    }
+                    &.full_screen {
+                        background-image: url('../../../assets/icons/full-screen.svg');
+                    }
                 }
             }
         }
@@ -68,12 +75,14 @@
 @media only screen and (max-width: 1600px) {
     .content {
         width: 875px;
-        height: 60px;
-        .block {
-            &.action_buttons {
-                .icon {
-                    width: 30px;
-                    height: 30px;
+        height: 70px;
+        .data {
+            .block {
+                &.action_buttons {
+                    .icon {
+                        width: 30px;
+                        height: 30px;
+                    }
                 }
             }
         }
@@ -84,7 +93,17 @@
 
 @media only screen and (max-width: 1400px) {
     .content {
-        width: 900px;
+        width: 735px;
+        .data {    
+            .block {
+                &.action_buttons {
+                    .icon {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+            }
+        }
     }
     
 }

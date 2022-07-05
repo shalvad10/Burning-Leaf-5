@@ -10,7 +10,7 @@ export default class Reel {
     public borderAnimation  : any;
 
   constructor(reelContainer: any, index: number, initialSymbols: any) {
-    this.reelContainer = reelContainer;
+    this.reelContainer = reelContainer.getElementsByClassName('cont')[0];
     this.index = index;
 
     this.symbolContainer = document.createElement("div");

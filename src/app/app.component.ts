@@ -10,16 +10,16 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent extends ComponentBase {
-  title = 'slot-game';
+  
   public app!: AppMain;
 
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-    //   console.warn(data);
-    //   this.data.connection.sessionKey = data.sessionId;
-    // });
+    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+      console.warn(data);
+      this.data.connection.sessionKey = data.sessionId;
+    });
     this.app = new AppMain();
 
     // console.log(this.app.dataObject);
@@ -83,7 +83,6 @@ export class AppComponent extends ComponentBase {
   }
 
   handleAction (e: any) {
-    console.error(e);
     if (e.action == 'selectBet') {
       if (this.data.user.holdBalance == true) {
         this.app.doAction({action: 'addToBalance',data:{}});

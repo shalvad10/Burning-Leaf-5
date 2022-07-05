@@ -5,15 +5,21 @@
     .reel {
         width: 200px;
         height: 100%;
-        border: 15px solid transparent;
-        border-image: url('../../../assets/borders/middle.svg') 25 round;
-        border-radius: 15px;
-        background-color: #3E0006;
+        border-radius: 10px;
+        background: linear-gradient(#fe8900 0%, #df2314 50%, #fe8900 100%);
         display: flex;
         justify-content: center;
-        align-items: flex-end;
-        overflow: hidden;
-        padding: 10px 0px;
+        align-items: center;
+        .cont {
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            border-radius: 10px;
+            background-color: #3E0006;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+        }
         &:not(:first-child) {
             margin-left: 10px;
         }
