@@ -6,8 +6,6 @@
     border: 3px solid #AAB1B0;
     background: #2C2022;
     border-radius: 10px;
-    width: 75px;
-    height: 75px;
     cursor: pointer;
     &.selected {
         border: 3px solid #A90006;
@@ -38,99 +36,4 @@
             text-align: left;
         }
     }
-}
-
-@media only screen and (max-width: 1600px) {
-    .cont {
-        width: 65px;
-        height: 65px;
-        .label {
-            &.currency {
-                font-size: 13px;
-            }
-            &.value {
-                font-size: 23px;
-            }
-            &.bet {
-                font-size: 13px;
-            }
-        }
-    }  
-}
-
-@media only screen and (max-width: 1400px) {
-    .cont {
-        width: 45px;
-        height: 45px;
-        .label {
-            &.currency {
-                font-size: 9px;
-            }
-            &.value {
-                font-size: 16px;
-            }
-            &.bet {
-                font-size: 9px;
-            }
-        }
-    }  
-}
-
-@media only screen and (max-width: 920px) {
-    .cont {
-        width: 35px;
-        height: 35px;
-        .label {
-            &.currency {
-                font-size: 8px;
-            }
-            &.value {
-                font-size: 11px;
-            }
-            &.bet {
-                font-size: 8px;
-            }
-        }
-    }  
-}
-
-@media only screen and (max-width: 500px) {
-    .cont {
-        width: 25px;
-        height: 25px;
-        border: 2px solid #AAB1B0;
-        &.selected {
-            border: 2px solid #A90006;
-        }
-        .label {
-            &.currency {
-                font-size: 4px;
-            }
-            &.value {
-                font-size: 7px;
-            }
-            &.bet {
-                font-size: 4px;
-            }
-        }
-    }    
-}
-
-@media only screen and (max-width: 420px) {
-    .cont {
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
-        .label {
-            &.currency {
-                font-size: 3px;
-            }
-            &.value {
-                font-size: 6px;
-            }
-            &.bet {
-                font-size: 3px;
-            }
-        }
-    }    
 }

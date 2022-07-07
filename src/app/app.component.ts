@@ -16,7 +16,7 @@ export class AppComponent extends ComponentBase {
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'demo', password: 'demo'}).subscribe((data: any) => {
       console.warn(data);
       this.data.connection.sessionKey = data.sessionId;
     });

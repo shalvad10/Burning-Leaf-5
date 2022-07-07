@@ -1,40 +1,46 @@
 <div class="content" [hidden]="loading == true">
-  <div class="container">
-    <div class="header">
-      <div class="title"></div>
+
+  <div class="container wrapper">
+    <!-- title -->
+    <div class="title">
+      <img src="assets/headline.png">
     </div>
+
+    <!-- main content -->
     <div class="cont">
-      <div class="side left">
-        <app-lines [hasButtons]="false"></app-lines>
+      <app-lines [hasButtons]="false"></app-lines>
+      <app-game-container [data]="data" [gameData]="data.game" [lines]="data.winByLines" (onAction)="handleAction($event)"
+        #gameContainer></app-game-container>
+      <app-lines [hasButtons]="true" [data]="data" [nominales]="data.game.nominales"
+        [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)"
+        (onAction)="handleAction($event)"></app-lines>
+
+      <div *ngIf="!winninSymbols" class="informationText">
+        <span> {{ informationText }}</span>
       </div>
-      <div class="middle">
-        <div class="game">
-          <app-game-container class="container" [data]="data" [gameData]="data.game" [lines]="data.winByLines" (onAction)="handleAction($event)" #gameContainer></app-game-container>
+      <div *ngIf="winninSymbols" class="informationText">
+        <div class="line">
+          <span> Line {{ winninSymbols.lineId }}</span>
         </div>
-        <div *ngIf="!winninSymbols" class="informationText">
-          <span> {{ informationText }}</span>
+        <div class="symbols">
+          <div *ngFor="let symbol of winninSymbols.symbols" class="symbol"
+            [ngStyle]="{'background-image': 'url(./assets/symbols/'+symbol+'.svg)'}"></div>
         </div>
-        <div *ngIf="winninSymbols" class="informationText">
-          <div class="line">
-            <span> Line {{ winninSymbols.lineId }}</span>
-          </div>
-          <div class="symbols">
-            <div *ngFor="let symbol of winninSymbols.symbols" class="symbol" [ngStyle]="{'background-image': 'url(./assets/symbols/'+symbol+'.svg)'}"></div>
-          </div>
-          <div class="ammount">
-            <span> {{ winninSymbols.wonAmmount }} {{ data.user.currency }}</span>
-          </div>
-        </div>
-        <div class="bottom-panel">
-            <app-bonus-button class="bonus_button" [freeSpins]="data.game.freeSpins.count" (onAction)="handleAction($event)"></app-bonus-button>
-            <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
+        <div class="ammount">
+          <span> {{ winninSymbols.wonAmmount }} {{ data.user.currency }}</span>
         </div>
       </div>
-      <div class="side right">
-        <app-lines [hasButtons]="true" [data]="data" [nominales]="data.game.nominales" [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)" (onAction)="handleAction($event)"></app-lines>
-      </div>
+    </div>
+
+    <div class="bottom-panel">
+      <app-bonus-button class="bonus_button" [freeSpins]="data.game.freeSpins.count" (onAction)="handleAction($event)">
+      </app-bonus-button>
+      <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
     </div>
   </div>
 </div>
-<app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)"></app-modal>
+
+
+<app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)">
+</app-modal>
 <app-loader class="loader" *ngIf="loading == true"></app-loader>
