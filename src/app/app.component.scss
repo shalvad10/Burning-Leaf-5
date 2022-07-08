@@ -21,9 +21,6 @@ app-game-container {
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
-    @media screen and (min-width: 768px) {
-        padding: 30px 50px;
-    }
     .wrapper {
         display: grid;
         grid-template-rows: minmax(0, 60px) minmax(0, 300px) minmax(0, 100px);
@@ -93,7 +90,7 @@ app-game-container {
         gap: 10px 0;
         @media screen and (min-width: 768px) {
             gap: 0 10px;
-            grid-template-columns: minmax(0, min-content) minmax(0, 1fr);
+            grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
         }
     }
 }

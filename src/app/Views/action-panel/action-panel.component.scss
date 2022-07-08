@@ -1,14 +1,5 @@
-.content {
-    border-radius: 10px;
-    // background-color: #b80011;
-    border: 5px solid #b80011;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @media screen and (min-width: 768px) {
-        height: 100px;
-    }
     .data {
+        border: 5px solid #b80011;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -16,71 +7,94 @@
         flex-direction: column;
         border-radius: 5px;
         width: 100%;
+
         @media screen and (min-width: 768px) {
+            display: grid;
+            grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
             border-radius: 10px;
-            width: calc(100% - 10px);
-            height: calc(100% - 10px);
             flex-direction: row;
+            height: 100px;
+            box-sizing: border-box;
         }
+
         .bets {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             width: 100%;
+
             .balance {
                 order: 1;
+                @media screen and (min-width: 768px) {
+                    order: initial;
+                }
             }
+
             .last_win {
                 order: 2;
+                @media screen and (min-width: 768px) {
+                    order: initial;
+                }
             }
+
             .nominales {
                 order: 3;
                 grid-column: 1 / span 2;
                 display: grid;
                 grid-template-columns: repeat(5, minmax(0, 1fr));
                 padding-inline: 15px;
+
                 @media screen and (min-width: 768px) {
-                    display: flex;
+                    order: initial;
+                    grid-column: initial;
+                    display: grid;
+                    grid-template-columns: repeat(5, minmax(0, 1fr));
                 }
             }
-            & > div {
+
+            &>div {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 margin-inline: 0;
             }
+
             @media screen and (min-width: 768px) {
                 width: initial;
-                display: flex;
+                display: grid;
                 align-items: center;
-                & > div {
-                    order: initial;
-                }
+                grid-template-columns: minmax(0 ,160px) auto minmax(0 ,160px);
             }
         }
+
         .block {
-            margin: 15px;
             &.balance {
                 flex: 2;
             }
+
             &.value {
                 flex: 1;
             }
+
             &.bet {
                 flex: 1;
             }
+
             &.nominales {
                 flex: 3;
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
                 gap: 0 10px;
+
                 @media screen and (min-width: 768px) {
                     gap: 15px;
                 }
             }
+
             &.last_win {
                 flex: 1;
             }
+
             &.action_buttons {
                 flex: 2;
                 display: flex;
@@ -88,9 +102,11 @@
                 align-items: center;
                 width: 100%;
                 margin-inline: 0;
+
                 @media screen and (min-width: 768px) {
                     width: initial;
                 }
+
                 .icon {
                     cursor: pointer;
                     margin: 5px;
@@ -99,20 +115,25 @@
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: contain;
+
                     &.info {
                         background-image: url('../../../assets/icons/info.svg');
                     }
+
                     &.volume {
-                        &.on{
+                        &.on {
                             background-image: url('../../../assets/icons/volume.svg');
                         }
-                        &.off{
+
+                        &.off {
                             background-image: url('../../../assets/icons/volume_off.svg');
                         }
                     }
+
                     &.menu {
                         background-image: url('../../../assets/icons/list.svg');
                     }
+
                     &.full_screen {
                         background-image: url('../../../assets/icons/full-screen.svg');
                     }
@@ -120,4 +141,3 @@
             }
         }
     }
-}
