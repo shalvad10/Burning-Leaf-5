@@ -38,9 +38,9 @@ export class GameComponent extends ComponentBase implements OnInit {
   public config = {
     inverted: true, // true: reels spin from top to bottom; false: reels spin from bottom to top
     onSpinStart: (symbols: any) => {
+      this.emitAction('winText', undefined);
       this.animatingBorders = [];
       this.gameData.cancelAnimations = false;
-      this.emitAction('winText', undefined);
       this.spinStarted = true;
       this.winningLines = [];
       this.winningSpecials = [];
@@ -138,10 +138,9 @@ export class GameComponent extends ComponentBase implements OnInit {
           } else {
             if (this.data.modal.savedModal !== '') {
               setTimeout(() => {
-                console.warn('AQEDAN 2');
                 this.data.modal.currentModal = this.data.modal.savedModal;
                 this.data.modal.savedModal = '';
-              }, 500);
+              }, 3000);
             }
             setTimeout(() => {
               this.emitAction('spinning', false);
@@ -172,10 +171,9 @@ export class GameComponent extends ComponentBase implements OnInit {
         } else {
           if (this.data.modal.savedModal !== '') {
             setTimeout(() => {
-              console.warn('AQEDAN 3');
               this.data.modal.currentModal = this.data.modal.savedModal;
               this.data.modal.savedModal = '';
-            }, 500);
+            }, 3000);
           }
           setTimeout(() => {
             this.emitAction('winText', undefined);
@@ -229,9 +227,8 @@ export class GameComponent extends ComponentBase implements OnInit {
                         if (this.spinning == false) {
                           this.slot?.animateBorder(i, winningLines[j][0]);
                         }
-                        
                         this.animatingBorders.push(i);
-                      }, 700);
+                      }, 500);
                     } else {
                       allowBorder = false;
                     }
@@ -257,14 +254,12 @@ export class GameComponent extends ComponentBase implements OnInit {
               }, 1500);
           } else if (this.data.modal.savedModal !== '') {
             setTimeout(() => {
-              console.warn('AQEDAN 1');
               this.data.modal.currentModal = this.data.modal.savedModal;
               this.data.modal.savedModal = '';
             }, 3000);
           } else {
             setTimeout(() => {
               this.checkWin(this.winningLines);
-              // this.emitAction('spinning', false);
             }, 1000);
           }
         }
@@ -286,6 +281,8 @@ export class GameComponent extends ComponentBase implements OnInit {
               this.emitAction('winText', data);
               if (this.spinning == false) {
                 this.slot?.animateBorder(i, l);
+              } else {
+                this.emitAction('spinning', false);
               }
               this.animatingBorders.push(i);
             }, 700);
@@ -295,7 +292,11 @@ export class GameComponent extends ComponentBase implements OnInit {
     }
     if (index === this.winningSpecials.length - 1) {
       setTimeout(() => {
-        this.changeSymbols();
+        if (SharedMethods.matricCheck(this.gameData.initialMatrix , this.gameData.changedMatrix) == false) {
+          this.changeSymbols();
+        } else {
+          this.showSpecial(data,index);
+        }
       }, 1000);
     }
   }
@@ -314,9 +315,9 @@ export class GameComponent extends ComponentBase implements OnInit {
   }
 
   onStop() {
-    setTimeout(() => {
-      this.emitAction('spinning', false);
-    }, 500);
+    // setTimeout(() => {
+    //   this.emitAction('spinning', false);
+    // }, 500);
     if (this.spinning == true) {
       this.slot?.stop(this.gameData.initialMatrix);
     }

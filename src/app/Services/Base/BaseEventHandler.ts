@@ -10,32 +10,27 @@ export default abstract class BaseEventHandler {
       case ConnEnums.events.BalanceUpdated        : { this.updateBalance(data);       break; }
       case ConnEnums.events.FreeSpinTypes         : { this.freeSpinTypes(data);       break; }
       case ConnEnums.events.BonusLeafLines        : { this.bonusleaflines(data);      break; }
-      // case ConnEnums.events.RejoinTables          : { this.setRejoinTables(data);     break; }
-      // case ConnEnums.events.OnlinePlayersEvent    : { this.setLobbyInfo(data);        break; }
-      // case ConnEnums.events.PlayerSettings        : { this.setPlayerSettings(data);   break; }
-      // case ConnEnums.events.TournamentListEvent   : { this.setTournaments(data);      break; }
-      // case ConnEnums.events.TournamentUpdate      : { this.updateTournaments(data);   break; }
-      // case ConnEnums.events.OpenTournament        : { this.openTournament(data);      break; }
-      // case ConnEnums.events.PlayerHistoryMatchList: { this.onHistoryList(data);       break; }
-      // case ConnEnums.events.MatchesEnableState    : { this.changeMatchesState(data);  break; }
-      // case ConnEnums.events.MyTournaments         : { this.setMyTournaments(data);    break; }
     }
   }
 
   public bonusleaflines(data: any): void {
     this.data.game.bonusLeafLines = data.Array;
-    console.warn(this.data.game.bonusLeafLines);
   }
 
   public remainingFreespins(data: any): void {
-    this.data.game.freeSpins.isActive = data.FreespinsCount > 0;
+    this.data.game.freeSpins.isActive = data.FreespinsCount >= 0;
     this.data.game.freeSpins.count = data.FreespinsCount;
+    this.data.game.freeSpins.maxCount = this.data.game.freeSpins.maxCount == -1 ? data.FreespinsCount : this.data.game.freeSpins.maxCount;
     this.data.game.freeSpins.bet = data.BetAmmount / this.data.ammountDivide;
     this.data.game.freeSpins.typeID = data.FrespinTypeID;
     
+    this.data.game.autoSpin.inProgress      = data.FreespinsCount >= 0;
+    this.data.game.autoSpin.infiniteLoop    = false;
+    this.data.game.autoSpin.spinsRemaining  = data.FreespinsCount;
+    
     setTimeout(() => {
       this.data.game.freeSpins.won = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : 0;
-    }, 2000);
+    }, 3000);
 
     if (this.data.game.freeSpins.showPopup == true || data.FreespinsCount == 0) {
       let freesPinType = this.data.freespinTypes.filter( (frsp:any) => frsp.typeID ==data.FrespinTypeID)[0];
@@ -79,10 +74,9 @@ export default abstract class BaseEventHandler {
   }
 
   public updateBalance(data: any): void {
-    if (this.data.user.holdBalance == true) {
-      this.data.user.balanceTohold = ((data.Balance / this.data.ammountDivide) - this.data.user.balance).toFixed(2);
+    if (this.data.game.freeSpins.isActive && this.data.game.freeSpins.maxCount !== this.data.game.freeSpins.count) {
+      this.data.user.balanceTohold = (data.Balance / this.data.ammountDivide).toFixed(2);
     } else {
-      this.data.user.oldBalance = this.data.user.balance;
       this.data.user.balance = (data.Balance / this.data.ammountDivide).toFixed(2);
     }
   }

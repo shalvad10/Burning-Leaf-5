@@ -35,21 +35,15 @@ export default abstract class BaseResponseHandler {
 
   public handleResponses(code: number, data: any): void {
     switch (code) {
-      // case ConnEnums.operations.CreateSession       : { this.createSession(data);        break; }
       case ConnEnums.operations.Login               : { this.login(data);         break; }
       case ConnEnums.operations.Spin                : { this.spin(data);          break; }
       case ConnEnums.operations.BuyFreeSpin         : { this.buyFreeSpin(data);   break; }
-      // case ConnEnums.operations.GetRakebackState    : { this.getRakebackState(data);     break; }
-      // case ConnEnums.operations.EncashRakebackPoints: { this.rakebackExchange(data);     break; }
-      // case ConnEnums.operations.TouranamentInfo     : { this.tournamentInfo(data);       break; }
-      // case ConnEnums.operations.TournamentRegister  : { this.onTournamentRegister(data); break; }
     }
   }
 
   public login(data: any): void {
     console.warn('LOGIN', data);
     this.data.user.userName   = data.PlayerName;
-    this.data.user.oldBalance = 0;
     this.data.user.balance    = data.Balance / this.data.ammountDivide;
     setTimeout(() => {
       this.data.loading         = false;
@@ -63,12 +57,14 @@ export default abstract class BaseResponseHandler {
     this.data.game.specialSymbols   = data.Scatters;
     this.data.game.lines            = data.Lines;
     setTimeout(() => {
-      this.data.game.wonAmmount   = data.WonAmount > 0 ? 0 : this.data.game.wonAmmount;
       setTimeout(() => {
         if (data.WonAmount > 0) {
           Sounds.instance.play('win');
+          if(this.data.game.freeSpins.isActive == false) {
+            this.data.game.freeSpins.won = 0;
+            this.data.game.wonAmmount = data.WonAmount / this.data.ammountDivide;
+          }
         }
-        this.data.game.wonAmmount = data.WonAmount > 0 ? data.WonAmount / this.data.ammountDivide : this.data.game.wonAmmount;
       }, 1);
     }, 3000);
   }

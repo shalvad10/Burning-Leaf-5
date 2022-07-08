@@ -16,7 +16,8 @@
         </div>
         <div *ngIf="winninSymbols" class="informationText">
           <div class="line">
-            <span> Line {{ winninSymbols.lineId }}</span>
+            <span *ngIf="winninSymbols.lineId > 0"> Line {{ winninSymbols.lineId }}</span>
+            <span *ngIf="winninSymbols.lineId == 0"> Scatter </span>
           </div>
           <div class="symbols">
             <div *ngFor="let symbol of winninSymbols.symbols" class="symbol" [ngStyle]="{'background-image': 'url(./assets/symbols/'+symbol+'.svg)'}"></div>

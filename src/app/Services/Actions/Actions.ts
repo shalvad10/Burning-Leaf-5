@@ -7,8 +7,6 @@ export default class Actions {
 
   public onAction(type: string, data: any) {
 
-    // console.warn(type,data);
-
     switch (type) {
       case 'spin'               : { this.spin();                break; }
       case 'selectNominale'     : { this.selectNominale(data);  break; }
@@ -17,7 +15,6 @@ export default class Actions {
       case 'toggleModal'        : { this.toggleModal(data);     break; }
       case 'closeGame'          : { this.closeGame();           break; }
       case 'spinning'           : { this.spinning(data);        break; }
-      case 'addToBalance'       : { this.addToBalance();        break; }
       case 'autoSpin'           : { this.autoSpin(data);        break; }
       case 'stopAutospin'       : { this.stopAutospin();        break; }
       case 'winText'            : { this.setWinText(data);      break; }
@@ -31,7 +28,10 @@ export default class Actions {
   }
 
   public finishFreespins():void  {
-    this.data.game.freeSpins.count = -1;
+    this.data.game.freeSpins.count    = -1;
+    this.data.game.freeSpins.maxCount = -1;
+    this.data.game.freeSpins.isActive = false;
+    this.data.user.balance            = this.data.user.balanceTohold;
   }
 
   public setWinText(data: any) {
@@ -52,12 +52,6 @@ export default class Actions {
 
   public spinning(data: boolean):void {
     this.data.game.spinning = data;
-  }
-
-  public addToBalance(): void {
-    this.data.user.balance = ((Number.parseFloat(this.data.user.balance) + Number.parseFloat(this.data.user.balanceTohold)).toFixed(2)).toString();
-    this.data.user.holdBalance = false;
-    this.data.user.balanceTohold = 0;
   }
 
   public spin(): void {
@@ -85,10 +79,10 @@ export default class Actions {
   }
 
   public buyFreeSpin(data: any): void {
-    console.warn(data);
     this.data.game.selectedNominale = data.nominale;
     this.data.game.selectedBet = data.bet;
     this.data.game.selectedMultiplierIndex = data.multiplier
+    this.data.game.freeSpins.won = 0;
     this.sender.buyFreeSpin(data.freeSpinType, data.bet * this.data.ammountDivide);
   }
 

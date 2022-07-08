@@ -16,37 +16,21 @@ export class AppComponent extends ComponentBase {
 
   constructor (ref: ChangeDetectorRef,private http: HttpClient) {
     super(ref);
-    this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
-      console.warn(data);
-      this.data.connection.sessionKey = data.sessionId;
-    });
+    // this.http.post(`${environment.apiURL}/Public/login`, { playerName: 'test', password: '123'}).subscribe((data: any) => {
+    //   console.warn(data);
+    //   this.data.connection.sessionKey = data.sessionId;
+    // });
     this.app = new AppMain();
 
-    // console.log(this.app.dataObject);
-    // this.app.dataObject.modal.currentModal = '';
-    setTimeout( () => {
-      // console.error(this.app.dataObject);
-      // this.app.dataObject.modal.currentModal = 'avatars';
-    }, 2000);
     document.addEventListener('keypress', (e) => {
       if (this.app.dataObject.game.gameLoaded == true) {
         if ( e.keyCode == 32) {
-          if (this.data.user.holdBalance == true) {
-            this.app.doAction({action: 'addToBalance',data:{}});
-          } else if (this.data.game.spinning == false) {
+          if (this.data.game.spinning == false) {
             this.onSpin();
-            // this.gameContainer.game.onStop();
             this.data.game.spinning = true;
           } else {
             this.gameContainer.game.onStop();
             this.data.game.stopBTNCount++;
-            if (this.data.game.stopBTNCount == 2) {
-              // if (this.data.game.showWin == true) {
-              //   console.error('HERE')
-              //   this.data.game.showWin = false;
-              //   this.data.game.cancelAnimations = true;
-              // }
-            }
           }
         }
       }
@@ -84,9 +68,7 @@ export class AppComponent extends ComponentBase {
 
   handleAction (e: any) {
     if (e.action == 'selectBet') {
-      if (this.data.user.holdBalance == true) {
-        this.app.doAction({action: 'addToBalance',data:{}});
-      } else if (this.data.game.spinning == false) {
+      if (this.data.game.spinning == false) {
           if (this.data.game.autoSpin.inProgress == true) {
             this.app.doAction({action: 'autoSpin', data: {inProgress: false, spinsCount: null}});
           } else {
