@@ -13,28 +13,37 @@ export class LabelValueComponent implements OnInit {
   public maxAmmount: any = 0;
   public step: number = 0.01;
   public int: any;
+  public _isBonus!: boolean;
 
   @Input() hasAnimation!: boolean;
   @Input() set spinning(val:boolean) {
-    console.warn('AAAAAAAAAAAQQQQQQQQQQ', val)
     if (val) {
-      clearInterval(this.int);
-      this.ammount = this.maxAmmount;
+      this.stopAnimation();
     }
   }
-  @Input() isBonus!: boolean;
+  @Input() set clearAnimation(val:boolean) {
+    if (val == false) {
+      this.stopAnimation();
+    }
+  }
+  @Input() set isBonus(val: any) {
+    this._isBonus = val;
+    if(val) {
+      this.step = 0.05;
+    }
+  }
   @Input() label!: string;
   @Input() set value(val: any) {
     this.maxAmmount = 0;
     if (this.hasAnimation) {
-      if(this.isBonus == false) { this.ammount = 0.00; }
+      if(this._isBonus == false) { this.ammount = 0.00; }
       setTimeout(() => {
         if (val < this.ammount) this.ammount = 0; 
         this.maxAmmount = Number.parseFloat(val);
         this.increaseValue(Number.parseFloat(val));
       }, 10);
     } else {
-      this.ammount = Number.parseFloat(val);
+      this.ammount = val;
     }
   }
 
@@ -43,9 +52,14 @@ export class LabelValueComponent implements OnInit {
       if (this.ammount < maxValue) {
         this.ammount = ((this.ammount * 100) + (this.step * 100)) / 100;
       } else {
-        clearInterval(this.int);
+        this.stopAnimation();
       }
-    },5);
+    },1);
+  }
+
+  stopAnimation(): void {
+    clearInterval(this.int);
+    this.ammount = this.maxAmmount;
   }
 
   ngOnInit(): void { }

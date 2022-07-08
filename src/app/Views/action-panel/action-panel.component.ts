@@ -80,7 +80,7 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
   }
 
   public wonAmmount() {
-    return this.data.game.freeSpins.isActive ? this.data.game.freeSpins.won : this.data.game.wonAmmount;
+    return this.data.game.freeSpins.won > 0 ? this.data.game.freeSpins.won : this.data.game.wonAmmount;
   }
 
   public get balance(): string {

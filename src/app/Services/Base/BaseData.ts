@@ -28,8 +28,11 @@ export class BaseData {
       lines: [],
       winningInfo: undefined,
       freeSpins: {
+        isActive: false,
         count: -1,
+        maxCount: -1,
         bet: 0,
+        won: 0,
         typeID: 0,
         showPopup: true
       },

@@ -15,6 +15,7 @@ export default class Reel {
 
     this.symbolContainer = document.createElement("div");
     this.symbolContainer.classList.add("icons");
+    this.symbolContainer.style.cssText = `width: 100%;`;
     this.reelContainer.appendChild(this.symbolContainer);
 
     this.animation = this.symbolContainer.animate(
