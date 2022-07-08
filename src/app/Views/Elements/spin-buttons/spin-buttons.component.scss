@@ -1,0 +1,96 @@
+.block {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .nominales-selector {
+        position: absolute;
+        left: 50px;
+        transition: .3s all ease-in-out;
+
+        &.open {
+            left: -310px;
+        }
+    }
+
+    .autospin {
+        cursor: pointer;
+        width: 95px;
+        height: 125px;
+        background-image: url('../../../../assets/autospin.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-bottom: -15px;
+
+        &.nominales_selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column-reverse;
+            transform: rotate(180deg);
+            margin-top: -15px;
+            background-image: url('../../../../assets/nominale_selector.svg');
+
+            .icon {
+                width: 40px;
+                height: 40px;
+                background-image: url('../../../../assets/nominal_settings.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+
+            .value {
+                transform: rotate(-180deg);
+                font-weight: 900;
+                font-size: 27px;
+                color: #FFD900;
+                text-align: left;
+            }
+        }
+    }
+
+    .spin {
+        cursor: pointer;
+        width: 175px;
+        height: 205px;
+        background-image: url('../../../../assets/spin.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &.animate {
+            transform: scale(1.1);
+        }
+
+        &.stop {
+            background-image: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ccc;
+            border-radius: 100%;
+            width: 175px;
+            height: 175px;
+
+            .spinsCounter {
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(#DDDDDD, #7B7B7B);
+                font-size: 17px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.infiniteLoop {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}

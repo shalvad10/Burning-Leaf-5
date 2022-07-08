@@ -3,7 +3,7 @@ import { AppEnums } from './../Enums/AppEnums';
 export class BaseData {
   public data: any = {
     connection: {
-      connectionURL: 'wss://test-bura.europebet.com:12010',
+      connectionURL: '',
       connected: false,
       partnerID: 1,
       accountID: 0,

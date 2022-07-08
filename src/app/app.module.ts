@@ -23,6 +23,7 @@ import { BonusWinComponent } from './Modal/bonus-win/bonus-win.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AutospinSelectorComponent } from './Views/Elements/autospin-selector/autospin-selector.component';
 import { GameInformationComponent } from './Modal/game-information/game-information.component';
+import { SpinButtonsComponent } from './Views/Elements/spin-buttons/spin-buttons.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { GameInformationComponent } from './Modal/game-information/game-informat
     BonusWinComponent,
     LoaderComponent,
     AutospinSelectorComponent,
-    GameInformationComponent
+    GameInformationComponent,
+    SpinButtonsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,18 @@
             </div>
             {{ line }}
         </div>
-        <div class="buttons" isSelector=true *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}">
+        <app-spin-buttons
+            class="buttons"
+            *ngIf="hasButtons"
+            [data]="data"
+            [nominales]="data.game.nominales"
+            [selectedNominale]="data.game.selectedNominale"
+            (spin)="onSpin()"
+            (autoSpin)="onAutoSpin()"
+            (onAction)="bubbleAction($event)"
+            [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}"
+        ></app-spin-buttons>
+        <!-- <div class="buttons" isSelector=true *ngIf="hasButtons"  [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}">
             <div class="block">
                 <app-nominales-selector isNomminaleSelector=true class="nominales-selector" [ngClass]="{'open': showNMSelector}" [open]="showNMSelector" [selectedNominale]="selectedNominale" [nominales]="nominales" (nominaleChanged)="nominaleChanged($event)"></app-nominales-selector>
                 <app-autospin-selector isAutospinSelector=true class="nominales-selector" [ngClass]="{'open': showAutospinSelector}" [open]="showAutospinSelector" [selectedCounter]="selectedNominale" [spinCounters]="autoSpinCount" (nominaleChanged)="autoSpinSelected($event)"></app-autospin-selector>
@@ -22,6 +33,6 @@
                     <div class="value"> {{ nominale }} </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
