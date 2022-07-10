@@ -44,6 +44,24 @@
     <div class="bottom-panel">
       <app-bonus-button class="bonus_button" [freeSpins]="data.game.freeSpins.count" (onAction)="handleAction($event)">
       </app-bonus-button>
+      <app-label-value
+        *ngIf="isMobile.any"
+        [isMobile]="isMobile.any"
+        label="balance"
+        [spinning]="false"
+        [hasAnimation]="false"
+        [value]="balance"
+      ></app-label-value>
+      <app-label-value
+        *ngIf="isMobile.any"
+        [isMobile]="isMobile.any"
+        [spinning]="data.game.spinning"
+        [clearAnimation]="data.game.freeSpins.isActive"
+        [label]="isBonus ? 'win' : 'last win'"
+        [hasAnimation]="true"
+        [isBonus]="isBonus"
+        [value]="wonAmmount()"
+      ></app-label-value>
       <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
     </div>
   </div>

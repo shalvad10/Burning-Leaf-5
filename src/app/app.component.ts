@@ -3,6 +3,7 @@ import { ComponentBase } from './Base/ComponentBase';
 import { AppMain } from './Services/AppMain';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import * as isMobile from '../app/Services/Libs/isMobile.min.js'
 
 @Component({
   selector: 'app-root',
@@ -50,6 +51,22 @@ export class AppComponent extends ComponentBase {
 
   onAutoSpin(ev: any) {
     this.gameContainer.game.onAutoSpin(ev);
+  }
+
+  public wonAmmount() {
+    return this.app.dataObject.game.freeSpins.won > 0 ? this.app.dataObject.game.freeSpins.won : this.app.dataObject.game.wonAmmount;
+  }
+
+  public get isBonus(): boolean {
+    return this.app.dataObject.game.freeSpins.count >= 0;
+  }
+  
+  public get balance(): string {
+    return this.app.dataObject.user.balance;
+  }
+
+  public get isMobile(): any {
+    return isMobile;
   }
 
   public get loading(): boolean {

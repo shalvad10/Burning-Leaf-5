@@ -16,6 +16,7 @@ export class LabelValueComponent implements OnInit {
   public _isBonus!: boolean;
 
   @Input() hasAnimation!: boolean;
+  @Input() isMobile: boolean = false;
   @Input() set spinning(val:boolean) {
     if (val) {
       this.stopAnimation();
