@@ -14,18 +14,6 @@
       <app-lines [hasButtons]="true" [data]="data" [nominales]="data.game.nominales"
         [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)"
         (onAction)="handleAction($event)"></app-lines>
-
-      <div *ngIf="!winninSymbols" class="informationText">
-        <span> {{ informationText }}</span>
-      </div>
-      <div *ngIf="winninSymbols" class="informationText">
-        <div class="line">
-          <span> Line {{ winninSymbols.lineId }}</span>
-        </div>
-        <div class="symbols">
-          <div *ngFor="let symbol of winninSymbols.symbols" class="symbol"
-            [ngStyle]="{'background-image': 'url(./assets/symbols/'+symbol+'.svg)'}"></div>
-        </div>
         <div *ngIf="winninSymbols" class="informationText">
           <div class="line">
             <span *ngIf="winninSymbols.lineId > 0"> Line {{ winninSymbols.lineId }}</span>
@@ -38,7 +26,6 @@
             <span> {{ winninSymbols.wonAmmount }} {{ data.user.currency }}</span>
           </div>
         </div>
-      </div>
     </div>
 
     <div class="bottom-panel">
@@ -59,6 +46,18 @@
         [value]="wonAmmount()"
       ></app-label-value>
       <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
+      <app-spin-buttons
+          class="buttons"
+          *ngIf="isMobile.any"
+          [data]="data"
+          [isMobile]="isMobile.any"
+          [nominales]="data.game.nominales"
+          [selectedNominale]="data.game.selectedNominale"
+          (spin)="onSpin()"
+          (autoSpin)="onAutoSpin($event)"
+          (onAction)="bubbleAction($event)"
+          [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}"
+      ></app-spin-buttons>
     </div>
   </div>
 </div>

@@ -23,6 +23,7 @@ export class SpinButtonsComponent extends ComponentBase implements OnInit {
   @Output() autoSpin = new EventEmitter<any>();
 
   @Input() nominales?: number[];
+  @Input() isMobile: boolean = false;
   @Input() selectedNominale!: number;
   @Input() data: any;
 
@@ -85,8 +86,8 @@ export class SpinButtonsComponent extends ComponentBase implements OnInit {
 
   toggleAutospinSelector(): void {
     if (this.data.game.spinning == false) {
-      this.showNMSelector = false;
       this.showAutospinSelector = !this.showAutospinSelector;
+      this.showNMSelector = false;
     }
   }
 
