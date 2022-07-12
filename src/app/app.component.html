@@ -67,7 +67,5 @@
   </div>
 </div>
 
-
-<app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)">
-</app-modal>
-<app-loader class="loader" *ngIf="loading == true"></app-loader>
+<app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)"></app-modal>
+<app-loader class="loader" *ngIf="loading"></app-loader>

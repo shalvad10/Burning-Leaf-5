@@ -6,15 +6,18 @@
         background-color: #3E0006;
         flex-direction: column;
         border-radius: 5px;
-        width: 100%;
-
-        @media screen and (min-width: 768px) {
+        width: initial;
+        
+        @media screen and (min-width: 992px) {
+            width: 100%;
+            padding-inline: 15px;
             display: grid;
-            grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
+            grid-template-columns: auto minmax(0, 4fr) minmax(0, 1fr) auto ;
             border-radius: 10px;
             flex-direction: row;
             height: 100px;
             box-sizing: border-box;
+            gap: 0 10px;
         }
 
         .bets {
@@ -24,14 +27,14 @@
 
             .balance {
                 order: 1;
-                @media screen and (min-width: 768px) {
+                @media screen and (min-width: 992px) {
                     order: initial;
                 }
             }
 
             .last_win {
                 order: 2;
-                @media screen and (min-width: 768px) {
+                @media screen and (min-width: 992px) {
                     order: initial;
                 }
             }
@@ -43,7 +46,7 @@
                 grid-template-columns: repeat(5, minmax(0, 1fr));
                 padding-inline: 15px;
 
-                @media screen and (min-width: 768px) {
+                @media screen and (min-width: 992px) {
                     order: initial;
                     grid-column: initial;
                     display: grid;
@@ -58,7 +61,7 @@
                 margin-inline: 0;
             }
 
-            @media screen and (min-width: 768px) {
+            @media screen and (min-width: 992px) {
                 width: initial;
                 display: grid;
                 align-items: center;
@@ -86,8 +89,9 @@
                 align-items: center;
                 gap: 0 10px;
 
-                @media screen and (min-width: 768px) {
-                    gap: 15px;
+                @media screen and (min-width: 992px) {
+                    display: grid;
+                    grid-template-columns: repeat(5, minmax(0, 1fr));
                 }
             }
 
@@ -103,7 +107,7 @@
                 width: 100%;
                 margin-inline: 0;
 
-                @media screen and (min-width: 768px) {
+                @media screen and (min-width: 992px) {
                     width: initial;
                 }
 
