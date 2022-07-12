@@ -12,7 +12,7 @@ app-game-container {
 }
 
 .content {
-    padding: 30px 0;
+    padding: 20px 0;
     box-sizing: border-box;
     height: 100vh;
     min-height: 680px;
@@ -20,14 +20,15 @@ app-game-container {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
+    overflow: hidden;  
+    
     .wrapper {
         display: grid;
-        grid-template-rows: minmax(0, 60px) minmax(0, 300px) minmax(0, 100px);
+        grid-template-rows: minmax(0, 60px) minmax(0, 350px) minmax(0, 100px);
         grid-template-columns: minmax(0, 80px) minmax(0, 1fr) minmax(0, 80px);
         height: 100%;
         @media screen and (min-width: 992px) {
-            grid-template-rows: minmax(0, 60px) minmax(0, 1fr) minmax(0, 100px);
+            grid-template-rows: minmax(0, 60px) minmax(0, 1fr) minmax(0, auto);
         }
     }
     .title {
@@ -43,7 +44,7 @@ app-game-container {
         display: grid;
         gap: 0 10px;
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: minmax(0, 1fr) minmax(0, 50px);
+        grid-template-rows: minmax(0, 1fr) minmax(0, 40px);
         app-lines {
             display: none;
         }
@@ -86,10 +87,34 @@ app-game-container {
     .bottom-panel {
         grid-column: 1 / 4;
         display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 10px 0;
+        grid-template-columns:minmax(0, 1fr) minmax(0, 2fr) minmax(0, 2fr);
+        gap: 20px;
+        
         @media screen and (min-width: 992px) {
-            gap: 0 10px;
+        }
+
+        app-label-value {
+            background: rgb(62, 0, 6);
+            border: 5px solid rgb(184, 0, 17);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding-inline: 15px;
+            box-sizing: border-box;
+            @media screen and (min-width: 992px) {
+                display: none;
+            }
+        }
+
+        app-action-panel {
+            grid-column: 1 / 4;
+            @media screen and (min-width: 992px) {
+                grid-column: initial;
+            }
+        }
+        
+        @media screen and (min-width: 992px) {
+            gap: 10px;
             grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
         }
     }
