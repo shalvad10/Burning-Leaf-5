@@ -24,7 +24,7 @@ app-game-container {
     
     .wrapper {
         display: grid;
-        grid-template-rows: minmax(0, 60px) minmax(0, 220px) minmax(0, 100px);
+        grid-template-rows: minmax(0, 60px) minmax(0, 220px) minmax(0, 1fr);
         grid-template-columns: minmax(0, 80px) minmax(0, 1fr) minmax(0, 80px);
         height: 100%;
         @media screen and (min-width: 576px) {
@@ -92,7 +92,9 @@ app-game-container {
         display: grid;
         grid-template-columns:minmax(0, 1fr) minmax(0, 2fr) minmax(0, 2fr);
         gap: 10px;
+        grid-template-rows: minmax(75px, 75px);
         @media screen and (min-width: 992px) {
+            grid-template-rows: initial;
             gap: 20px;
         }
 

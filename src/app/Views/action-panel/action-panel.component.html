@@ -1,29 +1,27 @@
-<div class="content">
-    <div class="data">
-        <div class="block balance">
-            <app-label-value label="balance" [spinning]="false" [hasAnimation]="false" [value]="balance"></app-label-value>
-        </div>
-        <div class="block nominales">
-            <app-bet-block *ngFor="let item of betMultipliers;let i=index" [spinning]="data.game.spinning" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
-        </div>
-        <div class="block last_win">
-            <app-label-value [spinning]="data.game.spinning" [clearAnimation]="data.game.freeSpins.isActive" [label]="isBonus ? 'win' : 'last win'" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
-        </div>
-        <app-spin-buttons
-          class="buttons"
-          [data]="data"
-          [nominales]="data.game.nominales"
-          [selectedNominale]="data.game.selectedNominale"
-          (spin)="onSpin()"
-          (autoSpin)="onAutoSpin()"
-          (onAction)="bubbleAction($event)"
-          [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}"
-      ></app-spin-buttons>
-        <div class="block action_buttons">
-            <div class="icon info" (click)="gameInfo('info')"></div>
-            <div class="icon volume" [ngClass]="[volume ? 'on' : 'off']" (click)="toggleVolume()"></div>
-            <div class="icon menu" (click)="gameInfo(null)"></div>
-            <div class="icon full_screen" (click)="fullScreen()"></div>
-        </div>
+<div class="data">
+    <div class="block balance">
+        <app-label-value label="balance" [spinning]="false" [hasAnimation]="false" [value]="balance"></app-label-value>
+    </div>
+    <div class="block nominales">
+        <app-bet-block *ngFor="let item of betMultipliers;let i=index" [spinning]="data.game.spinning" currency="GEL" [value]="bet(item)" [index]="i" [isSelected]="bet(item) == selectedBet" (onAction)="bubbleAction($event)"></app-bet-block>
+    </div>
+    <div class="block last_win">
+        <app-label-value [spinning]="data.game.spinning" [clearAnimation]="data.game.freeSpins.isActive" [label]="isBonus ? 'win' : 'last win'" [hasAnimation]="true" [isBonus]="isBonus" [value]="wonAmmount()"></app-label-value>
+    </div>
+    <app-spin-buttons
+        class="buttons"
+        [data]="data"
+        [nominales]="data.game.nominales"
+        [selectedNominale]="data.game.selectedNominale"
+        (spin)="onSpin()"
+        (autoSpin)="onAutoSpin()"
+        (onAction)="bubbleAction($event)"
+        [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}"
+    ></app-spin-buttons>
+    <div class="block action_buttons">
+        <div class="icon info" (click)="gameInfo('info')"></div>
+        <div class="icon volume" [ngClass]="[volume ? 'on' : 'off']" (click)="toggleVolume()"></div>
+        <div class="icon menu" (click)="gameInfo(null)"></div>
+        <div class="icon full_screen" (click)="fullScreen()"></div>
     </div>
 </div>
