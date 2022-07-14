@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComponentBase } from 'src/app/Base/ComponentBase';
 import { Sounds } from 'src/app/Services/Libs/sounds';
 
@@ -11,6 +11,9 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
 
   public volume!: boolean;
   @Input() data: any;
+
+  @Output() spin = new EventEmitter<any>();
+  @Output() autoSpin = new EventEmitter<any>();
 
   constructor(public ref: ChangeDetectorRef) {
     super(ref);
@@ -25,11 +28,23 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
     this.emitAction('toggleVolume', this.volume ? 1 : 0);
   }
 
+  onAutoSpin(): void {
+    this.autoSpin.emit();
+  }
+
+  onSpin(): void {
+    this.spin.emit();
+  }
+
   public get selectedBet(): number {
     return this.data.game.selectedBet;
   }
   public get gameLine(): number {
     return this.data.game.gameLine;
+  }
+
+  public get autoSpinInProgress() {
+    return this.data.game.autoSpin.inProgress;
   }
   public get isBonus(): boolean {
     return this.data.game.freeSpins.count >= 0;

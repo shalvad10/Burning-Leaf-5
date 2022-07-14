@@ -73,10 +73,6 @@ export class AppComponent extends ComponentBase {
     return this.data.loading;
   }
 
-  public get autoSpinInProgress() {
-    return this.data.game.autoSpin.inProgress;
-  }
-
   public get winninSymbols() {
     if (this.data.game.winningInfo) {
       this.data.game.winningInfo.symbols = [];
