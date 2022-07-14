@@ -92,9 +92,9 @@
                 grid-template-columns: repeat(5, minmax(0, 1fr));
                 display: grid;
                 width: 100%;
-                gap: 0 20px;
+                gap: 0 10px;
                 @media screen and (min-width: 992px) {
-                    gap: 0 10px;
+                    gap: 0 20px;
                 }
             }
 
@@ -105,12 +105,13 @@
             &.action_buttons {
                 flex: 2;
                 display: flex;
-                justify-content: space-evenly;
                 align-items: center;
                 width: 100%;
                 margin-inline: 0;
-
+                justify-content: space-between;
+                
                 @media screen and (min-width: 992px) {
+                    justify-content: space-evenly;
                     width: initial;
                 }
 
@@ -125,6 +126,10 @@
 
                     &.info {
                         background-image: url('../../../assets/icons/info.svg');
+                        display: none;
+                        @media screen and (min-width: 992px) {
+                            display: block;
+                        }
                     }
 
                     &.volume {
@@ -143,6 +148,10 @@
 
                     &.full_screen {
                         background-image: url('../../../assets/icons/full-screen.svg');
+                        display: none;
+                        @media screen and (min-width: 992px) {
+                            display: block;
+                        }
                     }
                 }
             }

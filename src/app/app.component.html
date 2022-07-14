@@ -37,6 +37,7 @@
         [hasAnimation]="false"
         [value]="balance"
       ></app-label-value>
+      <!-- spinner buttons -->
       <app-label-value
         [spinning]="data.game.spinning"
         [clearAnimation]="data.game.freeSpins.isActive"
@@ -46,18 +47,16 @@
         [value]="wonAmmount()"
       ></app-label-value>
       <app-action-panel [data]="data" (onAction)="handleAction($event)"></app-action-panel>
-      <app-spin-buttons
+      <!-- <app-spin-buttons
           class="buttons"
-          *ngIf="isMobile.any"
           [data]="data"
-          [isMobile]="isMobile.any"
           [nominales]="data.game.nominales"
           [selectedNominale]="data.game.selectedNominale"
           (spin)="onSpin()"
           (autoSpin)="onAutoSpin($event)"
           (onAction)="bubbleAction($event)"
           [ngStyle]="{'opacity': data.game.spinning == true && autoSpinInProgress == false ? 0 : 1}"
-      ></app-spin-buttons>
+      ></app-spin-buttons> -->
     </div>
   </div>
 </div>
