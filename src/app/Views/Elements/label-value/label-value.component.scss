@@ -7,9 +7,12 @@
     }
     .value {
         font-weight: 900;
-        font-size: 21px;
         color: #fff;
         text-align: left;
+        font-size: 17px;
+        @media screen and (min-width: 992px) {
+            font-size: 21px;
+        }
     }
     &.mobile {
         display: flex;

@@ -7,7 +7,11 @@
     border: 5px solid #b80011;
     box-sizing: border-box;
     height: 75px;
+    text-align: center;
+    flex-direction: column;
     @media screen and (min-width: 992px) {
+        text-align: left;
+        flex-direction: row;
         height: 100px;
     }
 
@@ -19,11 +23,21 @@
         background-repeat: no-repeat;
         background-size: contain;
         flex: 1;
+        display: none;
+        @media screen and (min-width: 992px) {
+            display: block;
+        }
     }
     .text {
         color: #FFF;
-        font-size: 16px;
         font-weight: 900;
         flex: 1;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        @media screen and (min-width: 992px) {
+            display: block;
+            font-size: 16px;
+        }
     }
 }
