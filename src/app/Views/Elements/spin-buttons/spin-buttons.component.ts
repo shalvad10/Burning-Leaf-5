@@ -23,8 +23,8 @@ export class SpinButtonsComponent extends ComponentBase implements OnInit {
   @Output() autoSpin = new EventEmitter<any>();
 
   @Input() nominales?: number[];
-  @Input() isMobile: boolean = false;
   @Input() selectedNominale!: number;
+  @Input() isMobile!: boolean;
   @Input() data: any;
 
   constructor(public ref: ChangeDetectorRef) {

@@ -20,6 +20,7 @@ export class BaseData {
       currency: 'GEL'
     },
     game: {
+      ammount_animating: false,
       infoObject: null,
       gameLoaded: false,
       initialMatrix: [],
@@ -27,6 +28,7 @@ export class BaseData {
       specialSymbols: [],
       lines: [],
       winningInfo: undefined,
+      selectedFreespin: null,
       freeSpins: {
         isActive: false,
         count: -1,

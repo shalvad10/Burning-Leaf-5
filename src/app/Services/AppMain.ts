@@ -74,7 +74,9 @@ export class AppMain {
   }
 
   public doAction(obj: any): void {
-    this.actions.onAction(obj.action, obj.data);
+    if (this.actions) {
+      this.actions.onAction(obj.action, obj.data);
+    }
   }
 
   public get mobile(): any {

@@ -11,8 +11,11 @@
             {{ data.infoText }}
         </div>
         <div class="buttons" *ngIf="data.buttons.length > 0">
-            <div class="btn" *ngFor="let modal of data.buttons" [style.background]="modal.backgroundColor" (click)="onClick(modal.action, modal.actionData)">
-                {{ modal.text }}
+            <div class="btn" (click)="onClick(true)">
+                OK
+            </div>
+            <div *ngIf="data.data.firstBuy == true" class="btn" (click)="onClick(false)">
+                CANCEL
             </div>
         </div>
     </div>

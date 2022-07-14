@@ -41,19 +41,14 @@ export default abstract class BaseEventHandler {
         this.data.game.autoSpin.inProgress      = false;
         this.data.game.autoSpin.infiniteLoop    = false;
         this.data.game.autoSpin.spinsRemaining  = data.spinsCount == null ? 0 : data.spinsCount;
-      } else if (data.FreespinsCount == freesPinType.freeSpinCount) {
-        this.data.modal.currentModal = 'bonus_type';
-        let modal = this.data.modal.modalParams[this.data.modal.currentModal];
-        modal.headText = 'YOU BOUGHT';
-        modal.infoText =`${data.FreespinsCount} Free Spins for ${(data.BetAmmount / this.data.ammountDivide) * freesPinType.price}`;
-        modal.data.typeID = data.FrespinTypeID;
-      } else {
+      } else if (data.FreespinsCount != freesPinType.freeSpinCount) {
         this.data.modal.currentModal = 'bonus_type';
         let modal = this.data.modal.modalParams[this.data.modal.currentModal];
         modal.headText = '';
         modal.infoText =`${data.FreespinsCount} Free Spins reamining`;
         modal.data.typeID = data.FrespinTypeID;
         modal.data.freespinsCount = data.FreespinsCount;
+        modal.data.firstBuy = false;
       }
       this.data.game.freeSpins.showPopup = false;
     }

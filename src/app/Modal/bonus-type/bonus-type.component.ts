@@ -15,12 +15,31 @@ export class BonusTypeComponent extends ComponentBase implements OnInit {
 
   @Input() data: any;
 
-  ngOnInit(): void { }
+  public buttons = [];
 
-  onClick(action: string, data: any): void {
-    this.emitAction('toggleModal', {modal: ''});
-    this.emitAction('autoSpin', {inProgress: true, spinsCount: this.data.data.freespinsCount});
-    Sounds.instance.play('bonus_started');
+  ngOnInit(): void {
+    if (this.data.data.firstBuy == false) {
+      this.buttons = this.data.buttons.filter( (btn: any) => btn.text !== 'CANCEL');
+    } else {
+      this.buttons = this.data.buttons;
+    }
+  }
+
+  onClick(action: boolean): void {
+    if (this.data.data.firstBuy == true) {
+      if (action) {
+        this.emitAction('autoSpin', {inProgress: true, spinsCount: this.data.data.freespinsCount});
+        Sounds.instance.play('bonus_started');
+        this.emitAction('buyFreeSpin', true);
+      }else {
+        this.emitAction('buyFreeSpin', false);
+      }
+      this.emitAction('toggleModal', {modal: ''});
+    } else {
+      this.emitAction('autoSpin', {inProgress: true, spinsCount: this.data.data.freespinsCount});
+      Sounds.instance.play('bonus_started');
+      this.emitAction('toggleModal', {modal: ''});
+    }
   }
 
   getClass(id: number): string {

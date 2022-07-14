@@ -45,11 +45,12 @@
         [hasAnimation]="true"
         [isBonus]="isBonus"
         [value]="wonAmmount()"
+        (onAction)="handleAction($event)"
       ></app-label-value>
       <app-action-panel [data]="data" (onAction)="handleAction($event)" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)"></app-action-panel>
     </div>
   </div>
 </div>
 
-<app-modal *ngIf="data.modal.currentModal !== ''" class="modal" [data]="data" (onAction)="handleAction($event)"></app-modal>
+<app-modal *ngIf="data.modal.currentModal !== '' && loading == false" class="modal" [data]="data" (onAction)="handleAction($event)"></app-modal>
 <app-loader class="loader" *ngIf="loading"></app-loader>

@@ -9,6 +9,7 @@ import { ComponentBase } from 'src/app/Base/ComponentBase';
 export class LinesComponent extends ComponentBase implements OnInit {
 
   public lines: number[] = [1,2,3,4,5];
+  public line: number= 5;
   public fixedLines: boolean = true;
 
   @ViewChild('spinButton') spinButton!: ElementRef;

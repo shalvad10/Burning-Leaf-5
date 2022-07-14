@@ -10,6 +10,34 @@
         flex-direction: column;
     }
 
+    &.mobile {
+        .autospin {
+            transform: rotate(90deg) !important;
+            margin-left: 10px;
+            &.nominales_selector {
+                transform: rotate(-90deg) !important;
+                margin-right: 10px;
+                margin-left: 0;
+                flex-direction: row-reverse;
+                .icon {
+                    transform: rotate(90deg) !important;
+                }
+    
+                .value {
+                    margin-right: -20px;
+                    transform: rotate(90deg) !important;
+                }
+            }
+        }
+        .nominales-selector {
+            left: -150px;
+            bottom: -200px;
+            &.open {
+                left: auto;
+                bottom: 300px;
+            }
+        }
+    }
     .nominales-selector {
         position: absolute;
         left: 50px;

@@ -1,13 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ComponentBase } from 'src/app/Base/ComponentBase';
 
 @Component({
   selector: 'app-label-value',
   templateUrl: './label-value.component.html',
   styleUrls: ['./label-value.component.scss']
 })
-export class LabelValueComponent implements OnInit {
+export class LabelValueComponent extends ComponentBase implements OnInit {
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) {
+    super(ref);
+  }
 
   public ammount: any = 0;
   public maxAmmount: any = 0;
@@ -41,6 +44,23 @@ export class LabelValueComponent implements OnInit {
       setTimeout(() => {
         if (val < this.ammount) this.ammount = 0; 
         this.maxAmmount = Number.parseFloat(val);
+        
+        if (this.maxAmmount - this.ammount <= 10) {
+          this.step = 0.01;
+        } else if (this.maxAmmount - this.ammount <= 50) {
+          this.step = 0.1;
+        } else if (this.maxAmmount - this.ammount <= 100) {
+          this.step = 0.20;
+        } else if (this.maxAmmount - this.ammount <= 500) {
+          this.step = 1;
+        } else if (this.maxAmmount - this.ammount <= 1000) {
+          this.step = 10;
+        } else if (this.maxAmmount - this.ammount <= 5000) {
+          this.step = 50;
+        } else if (this.maxAmmount - this.ammount > 5000) {
+          this.step = 100;
+        }
+        this.emitAction('animatingAmmount', true);
         this.increaseValue(Number.parseFloat(val));
       }, 10);
     } else {
@@ -61,6 +81,7 @@ export class LabelValueComponent implements OnInit {
   stopAnimation(): void {
     clearInterval(this.int);
     this.ammount = this.maxAmmount;
+    this.emitAction('animatingAmmount', false);
   }
 
   ngOnInit(): void { }

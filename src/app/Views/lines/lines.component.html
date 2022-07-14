@@ -1,6 +1,6 @@
 <div class="cont">
     <div class="content">
-        <div class="lines" *ngFor="let line of lines">
+        <div class="lines" *ngIf="!hasButtons">
             <div class="fixedLines" *ngIf="showLines(line)">
                 <span>LINES</span>
                 <span>FIXED</span>

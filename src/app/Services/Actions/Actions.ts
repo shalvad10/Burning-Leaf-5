@@ -8,19 +8,25 @@ export default class Actions {
   public onAction(type: string, data: any) {
 
     switch (type) {
-      case 'spin'               : { this.spin();                break; }
-      case 'selectNominale'     : { this.selectNominale(data);  break; }
-      case 'selectBet'          : { this.selectBet(data);       break; }
-      case 'buyFreeSpin'        : { this.buyFreeSpin(data);     break; }
-      case 'toggleModal'        : { this.toggleModal(data);     break; }
-      case 'closeGame'          : { this.closeGame();           break; }
-      case 'spinning'           : { this.spinning(data);        break; }
-      case 'autoSpin'           : { this.autoSpin(data);        break; }
-      case 'stopAutospin'       : { this.stopAutospin();        break; }
-      case 'winText'            : { this.setWinText(data);      break; }
-      case 'freespinsFinished'  : { this.finishFreespins();     break; }
-      case 'toggleVolume'       : { this.toggleVolume(data);    break; }
+      case 'spin'               : { this.spin();                  break; }
+      case 'selectNominale'     : { this.selectNominale(data);    break; }
+      case 'selectBet'          : { this.selectBet(data);         break; }
+      case 'selectFreeSpin'     : { this.selectFreeSpin(data);    break; }
+      case 'buyFreeSpin'        : { this.buyFreeSpin(data);       break; }
+      case 'toggleModal'        : { this.toggleModal(data);       break; }
+      case 'closeGame'          : { this.closeGame();             break; }
+      case 'spinning'           : { this.spinning(data);          break; }
+      case 'autoSpin'           : { this.autoSpin(data);          break; }
+      case 'stopAutospin'       : { this.stopAutospin();          break; }
+      case 'winText'            : { this.setWinText(data);        break; }
+      case 'freespinsFinished'  : { this.finishFreespins();       break; }
+      case 'toggleVolume'       : { this.toggleVolume(data);      break; }
+      case 'animatingAmmount'   : { this.animatingAmmount(data);  break; }
     }
+  }
+
+  public animatingAmmount(data: boolean): void {
+    this.data.game.ammount_animating  = data;
   }
 
   public toggleVolume(data: number):void {
@@ -78,12 +84,26 @@ export default class Actions {
     this.data.game.selectedBet = data * this.data.game.betMultipliers[this.data.game.selectedMultiplierIndex] * this.data.game.gameLine;
   }
 
+  public selectFreeSpin(data: any): void {
+    this.data.modal.currentModal = 'bonus_type';
+    let modal = this.data.modal.modalParams[this.data.modal.currentModal];
+    modal.headText = 'YOU ARE BUYING';
+    modal.infoText =`${data.freeSpinCount} Free Spins for ${data.price} ${this.data.user.currency}`;
+    modal.data.typeID = data.FrespinTypeID;
+    modal.data.firstBuy = true;
+    this.data.game.selectedFreespin = data;
+  }
+
   public buyFreeSpin(data: any): void {
-    this.data.game.selectedNominale = data.nominale;
-    this.data.game.selectedBet = data.bet;
-    this.data.game.selectedMultiplierIndex = data.multiplier
-    this.data.game.freeSpins.won = 0;
-    this.sender.buyFreeSpin(data.freeSpinType, data.bet * this.data.ammountDivide);
+    if (data == true) {
+      this.data.game.selectedNominale = this.data.game.selectedFreespin.nominale;
+      this.data.game.selectedBet = this.data.game.selectedFreespin.bet;
+      this.data.game.selectedMultiplierIndex = this.data.game.selectedFreespin.multiplier
+      this.data.game.freeSpins.won = 0;
+      this.sender.buyFreeSpin(this.data.game.selectedFreespin.freeSpinType, this.data.game.selectedFreespin.bet * this.data.ammountDivide);
+    } else {
+      this.data.game.selectedFreespin = null;
+    }
   }
 
   public selectBet(data: any): void {

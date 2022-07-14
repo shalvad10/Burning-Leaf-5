@@ -30,7 +30,8 @@ export class ModalData {
         title: '',
         data: {},
         buttons: [
-          { text: 'OK', backgroundColor: 'linear-gradient(#F57403, #D7340F)', action: 'toggleModal', actionData: { modal: ''} }
+          { text: 'OK', backgroundColor: 'linear-gradient(#F57403, #D7340F)', action: 'toggleModal', actionData: { modal: ''} },
+          { text: 'CANCEL', backgroundColor: 'linear-gradient(#F57403, #D7340F)', action: 'toggleModal', actionData: { modal: ''} }
         ]
       },
       bonus_win: {

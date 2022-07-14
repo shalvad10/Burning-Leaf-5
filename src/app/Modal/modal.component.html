@@ -1,4 +1,4 @@
-<div class="modal" *ngIf="activeModal">
+<div class="modal" *ngIf="activeModal" [ngClass]="{'buy_freespin': data.modal.currentModal == 'bonus_type'}">
     <div class="cont">
         <div class="header">
             <span class="title" *ngIf="activeModal.title.length > 0" >

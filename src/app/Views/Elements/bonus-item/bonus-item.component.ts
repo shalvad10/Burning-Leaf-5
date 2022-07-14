@@ -21,16 +21,16 @@ export class BonusItemComponent extends ComponentBase implements OnInit {
   }
 
   onClick() {
-    if ( this.isSelected ) {
-      this.emitAction('buyFreeSpin', {freeSpinType: this.freeSpin.typeID, bet: this.selectedBet, nominale: this.nominaleMultiplier.nominale, multiplier: this.nominaleMultiplier.multiplier});
-      this.data.selectedFreespinID = 0;
-    } else {
-      this.data.selectedFreespinID = this.freeSpin.typeID;
-    }
-  }
-
-  public get isSelected() {
-    return this.data.selectedFreespinID == this.freeSpin.typeID;
+    this.emitAction('selectFreeSpin',
+      {
+        freeSpinType: this.freeSpin.typeID,
+        bet: this.selectedBet,
+        price: this.selectedBet * this.freeSpin.price,
+        nominale: this.nominaleMultiplier.nominale,
+        multiplier: this.nominaleMultiplier.multiplier,
+        freeSpinCount: this.freeSpin.freeSpinCount
+      }
+    );
   }
 
   freeSpinName() {
