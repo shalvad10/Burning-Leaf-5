@@ -27,7 +27,7 @@ export class AppComponent extends ComponentBase {
       if (this.app.dataObject.game.gameLoaded == true) {
         if ( e.keyCode == 32) {
           if (this.data.game.spinning == false) {
-            this.onSpin();
+            this.onSpin(true);
             this.data.game.spinning = true;
           } else {
             this.gameContainer.game.onStop();
@@ -40,12 +40,18 @@ export class AppComponent extends ComponentBase {
 
   @ViewChild('gameContainer') gameContainer: any;
 
-  onSpin() {
-    this.app.doAction({action: 'spin', data: {}});
-    if (this.data.user.holdBalance == false) {
-      setTimeout(() => {
-          this.gameContainer.game.onSpin();
-      }, 500);
+  onSpin(ev: any) {
+    console.warn(ev);
+    if (ev) {
+      this.app.doAction({action: 'spin', data: {}});
+      if (this.data.user.holdBalance == false) {
+        setTimeout(() => {
+            this.gameContainer.game.onSpin();
+        }, 500);
+      }
+    } else {
+      this.gameContainer.game.onStop();
+      this.data.game.stopBTNCount++;
     }
   }
 
@@ -99,7 +105,7 @@ export class AppComponent extends ComponentBase {
       this.gameContainer.game.onStop();
     } else if (e.action == 'autoSpin') {
       if (e.data.inProgress == true) {
-        this.onSpin();
+        this.onSpin(true);
       }
     }
     this.app.doAction(e);

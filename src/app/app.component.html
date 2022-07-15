@@ -12,8 +12,11 @@
       <app-game-container [data]="data" [gameData]="data.game" [lines]="data.winByLines" (onAction)="handleAction($event)"
         #gameContainer></app-game-container>
       <app-lines [hasButtons]="true" [data]="data" [nominales]="data.game.nominales"
-        [selectedNominale]="data.game.selectedNominale" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)"
+        [selectedNominale]="data.game.selectedNominale" (spin)="onSpin($event)" (autoSpin)="onAutoSpin($event)"
         (onAction)="handleAction($event)"></app-lines>
+        <div *ngIf="!winninSymbols" class="informationText">
+          <span> {{ informationText }}</span>
+        </div>
         <div *ngIf="winninSymbols" class="informationText">
           <div class="line">
             <span *ngIf="winninSymbols.lineId > 0"> Line {{ winninSymbols.lineId }}</span>
@@ -47,7 +50,7 @@
         [value]="wonAmmount()"
         (onAction)="handleAction($event)"
       ></app-label-value>
-      <app-action-panel [data]="data" (onAction)="handleAction($event)" (spin)="onSpin()" (autoSpin)="onAutoSpin($event)"></app-action-panel>
+      <app-action-panel [data]="data" (onAction)="handleAction($event)" (spin)="onSpin($event)" (autoSpin)="onAutoSpin($event)"></app-action-panel>
     </div>
   </div>
 </div>

@@ -11,11 +11,11 @@
             {{ data.infoText }}
         </div>
         <div class="buttons" *ngIf="data.buttons.length > 0">
-            <div class="btn" (click)="onClick(true)">
-                OK
-            </div>
             <div *ngIf="data.data.firstBuy == true" class="btn" (click)="onClick(false)">
                 CANCEL
+            </div>
+            <div class="btn" (click)="onClick(true)">
+                OK
             </div>
         </div>
     </div>

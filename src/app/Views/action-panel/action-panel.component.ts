@@ -28,12 +28,13 @@ export class ActionPanelComponent extends ComponentBase implements OnInit {
     this.emitAction('toggleVolume', this.volume ? 1 : 0);
   }
 
-  onAutoSpin(): void {
-    this.autoSpin.emit();
+  onAutoSpin(ev: any): void {
+    this.autoSpin.emit(ev);
   }
 
-  onSpin(): void {
-    this.spin.emit();
+  onSpin(ev: any): void {
+    console.warn(ev);
+    this.spin.emit(ev);
   }
 
   public get selectedBet(): number {

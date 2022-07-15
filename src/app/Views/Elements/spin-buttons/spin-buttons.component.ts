@@ -67,6 +67,9 @@ export class SpinButtonsComponent extends ComponentBase implements OnInit {
   public get isInfinite() {
     return this.data.game.autoSpin.infiniteLoop;
   }
+  public get spinning() {
+    return this.data.game.spinning;
+  }
   public get spinsRemaining() {
     return this.data.game.autoSpin.spinsRemaining;
   }
@@ -113,10 +116,12 @@ export class SpinButtonsComponent extends ComponentBase implements OnInit {
       this.emitAction('stopAutospin', {});
     } else if (this.data.game.spinning == false) {
       this.spinButton.nativeElement.classList.toggle('animate');
-      this.spin.emit();
+      this.spin.emit(true);
       setTimeout( () => {
         this.spinButton.nativeElement.classList.toggle('animate');
       }, 100);
+    } else {
+      this.spin.emit(false);
     }
   }
 

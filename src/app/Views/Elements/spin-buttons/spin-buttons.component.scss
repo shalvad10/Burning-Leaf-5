@@ -12,13 +12,22 @@
 
     &.mobile {
         .autospin {
-            transform: rotate(90deg) !important;
-            margin-left: 10px;
+            margin-left: -5px;
+            background-image: url('../../../../assets/m-autospin.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-bottom: -4px;
+            width: 125px;
+            height: 95px;
             &.nominales_selector {
                 transform: rotate(-90deg) !important;
                 margin-right: 10px;
                 margin-left: 0;
                 flex-direction: row-reverse;
+                margin-bottom: -20px;
+                width: 95px;
+                height: 125px;
                 .icon {
                     transform: rotate(90deg) !important;
                 }

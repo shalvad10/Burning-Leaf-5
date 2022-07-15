@@ -9,6 +9,7 @@ export class NominalesSelectorComponent implements OnInit {
 
   constructor() { }
   @Input() open!:boolean;
+  @Input() isMobile!:boolean;
   @Input() nominales?: number[];
   @Input() selectedNominale?: number;
   

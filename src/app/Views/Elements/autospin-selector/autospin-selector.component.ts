@@ -9,6 +9,7 @@ export class AutospinSelectorComponent implements OnInit {
 
   constructor() { }
   @Input() open!:boolean;
+  @Input() isMobile!:boolean;
   @Input() spinCounters?: number[];
   @Input() selectedCounter?: number;
   
